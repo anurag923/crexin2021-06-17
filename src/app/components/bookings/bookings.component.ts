@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { shareReplay } from 'rxjs/operators';
 import { CrexinService } from 'src/app/services/crexin.service';
+import { CheckoutService } from '../../services/checkout.service';
 
 @Component({
   selector: 'app-bookings',
@@ -23,7 +24,7 @@ export class BookingsComponent implements OnInit {
   completed_array=[];
   pending_array=[];
   type: any;
-  constructor(private fb:FormBuilder, private toastr:ToastrService,private router:Router,private http:HttpClient,private activeroute:ActivatedRoute, private route:Router, private crexinservice:CrexinService) { }
+  constructor(private checkoutservice:CheckoutService, private fb:FormBuilder, private toastr:ToastrService,private router:Router,private http:HttpClient,private activeroute:ActivatedRoute, private route:Router, private crexinservice:CrexinService) { }
 
   ngOnInit(): void {
     // const headers= new HttpHeaders()
@@ -33,7 +34,7 @@ export class BookingsComponent implements OnInit {
     // this.http.get<any>('https://superuser.crexin.com/api/user/bookeditem/',{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
     //   console.log(res);
     // })
-    this.crexinservice.allbookings().subscribe((res)=>{
+    this.checkoutservice.allbookings().subscribe((res)=>{
       console.log(res);
       this.ongoing = res.ongoing;
       console.log(this.ongoing);

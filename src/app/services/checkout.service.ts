@@ -25,5 +25,9 @@ export class CheckoutService {
   addfavs(data){
     return this.http.post<any>(GlobalData.url_api+'user/addfavs',data ,{ 'headers': headers })
   }
+
+  allbookings(){
+    return this.http.get<any>(GlobalData.url_api+'user/myorders',{ 'headers': headers })
+  }
 }
 

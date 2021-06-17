@@ -115,6 +115,8 @@ export class CheckoutComponent implements OnInit {
   h_sub_tot:number;
   d_sub_tot:number;
   w_sub_tot:number;
+  site_errors = false;
+  billing_errors = false;
   constructor(private checkoutservice: CheckoutService, private winRef: WindowRefService, private datePipe: DatePipe, private fb: FormBuilder, private toastr: ToastrService, private router: Router, private http: HttpClient, private activeroute: ActivatedRoute, private route: Router, private crexinservice: CrexinService) {
     console.log(this.d_enddate);
     if (sessionStorage.getItem('time') == null) {
@@ -764,6 +766,12 @@ export class CheckoutComponent implements OnInit {
   }
   paynow() {
     this.submitted = true;
+    if(this.Site_Details.invalid){
+      this.site_errors = true;
+    }
+    if(this.Billing_Information.invalid){
+      this.billing_errors = true;
+    }
     if (this.Site_Details.invalid) {
       return false;
     }

@@ -573,6 +573,7 @@
               <a class="card-title fs-18">
                 Site Details
               </a>
+              <i *ngIf="site_errors" class="fa fa-exclamation-circle" style="color:#dc3545;font-size:18px;"></i>
             </div>
             <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
               <div id="Site_Details">
@@ -679,6 +680,7 @@
               <a class="card-title fs-18">
                 Billing Information
               </a>
+              <i *ngIf="billing_errors" class="fa fa-exclamation-circle" style="color:#dc3545;font-size:18px;"></i>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
               <div id="Billing_Information" class="p-3">
