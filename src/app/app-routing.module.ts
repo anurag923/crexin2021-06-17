@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'otp', loadChildren: () => import('./auth/otp/otp.module').then(m => m.OtpModule) },
   { path: 'vendor', loadChildren: () => import('./vendor/vendor/vendor.module').then(m => m.VendorModule) },
   { path: 'otpsuccess', loadChildren: () => import('./auth/otpsuccess/otpsuccess.module').then(m => m.OtpsuccessModule) },
-  // { path: 'rent', loadChildren: () => import('./components/rent/rent.module').then(m => m.RentModule) },
+  { path: 'booked', loadChildren: () => import('./components/rent/rent.module').then(m => m.RentModule) },
   { path: 'rent', loadChildren: () => import('./components/categories/categories.module').then(m => m.CategoriesModule) },
   { path: 'rent/subcategories', loadChildren: () => import('./components/subcategories/subcategories.module').then(m => m.SubcategoriesModule) },
   { path: 'myorders', loadChildren: () => import('./components/myorders/myorders.module').then(m => m.MyordersModule) },

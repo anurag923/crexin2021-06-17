@@ -109,11 +109,11 @@ get userphone(){
   this.router.navigate(['/']);
  }   
 
- bookings(){
-   this.router.navigate(['/bookings']).then(()=>{
-     location.reload();
-   })
- }
+//  bookings(){
+//    this.router.navigate(['/bookings']).then(()=>{
+//      location.reload();
+//    })
+//  }
 updateprofile(){
    this.submitted = true
    if(this.profile_update.invalid){

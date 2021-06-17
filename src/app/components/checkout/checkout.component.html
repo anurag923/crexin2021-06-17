@@ -14,7 +14,7 @@
             <th class="text-center text-color fs-17 fw-700">Equipment</th>
             <th class="text-center text-color fs-17 fw-700 w-60Per">{{bookingtype}}</th>
             <th class="text-center text-color fs-17 fw-700 w-7per">Total Amount</th>
-            <th class="text-center text-color fs-17 fw-700 w-7per">Advance Paid</th>
+            <th class="text-center text-color fs-17 fw-700 w-7per">Advance</th>
             <th class="text-center text-color fs-17 fw-700 w-10per">Booking Summary</th>
           </tr>
         </thead>
@@ -348,11 +348,11 @@
             </td>
             <td class="w100">
               <div class="d-flex align-items-center">
-                <h3 class="mgb-0 mgr-2" *ngIf="hourly"><span class="fs-15 text-color fw-500">₹ {{h_grandtotal}} </span>
+                <h3 class="mgb-0 mgr-2" *ngIf="hourly"><span class="fs-15 text-color fw-500">₹ {{h_sub_total}} </span>
                 </h3>
-                <h3 class="mgb-0 mgr-2" *ngIf="daily"><span class="fs-15 text-color fw-500">₹ {{d_grandtotal}} </span>
+                <h3 class="mgb-0 mgr-2" *ngIf="daily"><span class="fs-15 text-color fw-500">₹ {{d_total_days_amount}} </span>
                 </h3>
-                <h3 class="mgb-0 mgr-2" *ngIf="weekly"><span class="fs-15 text-color fw-500">₹ {{w_grandtotal}} </span>
+                <h3 class="mgb-0 mgr-2" *ngIf="weekly"><span class="fs-15 text-color fw-500">₹ {{w_total_weeks_amount}} </span>
                 </h3>
                 <a>
                 </a>
@@ -360,7 +360,7 @@
             </td>
             <td class="w100">
               <div class="d-flex align-items-center">
-                <h3 class="mgb-0 mgr-2" *ngIf="hourly"><span class="fs-15 text-color fw-500">₹ {{h_grandtotal}} </span>
+                <h3 class="mgb-0 mgr-2" *ngIf="hourly"><span class="fs-15 text-color fw-500">₹ {{h_sub_total}} </span>
                 </h3>
                 <h3 class="mgb-0 mgr-2" *ngIf="daily"><span class="fs-15 text-color fw-500">₹ {{d_paid_amount}} </span>
                 </h3>
@@ -372,22 +372,22 @@
             </td>
             <td class="amount">
               <h1 *ngIf="hourly"><span class="fs-15 text-color fw-500 mr-1">Sub Total:</span><span
-                  class="fs-15 text-color fw-500">₹ {{h_sub_total}} </span></h1>
+                  class="fs-15 text-color fw-500">₹ {{h_sub_tot}} </span></h1>
               <h1 *ngIf="daily"><span class="fs-15 text-color fw-500 mr-1">Sub Total:</span><span
-                  class="fs-15 text-color fw-500">₹ {{d_total_days_amount}} </span></h1>
+                  class="fs-15 text-color fw-500">₹ {{d_sub_tot}} </span></h1>
               <h1 *ngIf="weekly"><span class="fs-15 text-color fw-500 mr-1">Sub Total:</span><span
-                  class="fs-15 text-color fw-500">₹ {{w_total_weeks_amount}} </span></h1>
+                  class="fs-15 text-color fw-500">₹ {{w_sub_tot}} </span></h1>
               <h1><span class="fs-15 text-color fw-500 mr-1">Taxes:</span><span class="fs-17 text-color fw-500">₹
                   {{gstval}} <i class="fa fa-info" style="color:red; cursor:pointer"
                     matTooltip="Service Charges @2%. GST on Service Charge @ 18% "
                     [matTooltipPosition]="position.value"></i></span></h1>
               <hr>
               <h1 *ngIf="hourly"><span class="fs-15 text-color fw-500 mr-1">Grand Total:</span><span
-                  class="fs-15 text-color fw-500">₹ {{h_grandtotal}}</span></h1>
+                  class="fs-15 text-color fw-500">₹ {{h_sub_total}}</span></h1>
               <h1 *ngIf="daily"><span class="fs-15 text-color fw-500 mr-1">Grand Total:</span><span
-                  class="fs-15 text-color fw-500">₹ {{d_grandtotal}}</span></h1>
+                  class="fs-15 text-color fw-500">₹ {{d_total_days_amount}}</span></h1>
               <h1 *ngIf="weekly"><span class="fs-15 text-color fw-500 mr-1">Grand Total:</span><span
-                  class="fs-15 text-color fw-500">₹ {{w_grandtotal}}</span></h1>
+                  class="fs-15 text-color fw-500">₹ {{w_total_weeks_amount}}</span></h1>
             </td>
           </tr>
         </tbody>
@@ -453,15 +453,15 @@
                                     </div>
                                   </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Address Line 1" class="form-control" formControlName="address_one" [ngClass]="{ 'is-invalid': submitted && s.address_one.errors }">
+                                    <input type="text" placeholder="Plot/Flat No. & Building Name" class="form-control" formControlName="address_one" [ngClass]="{ 'is-invalid': submitted && s.address_one.errors }">
                                     <div *ngIf="submitted && s.address_one.errors" class="invalid-feedback">
-                                      <div *ngIf="s.address_one.errors.required" class="fs-15 fw-700">Address Line 1 is required</div>
+                                      <div *ngIf="s.address_one.errors.required" class="fs-15 fw-700">Plot/Flat No. & Building Name is required</div>
                                     </div>
                                   </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Address Line 2" class="form-control" formControlName="address_two" [ngClass]="{ 'is-invalid': submitted && s.address_two.errors }">
+                                    <input type="text" placeholder="Street Name/Area" class="form-control" formControlName="address_two" [ngClass]="{ 'is-invalid': submitted && s.address_two.errors }">
                                     <div *ngIf="submitted && s.address_two.errors" class="invalid-feedback">
-                                      <div *ngIf="s.address_two.errors.required" class="fs-15 fw-700">Address Line 2 is required</div>
+                                      <div *ngIf="s.address_two.errors.required" class="fs-15 fw-700">Street Name/Area is required</div>
                                     </div>
                                   </div>
                                 <div class="form-group">
@@ -607,22 +607,22 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group w1001">
-                        <label for="" class="fs-15">Address Line 1</label>
-                        <input type="text" placeholder="Address Line 1" class="form-control"
+                        <label for="" class="fs-15">Plot/Flat No. & Building Name</label>
+                        <input type="text" placeholder="Plot/Flat No. & Building Name" class="form-control"
                           formControlName="address_one" [ngClass]="{ 'is-invalid': submitted && s.address_one.errors }">
                         <div *ngIf="submitted && s.address_one.errors" class="invalid-feedback">
-                          <div *ngIf="s.address_one.errors.required" class="fs-13 fw-600">Address Line 1 is required
+                          <div *ngIf="s.address_one.errors.required" class="fs-13 fw-600">Plot/Flat No. & Building Name is required
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group w1001">
-                        <label for="" class="fs-15">Address Line 2</label>
-                        <input type="text" placeholder="Address Line 2" class="form-control"
+                        <label for="" class="fs-15">Street Name/Area</label>
+                        <input type="text" placeholder="Street Name/Area" class="form-control"
                           formControlName="address_two" [ngClass]="{ 'is-invalid': submitted && s.address_two.errors }">
                         <div *ngIf="submitted && s.address_two.errors" class="invalid-feedback">
-                          <div *ngIf="s.address_two.errors.required" class="fs-13 fw-600">Address Line 2 is required
+                          <div *ngIf="s.address_two.errors.required" class="fs-13 fw-600">Street Name/Area is required
                           </div>
                         </div>
                       </div>
@@ -637,19 +637,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="form-group w1001">
-                        <label for="" class="fs-15">Pincode</label>
-                        <input type="number" placeholder="Pincode" class="form-control" formControlName="pincode"
-                          [ngClass]="{ 'is-invalid': submitted && s.pincode.errors }" maxlength="6">
-                        <div *ngIf="submitted && s.pincode.errors" class="invalid-feedback">
-                          <div *ngIf="s.pincode.errors.required" class="fs-13 fw-600">Pincode is required</div>
-                          <div *ngIf="s.pincode.errors.pattern" class="fs-13 fw-600">pincode must be at 6 digits
-                            required
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    
                     <div class="col-md-4">
                       <div class="form-group w1001">
                         <label for="" class="fs-15">City</label>
@@ -667,6 +655,19 @@
                           [ngClass]="{ 'is-invalid': submitted && s.state.errors }">
                         <div *ngIf="submitted && s.state.errors" class="invalid-feedback">
                           <div *ngIf="s.state.errors.required" class="fs-13 fw-600">State is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group w1001">
+                        <label for="" class="fs-15">Pincode</label>
+                        <input type="number" placeholder="Pincode" class="form-control" formControlName="pincode"
+                          [ngClass]="{ 'is-invalid': submitted && s.pincode.errors }" maxlength="6">
+                        <div *ngIf="submitted && s.pincode.errors" class="invalid-feedback">
+                          <div *ngIf="s.pincode.errors.required" class="fs-13 fw-600">Pincode is required</div>
+                          <div *ngIf="s.pincode.errors.pattern" class="fs-13 fw-600">pincode must be at 6 digits
+                            required
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -726,18 +727,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="form-group w1001">
-                        <label for="" class="fs-15">Pincode</label>
-                        <input type="number" placeholder="Pincode" class="form-control" formControlName="p_code"
-                          [ngClass]="{ 'is-invalid': submitted && b.p_code.errors }">
-                        <div *ngIf="submitted && b.p_code.errors" class="invalid-feedback">
-                          <div *ngIf="b.p_code.errors.required" class="fs-13 fw-600">Pincode is required</div>
-                          <div *ngIf="b.p_code.errors.pattern" class="fs-13 fw-600">pincode must be at 6 digits required
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    
                     <div class="col-md-4">
                       <div class="form-group w1001">
                         <label for="" class="fs-15">City</label>
@@ -755,6 +745,18 @@
                           [ngClass]="{ 'is-invalid': submitted && b.state.errors }">
                         <div *ngIf="submitted && b.state.errors" class="invalid-feedback">
                           <div *ngIf="b.state.errors.required" class="fs-13 fw-600">State is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group w1001">
+                        <label for="" class="fs-15">Pincode</label>
+                        <input type="number" placeholder="Pincode" class="form-control" formControlName="p_code"
+                          [ngClass]="{ 'is-invalid': submitted && b.p_code.errors }">
+                        <div *ngIf="submitted && b.p_code.errors" class="invalid-feedback">
+                          <div *ngIf="b.p_code.errors.required" class="fs-13 fw-600">Pincode is required</div>
+                          <div *ngIf="b.p_code.errors.pattern" class="fs-13 fw-600">pincode must be at 6 digits required
+                          </div>
                         </div>
                       </div>
                     </div>
