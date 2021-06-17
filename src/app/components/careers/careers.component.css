@@ -1,0 +1,47 @@
+.information{
+    background-color: #fff !important;
+    padding: 20px !important;
+    border-top-right-radius:50px !important;
+    border-bottom-left-radius:50px !important;
+}
+.social-icons{
+    margin-top: -35px !important;
+    display: flex;
+    justify-content: center;
+}
+.social-icons i{
+    height: 50px;
+    width: 50px;
+    background-color: #dca101;
+    padding: 10px !important;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.accordion-header{
+    background-color: #ccc !important;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px !important;
+    margin-bottom:15px !important;
+}
+.accordion-button{
+    border:none !important;
+    background-color: #ccc !important;
+    margin-left: auto !important;
+}
+.accordion-body{
+    margin-bottom: 15px !important;
+}
+.bg-image{
+    background: url(/assets/images/careers_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30vh; 
+    position: relative; 
+}
+.accordion-header h2{
+    color: #414a4c;
+}

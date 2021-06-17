@@ -1,0 +1,31 @@
+.bg{
+    background-color: #efefef !important;
+    border-radius: 10px !important;
+    height: 100% !important;
+}
+ul li{
+    list-style: none  !important;
+    padding: 5px 0px !important;
+}
+ul li a{
+    padding: 12px !important;
+    display:inherit;
+    color: #414a4c !important;
+}
+ul li .active{
+    background-color: #c6c6c6 !important;
+    color: #414a4c !important;
+}
+li i{
+    margin-right: 10px !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+li span{
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+.sidenav-bg{
+    background-color: #f6f6f6 !important;
+    /* border-radius: 20px !important; */
+}

@@ -1,0 +1,36 @@
+.body{
+    background-color: #dcdcdc;
+    padding: 20px 50px 35px  50px;
+    border-bottom-right-radius:15px;
+    border-bottom-left-radius:15px;
+}
+@media(max-width:768px){
+    .body{
+        padding: 30px;
+    }
+}
+.form-control{
+    background-color: transparent !important;
+    border: none !important;
+    border: 2px solid #000 !important;
+    text-align: center;
+}
+.form-control:focus{
+    box-shadow: none !important;
+}
+.hover_otp:focus
+{
+    border:2px solid #dca101 !important;
+}
+.hover_otp:focus-visible
+{
+    border:2px solid #dca101 !important;
+}
+.hover_otp:visited
+{
+    border:2px solid #dca101 !important;
+}
+.hover_otp:active
+{
+    border:2px solid #dca101 !important;
+}

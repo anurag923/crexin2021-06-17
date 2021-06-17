@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://superuser.crexin.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

@@ -1,0 +1,3 @@
+<li class="fs-15 pdl-10" [ngClass]="{'active':selectedItem==categorie.c_name}" (click)="subcategories($event,categorie.id,categorie.c_name,categorie)" *ngFor="let categorie of allcategories;let id = index">
+    <a>{{categorie.c_name}}</a>
+ </li>

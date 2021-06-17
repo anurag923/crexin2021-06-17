@@ -1,0 +1,31 @@
+.one-23{
+    background-color: #e5e5e5;
+}
+.frm-brd{
+    border-radius: 5px;
+    border: 1px solid #a7abac;
+}
+.seven-23{
+    border-radius: 20px;
+    padding: 3rem;
+}
+.btn-frm-submit-23{
+   background-color: #dca101;
+   color: #4f5245;
+   padding: 6px 50px;
+   border-radius: 5px;
+   font-weight: bold;
+}
+.eight-23{
+    background: url(/assets/images/JCB-2.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 620px;
+    border-radius: 20px;
+}
+.fnt-sz{
+    font-size: 18px;
+    text-align: left;
+    line-height: 30px !important;
+    font-weight:300 !important;
+}

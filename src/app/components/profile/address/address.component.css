@@ -1,0 +1,18 @@
+.adrs{
+    border: 1px solid #c8c8c8;
+    padding: 15px;
+    border-radius: 10px;
+}
+.adres-icns{
+    display: flex;
+    justify-content: flex-end;
+    color: #b8390e;
+    font-size: 18px;
+    align-items: center;
+}
+.form-control{
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid #ccc !important;
+    border-radius: 0px !important;
+}

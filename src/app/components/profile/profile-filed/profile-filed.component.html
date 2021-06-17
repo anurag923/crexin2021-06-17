@@ -1,0 +1,50 @@
+<div class="row w-100">
+  <div class="col-md-6">
+    <h1 class="fs-20 fw-700 mgb-0 text-color">{{firstname}}</h1>
+    <div class="d-flex">
+        <h1 class="fs-15 mgb-0 text-color">{{mobile}}</h1>
+        <div style="border-left: 1px solid #cccc;" class="mr-2 ml-2"></div>
+        <h1 class="fs-15 mgb-0 text-color">{{email}}</h1>
+    </div>
+</div>
+<div class="col-md-6 d-flex justify-content-end align-items-end">
+   <button class="btn btn fs-15 fw-700" (click)="open(mymodal)" type="button">EDIT PROFILE</button>
+</div>
+</div>
+
+  <ng-template [ngIf]="modal_close" #mymodal let-modal >
+  <div class="modal-header bg-color">
+    <h1 class="modal-title fs-20 fw-700 mgb-0" id="modal-basic-title">UPDATE YOUR PROFILE</h1>
+    <button type="button text-light" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true" class="text-light">×</span>
+    </button>
+  </div>
+  <form action="" [formGroup]="Profile" (ngSubmit)="updateprofile()">
+  <div class="modal-body">
+        <div class="form-group">
+           <input type="text" class="form-control" placeholder="Name" formControlName="fullname" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" [(ngModel)]="firstname">
+           <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+            <div *ngIf="f.fullname.errors.required" class="fs-15 fw-700">Full Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Mobile" formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" [(ngModel)]="mobile">
+          <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+            <div *ngIf="f.mobile.errors.required" class="fs-15 fw-700">Mobil Number is required</div>
+            <div *ngIf="f.mobile.errors.pattern" class="fs-15 fw-700">Mobil Number must be at 10 digits required</div>
+          </div>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" [(ngModel)]="email">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required" class="fs-15 fw-700">Email is required</div>
+              <div *ngIf="f.email.errors.email" class="fs-15 fw-700">Email must be a valid email address</div>
+            </div>
+        </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger text-light fs-15 fw-700" (click)="modal.dismiss('Cross click')">Close</button>
+    <button type="submit" class="btn btn-outline-dark text-light fs-15 fw-700">Update</button>
+  </div>
+  </form>
+  </ng-template>

@@ -1,0 +1,73 @@
+<div class="container-fluid p-0">
+    <div class="bg-pic">
+      <div class="col-md-12 text-position-center">
+        <h1 class="text text-center">
+            Rent an Equipment
+        </h1>
+      </div>
+    </div>
+    <div class="rent-bg">
+        <div class="grid">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                        <i class="fa fa-check-circle mr-2 crexin-text fs-38 fw-700" aria-hidden="true"></i>
+                        <h1 class="mb-0 fs-18 fw-700 crexin-text">Your Order Request in {{booking_status}}.</h1>
+                </div>
+                <div class="col-md-4 offset-md-1">
+                    <div class="order-request">
+                        <h2 class="mb-0 fs-18 mr-1 fw-700 text-color">Your Booking ID:</h2>
+                        <h2 class="crexin-text fs-18 fw-700 mb-0">#{{booker_id}}</h2>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p class="mt-3 fs-17 lh-26 text-color">Thank you for your order request with us. currently we are processing your request we will conform your order with the equipment details along with the driver contact details in 15 mins</p>
+                </div>
+                <div class="col-md-6 offset-md-3">
+                    <div class="order-request">
+                        <h2 class="mb-0 fs-18 mr-1 fw-700 text-color">Booking Status:</h2>
+                        <h2 class="crexin-text fs-18 fw-700 mb-0">{{booking_status}}</h2>
+                    </div>
+                </div>
+                <div class="col-md-12 border-bottom">
+                    <h1 class="fs-25 fw-700 text-color">Booking Summary</h1>
+                </div>
+                <div class="col-md-12 d-flex mgt-15">
+                    <h2 class="mb-0 fs-18 text-color fw-600 mr-1">Order Request Number:</h2>
+                    <h2 class="crexin-text fs-18 fw-600 mb-0">#{{booker_id}}</h2>
+                </div>
+               
+                <div class="row w-100 mgt-15">
+                    <div class="col-md-3 border-right">
+                        <div class="image text-center" (click)="crane()">
+                            <img src="{{equipment_image}}" alt="" class="w100">
+                            <p class="mt-3 fs-15 fw-700">{{equipment_model}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div>
+                          <h1><span class="fs-15 mr-1 text-color">Date:</span><span class="fs-15 fw-700 text-color">{{start_date}}</span></h1>
+                          <h1><span class="fs-15 mr-1 text-color">Time:</span><span class="fs-15 fw-700 text-color">{{start_time}}</span></h1>
+                          <h1><span class="fs-15 mr-1 text-color">Type:</span><span class="fs-15 fw-700 text-color">{{type}}</span></h1>
+                      </div>
+                    </div> <div class="col-md-3  border-right">
+                        <div class="">
+                            <h1><span class="fs-15 mr-1 text-color">Duration:</span><span *ngIf="type === 'hourly'" class="fs-15 fw-700 text-color">{{duration}} Hrs</span><span *ngIf="type === 'daily'" class="fs-15 fw-700 text-color">{{duration}} days</span><span *ngIf="type === 'weekly'" class="fs-15 fw-700 text-color">{{duration}} weeks</span></h1>                            <h1><span class="fs-15 mr-1 text-color">Satus:</span><span class="fs-15 fw-700 text-color">{{booking_status}}</span></h1>
+                            <h1><span class="fs-15 mr-1 text-color">Payment:</span><span class="fs-15 fw-700 text-color">{{payment_status}}</span></h1>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="">
+                            <h1><span class="fs-15 mr-1 text-color">Sub Total:</span><span class="fs-16 fw-700"><i class="fa fa-inr mr-1" aria-hidden="true"></i>{{paid_amount}}</span></h1>
+                            <h1 class="border-bottom mgb-0 pdb-10"><span class="fs-15 mr-1 text-color">GST Tax:</span><span class="fs-16 fw-700"><i class="fa fa-inr mr-1" aria-hidden="true"></i>0</span></h1>
+                            <h1><span class="fs-15 mr-1 text-color">Grand Total:</span><span class="fs-16 fw-700"><i class="fa fa-inr mr-1" aria-hidden="true"></i>{{paid_amount}}</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mgt-15">
+                    <h1 class="mgb-10 fs-22 fw-600 text-color">Thank you for Booking with us</h1>
+                    <h1 class="mgb-10 fs-25 fw-700 text-color">CREXIN</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+.on-going-booings{
+    background-color: #d0e8e9;
+}
+.scheduled-bookings{
+    background-color: #f6e8c3;
+}
+.completed-bookings{
+    background-color: #fafafa;
+}
+.complete-job-text{
+    color: #414a4c;
+    transition: transform 500ms ease-in-out
+}
+.complete-job-text:hover
+{
+    color:#dca101;
+    transform: scale(1.1);
+}
+.hover-click:hover
+{
+    font-weight:bold;
+    color:#dca101;
+}
+.card-shad
+{
+    box-shadow: 0px 0px 10px #c7bbbb !important;
+}
+
+/* accordion */
+
+.accordion-header{
+    background-color: #ccc !important;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px !important;
+    margin-bottom:15px !important;
+}
+.accordion-button{
+    border:none !important;
+    background-color: #ccc !important;
+    margin-left: auto !important;
+}
+.accordion-body{
+    margin-bottom: 15px !important;
+}
+.accordion-header h2{
+    color: #414a4c;
+}

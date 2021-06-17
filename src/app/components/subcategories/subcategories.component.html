@@ -1,0 +1,219 @@
+<div class="container-fluid p-0">
+    <div class="bg-pic">
+        <div class="col-md-12 text-position-center">
+            <h1 class="text-light fs-30 fw-700 text-center">
+                AN EASY WAY TO RENT
+            </h1>
+        </div>
+    </div>
+    <div class="bg">
+        <div class="grid">
+            <div class="row mgl-0 mgr-0">
+                <div class="col-md-12">
+                    <form>
+                        <!-- <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                          <input type="search" class="form-control search" placeholder="Search for an Equipment">
+                        </div> -->
+                        <div class="crexin-search">
+                            <div class="search">
+                                <div class="form-group has-search w-100">
+                                    <span class="fa search_icon fa-search form-control-feedback"></span>
+                                    <input type="search" id="gsearch" [(ngModel)]="searchval" name="gsearch" class="searchTerm"
+                                        placeholder="Search for an Equipment" (keyup)="search(search_categorie.value)"
+                                        #search_categorie>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-4 mgl-0 mgr-0">
+                <div class="col-md-2">
+                    <h1 class="fs-20 fw-700 pdl-10">
+                        Equipments
+                    </h1>
+                </div>
+                <div class="col-md-10 d-flex">
+                    <h1 class="fs-20 fw-7001 pdl-10 mr-auto">
+                        {{cat_name}}
+                    </h1>
+
+                    <h1 *ngIf="searching" class="fs-20 fw-7001 pdl-10 pdr-10 ml-auto">
+                        searching for {{searchval}}
+                    </h1>
+                </div>
+            </div>
+            <div class="row mt-1 mgl-0 mgr-0">
+               <div class="col-md-2">
+                <ul class="categories">
+                    <li class="fs-15 pdl-10 categories-hover" (click)="all_categories()">All Categories</li>
+                    <li class="fs-15 pdl-10 categories-hover" [class.active]="selectedIndex === i" (click)="subcategories(i,categorie.id,categorie.c_name)" *ngFor="let categorie of allcategories;let i = index">
+                        <a>{{categorie.c_name}}</a>
+                    </li>
+                    <li class="fs-15 pdl-10 categories-hover" [class.active]="selectedIndex === i" (click)="subcategories(i,categorie.id,categorie.c_name)" *ngFor="let categorie of searchcategories;let i = index">
+                        <a>{{categorie.c_name}}</a>
+                    </li>
+               </ul>
+               </div>
+               <div class="col-md-10 product">
+                <div *ngIf="d">
+                    <div class="row my-4 mgl-0 mgr-0" *ngFor="let defaultproduct of defaultproducts">
+                        <div class="col-md-3">
+                             <div class="text-center crexin-product-images mgb-0">
+                                 <img src="{{defaultproduct.sc_image}}" class="img-fluid" alt="Responsive image">
+                             </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="pdl-20 subcategorie-name">
+                              <h1 class="mgb-10 fs-20">{{defaultproduct.sc_name}}</h1>
+                              <p class="fs-15 text-color lh-22">{{defaultproduct.description}}
+                              </p>
+                          </div>
+                          <!-- <div class="d-flex pdl-20">
+                            <div>
+                                <h1 class="mgb-0 fs-15 text-color">Hourly Rate</h1>
+                               <h1 class="text-center mgb-0 lh-10">
+                                <i class="fa fa-inr mr-1 fs-15"></i>
+                                <span class="fs-15 text-color">{{defaultproduct.hourly_rate}}</span>
+                               </h1>
+                            </div>
+                            <div>
+                                <h1 class="mgb-0 fs-15 text-color">Daily Rate</h1>
+                                <h1 class="lh-10 text-center mgb-0">
+                                    <i class="fa fa-inr mr-1 fs-15"></i>
+                                    <span class="fs-15 text-color">{{defaultproduct.daily_rate}}</span>
+                                </h1>
+                            </div>
+                            <div>
+                                <h1 class="mgb-0 fs-15 text-color">Weekly Rate</h1>
+                                <h1 class="text-center mgb-0 lh-10">
+                                    <i class="fa fa-inr mr-1 fs-15"></i>
+                                    <span class="fs-15 text-color">{{defaultproduct.weekly_rate}}</span>
+                                </h1>
+                            </div>
+                          </div> -->
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <h1 class="mgb-0 fs-15 text-color">Hourly Price</h1>
+                                    <i class="fa fa-inr mr-1 fs-15 fw-700"></i>
+                                    <span class="fs-15 fw-700 text-color">{{defaultproduct.hourly_rate}}</span>
+                                </div>
+                                <div>
+                                    <h1 class="mgb-0 fs-15 text-color">Day Price</h1>
+                                    <i class="fa fa-inr mr-1 fs-15 fw-700"></i>
+                                    <span class="fs-15 fw-700 text-color">{{defaultproduct.daily_rate}}</span>
+                                </div>
+                                <div>
+                                    <h1 class="mgb-0 fs-15 text-color">Weekly price</h1>
+                                    <i class="fa fa-inr mr-1 fs-15 fw-700"></i>
+                                    <span class="fs-15 fw-700 text-color">{{defaultproduct.weekly_rate}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end my-3">
+                                <button class="btn btn fs-15 fw-700 pdl-40 pdr-40"
+                                    (click)="singleproduct(defaultproduct.id)" type="button">
+                                    RENT
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="p">
+                        <div class="row my-4 mgl-0 mgr-0" *ngFor="let product of products">
+                            <div class="col-md-3">
+                                <div class="text-center subcategorie-images mgb-0">
+                                    <img src="{{product.sc_image}}" class="img-fluid" alt="Responsive image">
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center">
+                                <div class="pdl-20 subcategorie-name">
+                                    <h1 class="mgb-10 fs-20">{{product.sc_name}}</h1>
+                                    <p class="fs-15 text-color lh-22">{{product.description}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                <div class="d-flex">
+                                    <div>
+                                        <h1 class="mgb-0 fs-15 text-color">Hourly Rate</h1>
+                                        <h1 class="text-center mgb-0 lh-10">
+                                            <i class="fa fa-inr mr-1 fs-15"></i>
+                                            <span class="fs-15 text-color">{{product.hourly_rate}}</span>
+                                        </h1>
+                                    </div>
+                                    <div class="mr-3 ml-3">
+                                        <h1 class="mgb-0 fs-15 text-color">Daily Rate</h1>
+                                        <h1 class="text-center mgb-0 lh-10">
+                                            <i class="fa fa-inr mr-1 fs-15"></i>
+                                            <span class="fs-15 text-color">{{product.daily_rate}}</span>
+                                        </h1>
+                                    </div>
+                                    <div>
+                                        <h1 class="mgb-0 fs-15 text-color">Weekly Rate</h1>
+                                        <h1 class="mgb-0 text-center lh-10">
+                                            <i class="fa fa-inr mr-1 fs-15"></i>
+                                            <span class="fs-15 text-color">{{product.weekly_rate}}</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-center my-3">
+                                <button class="btn btn fs-15 fw-500 pdl-40 pdr-40" (click)="singleproduct(product.id)"
+                                    type="button">
+                                    RENT
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div *ngIf="d">
+                <div class="row my-4 mgl-0 mgr-0">
+                    <div class="col-md-4" (click)="singleproduct(defaultproduct.id)" *ngFor="let defaultproduct of defaultproducts">
+                         <div class="text-center crexin-product-images mgb-5">
+                             <img src="{{defaultproduct.sc_image}}" class="img-fluid" alt="Responsive image">
+                         </div>
+                         <div>
+                             <h1 class="fs-18 fw-700 crexin-text mgb-0">{{defaultproduct.sc_name}}</h1>
+                             <p class="fs-15 text-color">{{defaultproduct.description}}</p>
+                         </div>
+                    </div>
+                </div>
+              </div>
+              <div *ngIf="p">
+                <div class="row my-4 mgl-0 mgr-0">
+                    <div class="col-md-4" *ngFor="let product of products" (click)="singleproduct(product.id)">
+                        <div class="text-center crexin-product-images mgb-0">
+                            <img src="{{product.sc_image}}" class="img-fluid" alt="Responsive image">
+                        </div>
+                        <div>
+                            <h1 class="fs-18 fw-700 crexin-text mgb-0">{{product.sc_name}}</h1>
+                            <p class="fs-15 text-color">{{product.description}}</p>
+                        </div>
+                    </div>
+                </div>
+              </div> -->
+                    <!-- <div class="row my-4 mgl-0 mgr-0" *ngFor="let product of products">
+                    <div class="col-md-3">
+                        <div class="text-center crexin-product-images mgb-0">
+                            <img src="{{product.equipment_image}}" class="img-fluid" alt="Responsive image">
+                        </div>
+                    </div>
+                </div> -->
+                    <div *ngIf="loading" class="text-center">
+                        <h1 class="fs-15 fw-700">loading ...</h1>
+                    </div>
+                    <!-- <div class="d-flex justify-content-center" *ngIf="loading">
+                    <div class="spinner-border spinner" role="status">
+                        <span class="sr-only" id="loading"></span>
+                    </div>
+                </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

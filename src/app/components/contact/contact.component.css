@@ -1,0 +1,22 @@
+.get-in-touch{
+    background-color: #fff !important;
+    border-radius: 10px !important;
+    padding: 20px !important;
+}
+.input{
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid #ccc !important;
+    border-radius: 0px !important;
+}
+.mapouter{
+    border-radius: 10px !important;
+}
+.bg-image{
+    background: url(/assets/images/contact_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30vh; 
+    position: relative; 
+}

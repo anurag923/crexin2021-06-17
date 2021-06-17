@@ -1,0 +1,16 @@
+.bg{
+    background-color: #efefef;
+    margin: 30px;
+    padding: 40px 20px;
+}
+.table-bg{
+    background-color: #ccc;
+}
+.bg-pic{
+    background: url(/assets/images/dfdsf.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30vh; 
+    position: relative; 
+}

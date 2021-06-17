@@ -1,0 +1,127 @@
+.header-bg{
+    background-color: #ededed;
+}
+.check-radio{
+    background-color: #eaeaea;
+    padding: 10px 40px;
+}
+.table-bg{
+    background-color: #fbfbfb;
+}
+.details-bg{
+    background-color: #eeeeee;
+}
+.details-tab-bg{
+    background-color: #eeeeee;
+    /* padding: 10px; */
+}
+.form-group{
+    width: 60% !important;
+    
+    margin-bottom: 10px !important;
+}
+.form-control{
+    background-color: transparent !important;
+    /* border: none !important; */
+    border: 2px solid #ccc !important;
+    border-radius: 5px !important;
+    padding:0 4px !important;
+    font-size:13px !important;
+}
+.checkout-img{
+    width: 200px !important;
+}
+.checkout{
+    margin: 40px;
+    margin-bottom: 20px;
+}
+@media (max-width:560px){
+    .checkout{
+        margin: 20px;
+    }
+    .check-radio{
+        padding: 20px;
+    }
+    .radio{
+        padding: 10px !important;
+    }
+    .form-group {
+        width: 100% !important;
+        margin: auto;
+        margin-bottom: 10px !important;
+    }
+}
+.radio{
+    padding: 0px;
+}
+.work-fields{
+    padding: 10px 40px;
+}
+@media screen and (min-width: 100px) and (max-width:550px) {
+    .amount{
+        padding: 10px !important;
+    }
+    .details{
+        padding: 10px !important;
+    }
+}
+.amount{
+  padding: 10px;
+}
+.details{
+    padding: 25px;
+}
+.paynow-btn{
+    padding: 5px 30px !important;
+}
+.accordion .card-header:after {
+    font-family: 'FontAwesome';  
+    content: "\f068";
+    float: right; 
+}
+.accordion .card-header.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\f067"; 
+}
+.w1001
+{
+    width:100% !important;
+}
+.mat-form-field {
+    margin-top: 16px;
+  }
+select:hover {
+    border:1px solid #dca101 !important;
+   }
+   select:focus-visible
+   {
+       border:1px solid #dca101 !important;
+   }
+ .date1:hover
+ {
+     border:1px solid #dca101 !important;
+ }
+ .time1:hover
+ {
+     border:1px solid #dca101 !important;
+ }
+ .date1:focus-visible
+ {
+     border:1px solid #dca101 !important;
+ }
+ .time1:focus-visible
+ {
+     border:1px solid #dca101 !important;
+ }
+ .w-60Per
+ {
+     width:60%;
+ }
+ .w-10per
+ {
+    width:10%;
+ }
+ .w-8per
+ {
+     width:7%;
+ }

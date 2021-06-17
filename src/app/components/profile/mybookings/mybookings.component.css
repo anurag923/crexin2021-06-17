@@ -1,0 +1,36 @@
+.booking-hd-1{
+    background-color: #dcdcdc;
+    color: #414a4c;
+}
+.wdt-tdimg{
+    width: 120px;
+}
+.fnt-bld{
+    font-weight: bold;
+}
+.reqid-clr-1{
+    color: #dca101;
+    font-weight: bold;
+}
+.brd-book{
+    border: 1px solid #b0b0b0;
+    border-radius: 10px;
+    padding: 10px;
+}
+.reqid-clr-2{
+    color: #2bc965;
+    font-weight: bold;
+}
+.reqid-clr-3{
+    color: #414a4c;
+    font-weight: bold;
+}
+/* img{
+    width: 150px !important;
+} */
+.order-image{
+    height: 100px !important;
+}
+.bookings-header{
+    background-color: #dcdcdc !important;
+}

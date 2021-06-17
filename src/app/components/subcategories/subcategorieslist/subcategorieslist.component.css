@@ -1,0 +1,14 @@
+.bg{
+    background-color: #efefef;
+    padding: 30px;
+}
+.search{
+    border-radius: 10px !important;
+}
+.boder-bottom{
+    border-bottom: 1px solid #ccc;
+}
+img{
+    height: 170px !important;
+    width: 250px !important;
+}

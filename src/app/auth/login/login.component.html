@@ -1,0 +1,147 @@
+<div class="container-fluid p-0">
+    <div class="bg-image">
+
+        <div class="main-forms">
+            <div class="header">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="login-log">
+                </div>
+            </div>
+            <div class="body">
+                <div class="d-flex align-items-center">
+                    <h1 class="text-color fs-20 fw-600 mgb-0">Login</h1>
+                    <h1 class="text-color fs-20 mr-1 ml-2 mgb-0">or</h1>
+                    <h1 class="text-color fs-20 fw-600 mgb-0">Signup</h1>
+                </div>
+                <div class="forms">
+                    <form [formGroup]="Singin">
+                        <!-- 17-05-21 previous code -->
+                        <!-- <div class="form-group col-md-10 offset-md-1">
+                         <input type="number" [(ngModel)]="mobile" placeholder="Mobile Number" class="form-control" formControlName="mobile"  [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                         <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                            <div *ngIf="f.mobile.errors.required" class="fs-15 fw-700">Mobil Number is required</div>
+                            <div *ngIf="f.mobile.errors.pattern" class="fs-15 fw-700">Mobil Number must be at 10 digits required</div>
+                          </div>
+                    </div>
+                    <div class="col-md-10 offset-md-1">
+                        <input type="checkbox" class="mr-2" formControlName="termsandconditions"  [ngClass]="{ 'is-invalid': submitted && f.termsandconditions.errors }">
+                        <span>I agree to <a href="" routerLink="/Termsandconditions">Terms & Conditions</a></span>
+                        <div *ngIf="submitted && f.termsandconditions.errors" class="invalid-feedback">
+                            <div *ngIf="f.termsandconditions.errors.required" class="fs-15 fw-700">Terms and Conditions is required</div>
+                        </div>
+                    </div>
+                    <div class="col-md-10 offset-md-1 mt-2 text-center">
+                        <button class="btn btn fs-15 fw-700" type="button" (click)="login()">
+                            SEND OTP
+                        </button>
+                    </div> -->
+                        <div class="form__div mt-3">
+                            <input type="text" class="form__input cls18" placeholder=" " formControlName="mobile"
+                                [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                            <label for="" class="form__label">Mobile Number</label>
+                            <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                                <div *ngIf="f.mobile.errors.required" class="fs-13 error_pos">Mobile Number is required
+                                </div>
+                                <div *ngIf="f.mobile.errors.pattern" class="fs-13 error_pos">Mobil Number must be at 10
+                                    digits
+                                    required</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center" style="line-height: 1px;">
+                            <p class="text-color fs-15 mr-2">BY Continuing, I agree to the</p>
+                            <p class="active-color fs-1s cursor-pointer" routerLink="/Termsandconditions">Terms of use
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <p class="text-color fs-18 mr-2">&</p>
+                            <p class="active-color fs-1s cursor-pointer" routerLink="/Termsandconditions">Privacy Policy
+                            </p>
+                        </div>
+                        <div class="mt-2">
+                            <button class="btn btn fs-15 fw-700 text-color pd-10 w-100" type="button" (click)="login()">
+                                GET OTP
+                            </button>
+                        </div>
+                        <!-- <div class="col-md-10 my-2 offset-md-1 text-center">
+                        <span class="mr-1 crexin-text fs-15 fw-700">Login with</span>
+                        <span class="cursor-pointer fs-15 fw-700 active-color" routerLink="/account_password">Password</span>
+                    </div> -->
+
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h1 class="text-color fs-15 mr-1 mgb-0">Having trouble logging in?</h1>
+                            <h1 class="text-danger fs-15 cursor-pointer mgb-0">Get help</h1>
+                        </div>
+                        <h1 class="text-danger fw-400 text-center fs-15 mgb-0 lh-20" *ngIf="mobile_not_register">Your
+                            mobile number is not registered with us</h1>
+                        <div class="my-2">
+                            <button class="btn-outline-secondary fs-15 fw-700 text-color pd-10 w-100" type="button"
+                                routerLink="/usersignup" style="border-radius: 10px;">
+                                CREATE NEW ACCOUNT
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+    <div class="grid">
+        <div class="row mt-2">
+           <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Login</h1>
+           </div>
+            <div class="col-md-6 offset-md-3">
+              <form [formGroup]="Singin">
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control"  [(ngModel)]="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>                        
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" name="password" class="form-control" formControlName="password"  [(ngModel)]="password" placeholder="password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.pattern">Min requirement:8 characters, 1 uppercase , 1 lowercase , 1 special char</div>
+                      </div>
+                </div>
+                <div class="col-md-12 d-flex justify-content-center">
+                    <button class="btn btn-primary" (click)="login()">Login</button>
+                </div>
+                <p class="text-center mt-2">Don`t have a crexin account? <a routerLink="/usersignup">Singup</a></p>
+              </form>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-6 offset-md-3">
+                <h1>post</h1>
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control" placeholder="title" [(ngModel)]="title">
+                </div>
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <textarea class="form-control" placeholder="description" [(ngModel)]="description">
+                    </textarea>
+                </div>
+                <div class="">
+                    <button class="btn btn-primary" type="submit" (click)="post()">post</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="getpost()">GET POST</button>
+    </div>
+</div> -->

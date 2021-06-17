@@ -1,0 +1,35 @@
+.heading{
+    position: absolute;
+    top: 50%;
+    /* left: 50%; */
+}
+.text{
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+}
+.order-request{
+    border: 1px solid #414a4c;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex !important;
+    justify-content: center;
+}
+.rent-bg{
+    background-color: #f5f5f5;
+    padding: 50px;
+    margin: 30px;
+}
+@media(max-width:560px){
+    .rent-bg{
+        background-color: #f5f5f5;
+        padding: 30px;
+        margin: 15px;
+    }  
+}
+.border-bottom{
+    border-bottom: 1px solid #bebebe !important;
+}
+.border-right{
+    border-right: 1px solid #bebebe !important;
+}

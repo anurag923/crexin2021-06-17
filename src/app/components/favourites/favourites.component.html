@@ -1,0 +1,88 @@
+<div class="container-fluid p-0">
+    <div class="profile-image">
+        <div class="col-md-12 text-center text-position-center">
+            <h1 class="text-light fs-30 fw-700">
+                UPDATE YOUR PROFILE
+            </h1>
+        </div>
+    </div>
+    <div class="profile-bg">
+       <div class="sub-bg">
+        <div class="grid">
+            <div class="row mg-0">
+                <div class="col-md-12">
+                    <h1 class="fs-20 fw-700 text-color">Favourites</h1>
+                </div>
+            </div>
+            <div class="row mg-0 justify-content-center d-flex profile-gap">
+                <div class="col-md-4 my-2" *ngFor="let equipment of equipments">
+                    <div class="prf-updt">
+                        <div class="favourites_image">
+                            <img src="{{equipment.subcategory.sc_image}}" class="img-fluid prf-img">
+                        </div>
+                        <h5 class="fs-15 fw-700 mgt-10 mgb-5 text-color text-center">{{equipment.subcategory.sc_name}}</h5>
+                        <!-- <h4 class="fs-18 fw-700 mgb-5">₹ 7000</h4>
+                        <div class="d-flex">
+                            <div class="mr-2">
+                                <h5 class="fs-15 fw-600 mgb-5 text-color">24-04-2021</h5>
+                                <h5 class="fs-15 fw-600 mgb-0 text-color">7am to 9am</h5>
+                            </div>
+                            <div class="m-auto">
+                                <h4 class="mgb-0 text-color fs-15 fw-600">To</h4>
+                            </div>
+                            <div class="ml-2">
+                                <h5 class="fs-15 fw-600 mgb-5 text-color">24-04-2021</h5>
+                                <h5 class="fs-15 fw-600 mgb-0 text-color">7am to 9am</h5>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- <div class="col-md-4 my-2">
+                    <div class="prf-updt">
+                        <img src="/assets/images/c4.png" class="img-fluid prf-img">
+                        <h5 class="fs-15 fw-700 mgt-10 mgb-5 text-color">BACK HOE HOLDER</h5>
+                        <h4 class="fs-18 fw-700 mgb-5">₹ 7000</h4>
+                        <div class="d-flex">
+                            <div class="mr-2">
+                                <h5 class="fs-15 fw-600 mgb-5 text-color">24-04-2021</h5>
+                                <h5 class="fs-15 fw-600 mgb-0 text-color">7am to 9am</h5>
+                            </div>
+                            <div class="m-auto">
+                                <h4 class="mgb-0 text-color fs-15 fw-600">To</h4>
+                            </div>
+                            <div class="ml-2">
+                                <h5 class="fs-15 fw-600 mgb-5 text-color">24-04-2021</h5>
+                                <h5 class="fs-15 fw-600 mgb-0 text-color">7am to 9am</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 my-2">
+                    <div class="prf-updt">
+                        <img src="/assets/images/c4.png" class="img-fluid prf-img">
+                        <h5 class="fs-15 fw-700 mgt-10 mgb-5 text-color">BACK HOE HOLDER</h5>
+                        <h4 class="fs-18 fw-700 mgb-5">₹ 7000</h4>
+                        <div class="d-flex">
+                            <div class="mr-2">
+                                <h5 class="fs-15 fw-600 mgb-5 text-color">24-04-2021</h5>
+                                <h5 class="fs-15 fw-600 mgb-0 text-color">7am to 9am</h5>
+                            </div>
+                            <div class="m-auto">
+                                <h4 class="mgb-0 text-color fs-15 fw-600">To</h4>
+                            </div>
+                            <div class="ml-2">
+                                <h5 class="fs-15 fw-600 mgb-5 text-color">24-04-2021</h5>
+                                <h5 class="fs-15 fw-600 mgb-0 text-color">7am to 9am</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>            -->
+            </div>
+            <div class="row my-3">
+                <div *ngIf="loading" class="text-center col-md-12">
+                    <h1 class="fs-15 fw-700">loading ...</h1>
+                </div>
+            </div>
+       </div>
+    </div>
+</div>

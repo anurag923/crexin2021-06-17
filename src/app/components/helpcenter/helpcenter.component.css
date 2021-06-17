@@ -1,0 +1,28 @@
+.information{
+    background-color: #fff !important;
+    padding: 20px !important;
+    border-top-right-radius:50px !important;
+    border-bottom-left-radius:50px !important;
+    box-shadow: 3px 3px 20px #888888 !important; 
+}
+.social-icons{
+    margin-top: -35px !important;
+    display: flex;
+    justify-content: center;
+}
+.social-icons i{
+    height: 50px;
+    width: 50px;
+    background-color: #dca101;
+    padding: 10px !important;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.border-bottom{
+    border-bottom: 1px solid #707070;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}

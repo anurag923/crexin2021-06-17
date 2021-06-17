@@ -1,0 +1,254 @@
+<div class="container-fluid p-0">
+    <div class="profile-image">
+      <div class="col-md-12 text-center text-position-center">
+          <h1 class="text-light fs-30 fw-700">
+             UPDATE YOUR PROFILE
+          </h1>
+        </div>
+    </div>
+    <div class="profile-bg">
+      <div class="grid">
+          <div class="row mg-0">
+              <app-profile-filed class="w-100"></app-profile-filed>
+              <div class="bg-white profile-fields mt-4">
+                <div class="row mg-0">
+                  <div class="col-md-3">
+                      <app-sidenav></app-sidenav>
+                  </div>
+                  <div class="col-md-9">
+                        <div class="row mg-0">
+                            <div class="col-md-6">
+                                <h1 class="fs-20 fw-700 mgb-0 text-color">Manage Address</h1>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <button type="button" class="btn btn fs-15 fw-700 mgb-10" (click)="open(addaddress)">
+                                    <i class="fa fa-plus mr-1" aria-hidden="true"></i> add new address
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row my-2  mgl-0 mgr-0">
+                             <div class="col-md-6 mb-3" *ngFor="let getaddress of getaddresses">
+                                 <div class="adrs">
+                                     <div class="d-flex">
+                                     <i class="fa fa-home fs-20 mgr-10" *ngIf="getaddress.type == 'Home'"></i>
+                                     <i class="fa fa-building fs-20 mgr-10" *ngIf="getaddress.type == 'Office'"></i>
+                                     <p class="fs-15 text-color">{{getaddress.street}}</p>
+                                     <p class="mr-1 ml-1 fs-15 text-color text-center">{{getaddress.address}}</p>
+                                     <p class="fs-15 text-color text-center">{{getaddress.pincode}}</p>
+                                    </div>
+                                    
+                                    <div class="adres-icns">
+                                        <p class="mr-2 mgb-0">
+                                        <i class="fa fa-edit mr-2 fs-18 fw-700"></i><a class="text-danger fs-18 fw-700 cursor-pointer" data-toggle="modal" data-target="#editaddress" (click)="editsingleaddress(getaddress.id,getaddress.street,getaddress.address,getaddress.pincode,getaddress.type)">Edit</a></p>
+                                        <p class="ml-2 mgb-0"><i class="fa fa-trash mr-2 fs-18 fw-700"></i><a class="text-danger fs-18 fw-700 cursor-pointer" data-toggle="modal" data-target="#deleteaddress" (click)="delete(getaddress.id)">Delete</a></p>
+                                    </div>
+                                
+                                 </div>
+                             </div>
+                             <div *ngIf="loading" class="text-center mg-auto mgt-35">
+                              <h1 class="fs-15 fw-700 text-center">loading ...</h1>
+                             </div>
+                             <div class="spiner d-flex justify-content-center" *ngIf="loading">
+                                  <div class="spinner-border spinner" role="status">
+                                      <span class="sr-only" id="loading"></span>
+                                  </div>
+                             </div>
+                        </div>
+                   
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- add addrees -->
+  <ng-template #addaddress let-modal>
+    <div class="modal-header bg-color">
+      <h1 class="modal-title fs-20 fw-700 mgb-0" id="modal-basic-title">ADD NEW ADDRESS</h1>
+      <button type="button text-light" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="text-light">×</span>
+      </button>
+    </div>
+    <form [formGroup]="Address" (ngSubmit)="updateaddress()">
+    <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="street"  placeholder="Street/ Flatno/ Door No/ House No" formControlName="sreet" [ngClass]="{ 'is-invalid': submitted && f.sreet.errors }">
+            <div *ngIf="submitted && f.sreet.errors" class="invalid-feedback">
+              <div *ngIf="f.sreet.errors.required" class="fs-15 fw-700">Street is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="address" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+              <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                <div *ngIf="f.address.errors.required" class="fs-15 fw-700">Address is required</div>
+              </div>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Pincode"  [(ngModel)]="pincode" class="form-control" formControlName="pincode" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }">
+            <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+              <div *ngIf="f.pincode.errors.required" class="fs-15 fw-700">Pincode is required</div>
+              <div *ngIf="f.pincode.errors.pattern" class="fs-15 fw-700">Pincode must be at least 6 digits</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select name="" id="" formControlName="type"  [(ngModel)]="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+              <option value="" selected disabled>--Select a type--</option>
+              <option value="Home">Home</option>
+              <option value="Office">Office</option>
+            </select>
+            <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+              <div *ngIf="f.type.errors.required" class="fs-15 fw-700">Type is required</div>
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger fs-15 fw-700" (click)="modal.dismiss('Cross click')">Close</button>
+      <button type="submit" class="btn btn-outline-dark fs-15 fw-700">ADD</button>
+    </div>
+  </form>
+  
+  </ng-template>
+
+  <!-- edit address -->
+
+  <ng-template #editaddress let-modal>
+    <div class="modal-header bg-color">
+      <h1 class="modal-title fs-20 fw-700 mgb-0" id="modal-basic-title">EDIT ADDRESS</h1>
+      <button type="button text-light" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="text-light">×</span>
+      </button>
+    </div>
+    <form [formGroup]="Address" (ngSubmit)="updateaddress()">
+    <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="street"  placeholder="Street/ Flatno/ Door No/ House No" formControlName="sreet" [ngClass]="{ 'is-invalid': submitted && f.sreet.errors }">
+            <div *ngIf="submitted && f.sreet.errors" class="invalid-feedback">
+              <div *ngIf="f.sreet.errors.required" class="fs-15 fw-700">Street is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="address" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+              <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                <div *ngIf="f.address.errors.required" class="fs-15 fw-700">Address is required</div>
+              </div>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Pincode"  [(ngModel)]="pincode" class="form-control" formControlName="pincode" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }">
+            <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+              <div *ngIf="f.pincode.errors.required" class="fs-15 fw-700">Pincode is required</div>
+              <div *ngIf="f.pincode.errors.pattern" class="fs-15 fw-700">Pincode must be at least 6 characters</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select name="" id="" formControlName="type"  [(ngModel)]="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+              <option value="" selected disabled>--Select a type--</option>
+              <option value="Home">Home</option>
+              <option value="Office">Office</option>
+            </select>
+            <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+              <div *ngIf="f.type.errors.required" class="fs-15 fw-700">Type is required</div>
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger fs-15 fw-700" (click)="modal.dismiss('Cross click')">Close</button>
+      <button type="submit" class="btn btn-outline-dark fs-15 fw-700">EDIT</button>
+    </div>
+  </form>
+  
+  </ng-template>
+
+  <!-- delete address -->
+
+  <ng-template #deleteaddress let-modal>
+    <div class="modal-header bg-color">
+      <h1 class="modal-title fs-20 fw-700 mgb-0" id="modal-basic-title">DELETE ADDRESS</h1>
+      <button type="button text-light" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="text-light">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+          <h1 class="fs-18 w-700">Are you sure you want to delete ? </h1>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger fs-15 fw-700" (click)="modal.dismiss('Cross click')">Close</button>
+      <button type="submit" class="btn btn-outline-dark fs-15 fw-700">DELETE</button>
+    </div>
+  </ng-template>
+
+
+
+  <div class="modal fade" data-aos="flip-right" id="editaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-color">
+          <h1 class="modal-title fs-20 fw-700 mgb-0" id="modal-basic-title">EDIT ADDRESS</h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="Address" (ngSubmit)="updatesingleaddress()">
+        <div class="modal-body">
+              <div class="form-group">
+                <input type="hidden" class="form-control" value={{add_id}}>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="singlestreet"  formControlName="sreet" [ngClass]="{ 'is-invalid': submitted && f.sreet.errors }">
+                <div *ngIf="submitted && f.sreet.errors" class="invalid-feedback">
+                  <div *ngIf="f.sreet.errors.required" class="fs-15 fw-700">Street is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="singleaddress" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                  <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required" class="fs-15 fw-700">Address is required</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                <input type="text" [(ngModel)]="singlepincode" class="form-control" formControlName="pincode" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }">
+                <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+                  <div *ngIf="f.pincode.errors.required" class="fs-15 fw-700">Pincode is required</div>
+                  <div *ngIf="f.pincode.errors.pattern" class="fs-15 fw-700">Pincode must be at least 6 characters</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <select name="" id="" formControlName="type" [(ngModel)]=" singletype" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                  <option value="" selected disabled>--Select a type--</option>
+                  <option value="Home">Home</option>
+                  <option value="Office">Office</option>
+                </select>
+                <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                  <div *ngIf="f.type.errors.required" class="fs-15 fw-700">Type is required</div>
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger fs-15 fw-700" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-dark fs-15 fw-700">UPDATE</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-color">
+          <h1 class="modal-title fs-20 fw-700 mgb-0" id="modal-basic-title">DELETE ADDRESS</h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h1 class="fs-18 w-700">Are you sure you want to delete ?</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger fs-15 fw-700" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline-dark fs-15 fw-700" (click)="deletesingledelete()">DELETE</button>
+        </div>
+      </div>
+    </div>
+  </div>

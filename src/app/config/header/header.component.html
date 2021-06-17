@@ -1,0 +1,209 @@
+<!-- <button routerLink="/">Home</button>
+<button routerLink="/careers">Careers</button>
+<button routerLink="/blog">Blog</button>
+<button routerLink="/contact">Contact</button>
+<button routerLink="/registerequipment">Register Equipment</button>
+<button routerLink="/vendorsignup">Vendor registration</button>
+<button routerLink="/usersignup">User registration</button>
+<button routerLink="/login">Login</button> -->
+<!-- <button routerLink="/otp">OTP</button> -->
+
+
+
+<nav class="navbar navbar-expand-lg bg-dark pd-5">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item2 fs-13">
+      <a class="nav-link2" href="#">
+        <i class="fa fa-phone mr-2 crexin-text1"></i>Toll Free: 040-25256526
+      </a>
+    </li>
+    <li class="nav-item2 fs-13">
+      <a class="nav-link2" href="#">
+        <i class="fa fa-envelope mr-2 crexin-text1"></i>info@crexin.com
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light p-0">
+  <!--navbar section ends here-->
+  <div class="container-fluid ml-5 mr-5">
+    <a class="navbar-brand" routerLink="/"><img src="assets/images/Log_one.png" class="img-fluid logo-wdith"></a>
+
+    <button class="navbar-toggler mobile-button" type="button" data-toggle="collapse" data-target="#crexin-menu"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"
+      (click)="toggleCollapsed()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="crexin-menu" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item mt-2">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            HOME
+          </a>
+        </li>
+        <li class="nav-item mt-2">
+          <a class="nav-link" routerLink="/rent" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            RENT
+          </a>
+        </li>
+        <li class="nav-item mt-2">
+          <a class="nav-link" routerLink="/vendor" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">REGISTER EQUIPMENT</a>
+        </li>
+        <li class="nav-item mt-2">
+          <a class="nav-link" routerLink="/careers" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            CAREERS
+          </a>
+        </li>
+
+        <li class="nav-item mt-2">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            CONTACT
+          </a>
+        </li>
+
+        <li class="nav-item mt-2" *ngIf="!userstatus">
+          <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/login"
+            class="nav-link font400 pulse black_cls"><i class="fa fa-sign-in mr-2"></i>
+            <span>LOGIN/SIGN UP</span></a>
+        </li>
+
+        <li class="nav-item mt-2 user-fields" *ngIf="userstatus">
+          <a class="nav-link">
+            <i class="fa fa-user-circle" style="font-size: 24px;"></i>
+          </a>
+          <div class="drop-downfields">
+            <ul class="">
+              <li class="border-bottom">
+                <a href="">
+                  <span class="text-white fs-15 fw-700 mr-2">Hello</span> <span
+                    class="text-white fs-15 fw-700">{{username}}</span>
+                  <h1 class="text-white fs-15 fw-700 mgb-0">+91-{{userphone}}</h1>
+                </a>
+              </li>
+              <li>
+                <a href="" data-toggle="modal" data-target="#deleteaddress" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact:true}" class="text-decoration-none"><i
+                    class="fa fa-user-circle"></i>
+                  <span>Profile</span></a>
+              </li>
+              <li>
+                <a href="" (click)="bookings();" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i
+                    class="fa fa-list" aria-hidden="true"></i><span class="">Bookings</span></a>
+              </li>
+              <li>
+                <a href="" routerLink="/helpcenter" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+                  class="text-decoration-none"><i class="fa fa-question" aria-hidden="true"></i>
+                  <span>Help Center</span></a>
+              </li>
+              <li>
+                <a href="" routerLink="favourites" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i
+                    class="fa fa-heart-o" aria-hidden="true"></i><span>Favourite</span></a>
+              </li>
+              <li>
+                <a href="" routerLink="/Termsandconditions" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact:true}" class="text-decoration-none"><i class="fa fa-legal"></i>
+                  <span>Terms & Conditions</span></a>
+              </li>
+              <li>
+                <a href="" routerLink="/notifications" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact:true}" class="text-decoration-none"><i class="fa fa-bell"
+                    aria-hidden="true"></i>
+                  <span>Notifications</span></a>
+              </li>
+              <li class="border-bottom">
+                <a href="" routerLink="/payments" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+                  class="text-decoration-none"><i class="fa fa-credit-card" aria-hidden="true"></i>
+                  <span>Payments</span></a>
+              </li>
+              <li>
+                <a href="" (click)="logout()" class="text-decoration-none"><i class="fa fa-sign-out"></i>
+                  <span>Logout</span></a>
+              </li>
+              <!-- <ng-container *ngIf="userstatus">
+              <li>
+                <a href="" routerLink="profile/bookings" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="text-decoration-none"><i class="fa fa-first-order"></i>
+                <span>My Bookings</span></a>
+              </li>
+             </ng-container>
+             <ng-container *ngIf="!userstatus">
+              <li>
+                <a href="" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="text-decoration-none"><i class="fa fa-sign-in"></i>
+                <span>Login</span></a>
+              </li>
+             </ng-container>
+             <ng-container *ngIf="userstatus">
+              <li>
+                <a (click)="logout()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="text-decoration-none"><i class="fa fa-sign-out"></i>
+                <span>Logout</span></a>
+              </li>
+             </ng-container> -->
+            </ul>
+            <!-- <ul *ngIf="!userstatus">
+              <li class="mgb-0 fs-15 text-white text-center">Welcome to Crexin!</li>
+              <li>
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/login" class="text-decoration-none"><i class="fa fa-sign-in"></i>
+                <span>LOGIN/SIGN UP</span></a>
+              </li>
+            </ul> -->
+          </div>
+        </li>
+
+        <!-- <li class="nav-item mt-2 mb-2 d-flex justify-content-center">
+          <button class="btn btn" routerLink="vendor">Vendor form</button>
+        </li> -->
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- profile modal -->
+
+<div class="modal fade" id="deleteaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-10 offset-1">
+          <h1 class="fs-20 fw-700 text-center text-color">
+            Update Profile Details
+          </h1>
+        </div>
+        <form [formGroup]="profile_update" class="w-100">
+          <div class="form__div mt-3 col-md-10 offset-1">
+            <input type="text" class="form__input" placeholder=" " formControlName="mobile" [(ngModel)]="phone"
+              [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+            <label for="" class="form__label">Mobile Number</label>
+            <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+              <div *ngIf="f.mobile.errors.required" class="fs-13">Mobile no is required</div>
+              <div *ngIf="f.mobile.errors.pattern" class="fs-13">Mobil Number must be at 10 digits required</div>
+            </div>
+          </div>
+          <div class="form__div mt-3 col-md-10 offset-1">
+            <input type="email" class="form__input" placeholder=" " formControlName="email" [(ngModel)]="email"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <label for="" class="form__label">Email Id</label>
+            <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+              <div *ngIf="f.mobile.errors.required" class="fs-13">Email is required</div>
+            </div>
+          </div>
+          <div class="form__div mt-3 col-md-10 offset-1">
+            <input type="text" class="form__input" placeholder=" " formControlName="address"
+              [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+            <label for="" class="form__label">Address</label>
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+              <div *ngIf="f.address.errors.required" class="fs-13">Address is required</div>
+            </div>
+          </div>
+          <div class="col-md-10 offset-1">
+            <button class="fs-15 fw-700 text-color btn w-100 pd-10" type="button" (click)="updateprofile()">
+              Update Profile
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

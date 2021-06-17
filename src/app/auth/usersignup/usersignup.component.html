@@ -1,0 +1,68 @@
+<div class="container-fluid p-0">
+  <div class="bg-image">
+
+    <div class="main-forms">
+      <div class="header">
+        <div class="logo">
+          <img src="/assets/images/Logo-1.png" alt="login-log">
+        </div>
+      </div>
+      <div class="body">
+        <div class="">
+          <h1 class="text-color mb-2 fs-20 fw-700">Complete your Signup Now</h1>
+          <div class="forms">
+            <form [formGroup]="Singup">
+              <div class="form__div">
+                <input type="password" class="form__input" placeholder=" " formControlName="password"
+                  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <label for="" class="form__label">Create Password</label>
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required" class="fs-13 error_pos">Password is required</div>
+                  <div *ngIf="f.password.errors.pattern" class="fs-10 error_pos">Min requirement:8 characters, 1
+                    uppercase , 1 lowercase , 1 number & 1 special char</div>
+                </div>
+              </div>
+
+              <div class="form__div">
+                <input type="password" class="form__input" placeholder=" " formControlName="c_password" [ngClass]="{ 'is-invalid': submitted && f.c_password.errors }">
+                <label for="" class="form__label">Confirm Password</label>
+                <div *ngIf="submitted && f.c_password.errors" class="invalid-feedback">
+                  <div *ngIf="f.c_password.errors.required"  class="fs-13 error_pos">Confirm Password is required</div>
+                  <div *ngIf="f.c_password.errors.mustMatch" class="fs-13 error_pos">Passwords must match</div>
+                </div>
+              </div>
+              <div class="form__div">
+                <input type="text" class="form__input" placeholder=" " formControlName="fullname"
+                  [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }">
+                <label for="" class="form__label">Full Name</label>
+                <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+                  <div *ngIf="f.fullname.errors.required" class="fs-13 error_pos">Full name is required</div>
+                </div>
+              </div>
+              <div class="form__div">
+                <input type="email" class="form__input" placeholder=" " #email>
+                <label for="" class="form__label">Email Id (Optional)</label>
+              </div>
+              <div class="form__div mgb-10">
+                <input type="text" class="form__input" placeholder=" " formControlName="mobile"
+                  [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                <label for="" class="form__label">Mobile Number</label>
+                <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                  <div *ngIf="f.mobile.errors.required" class="fs-13 error_pos">Mobile Number is required</div>
+                  <div *ngIf="f.mobile.errors.pattern" class="fs-13 error_pos">Mobile Number must be at 10 digits
+                    required</div>
+                </div>
+              </div>
+              <h1 class="text-color fs-15 mgb-10">This will help recover your account if needed</h1>
+
+              <div class="text-center">
+                <button class="btn btn text-color fs-15 fw-700 w-100 pd-10" (click)="onSubmit(email.value)">CREATE
+                  ACCOUNT</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    
+  </div>
+</div>

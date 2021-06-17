@@ -1,0 +1,98 @@
+.input-group-prepend{
+    width: 70%;
+    margin: auto;
+}
+
+.list-unstyled li a i:hover{
+    border-radius: 2px;
+    padding: 2px;
+    transform: scale(2);
+    color: #dca101 !important;
+}
+
+@media (max-width:768px) {
+    .home-text{
+        font-size: 30px !important;
+    }
+}
+.enquiry-error-message{
+    width: 70%;
+    margin: auto;
+}
+label{
+    width: 100%;
+    justify-content: flex-start;
+    display: flex !important;
+    margin: auto;
+}
+.map-icon
+{
+    position: relative;
+    top: 11px;
+    left: 25px;
+    font-size: 19px;
+    color: #fff;
+}
+.selectdiv {
+    position: relative;
+    /*Don't really need this just for demo styling*/
+    
+    float: left;
+    min-width: 200px;
+
+  }
+  
+  /* IE11 hide native button (thanks Matt!) */
+  select::-ms-expand {
+  display: none;
+  }
+  
+  .selectdiv:after {
+    content: url(/assets/images/downarrow.png);
+    font-size: 17px;
+    color: #fff;
+    
+    right: 11px;
+    /*Adjust for position however you want*/
+    
+    top: 10px;
+    padding: 0 0 2px;
+    /*left line */
+    
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  .selectdiv select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Add some styling */
+    
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: 50px;
+    float: right;
+    padding: 0px 56px;
+    font-size: 16px;
+    line-height: 1.75;
+    color:#dca101;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #dca101;
+    -ms-word-break: normal;
+    word-break: normal;
+  }
+  
+  
+
+  .cls-blk
+  {
+      color:#fff !important;
+      background-color:black;
+  }
+  .loc_cls
+  {
+        height: calc(2.5rem + 2px) !important;
+  }

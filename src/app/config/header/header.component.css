@@ -1,0 +1,92 @@
+@-webkit-keyframes glowing {
+    0% { background-color: #339999; -webkit-box-shadow: 0 0 3px#339999; }
+    50% { background-color: #339999; -webkit-box-shadow: 0 0 40px #339999; }
+    100% { background-color: #339999; -webkit-box-shadow: 0 0 3px #339999; }
+  }
+  
+  @-moz-keyframes glowing {
+    0% { background-color: #339999; -moz-box-shadow: 0 0 3px #339999; }
+    50% { background-color: #339999; -moz-box-shadow: 0 0 40px #339999; }
+    100% { background-color: #339999; -moz-box-shadow: 0 0 3px #339999; }
+  }
+  
+  @-o-keyframes glowing {
+    0% { background-color: #339999; box-shadow: 0 0 3px #339999; }
+    50% { background-color: #339999; box-shadow: 0 0 40px #339999; }
+    100% { background-color: #339999; box-shadow: 0 0 3px #339999; }
+  }
+  
+  @keyframes glowing {
+    0% { background-color: #339999; box-shadow: 0 0 3px #339999; }
+    50% { background-color: #339999; box-shadow: 0 0 40px #339999; }
+    100% { background-color: #339999; box-shadow: 0 0 3px #339999; }
+  }
+  .drop-downfields ul li{
+    list-style: none !important;
+  }
+  .drop-downfields ul li a i{
+    margin-right: 10px !important;
+  }
+  .drop-downfields{
+    display: none;
+    position: absolute;
+    background-color: #414a4c;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 50px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  @media(max-width:375px){
+    .drop-downfields{
+      right: 76px !important;
+    }
+  }
+  @media(min-width:768px) and (max-width:998px){
+    .drop-downfields{
+      right: 280px !important;
+    }
+  }
+  .drop-downfields a{
+    color: #ffffff;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px !important;
+  }
+  .drop-downfields li a:hover{
+    /* background-color: #fff; */
+    color: #dca101 !important;
+  }
+  /* .drop-downfields li a.active{
+    background-color: #fff;
+    color: #000;
+  } */
+  .user-fields:hover .drop-downfields{
+     display: block;
+     z-index: 9999;
+  }
+  .border-bottom{
+    border-bottom: 1px solid #fff;
+  }
+  .modal-content{
+    border-radius: 15px;
+    padding: 15px;
+  }
+  .form__label{
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0 .25rem;
+    background-color: #fff !important;
+    color: #414a4c;
+    font-size: 15px;
+    transition: .3s;
+    }
+    .font400
+    {
+      font-weight:400 !important;
+    }
+  
+    
