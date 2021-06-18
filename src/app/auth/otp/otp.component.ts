@@ -6,6 +6,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { shareReplay } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { CrexinService } from 'src/app/services/crexin.service';
+import { AESEncryptDecryptServiceService } from '../../services/aesencrypt-decrypt-service.service';
 
 @Component({
   selector: 'app-otp',
@@ -26,7 +27,7 @@ export class OtpComponent implements OnInit {
   status: any;
   data: any;
   auth_token = sessionStorage.getItem('auth_token');
-  constructor(private crexinservice:CrexinService,private http:HttpClient,private router:Router, private fb:FormBuilder, private toastr:ToastrService, private auth:AuthService) { }
+  constructor(private aes:AESEncryptDecryptServiceService, private crexinservice:CrexinService,private http:HttpClient,private router:Router, private fb:FormBuilder, private toastr:ToastrService, private auth:AuthService) { }
   ngOnInit(): void {
       this.Otp = this.fb.group({
         one:['', Validators.required],
@@ -90,12 +91,15 @@ otpsuccess(){
     }
     this.auth.verifyotp(data).subscribe((res)=>{
       console.log(res);
+      var name = this.aes.encrypt(res.fullname);
+      var phone = this.aes.encrypt(res.phone);
+      var email = this.aes.encrypt(res.email);
       sessionStorage.setItem('auth_token',res.token);
       sessionStorage.setItem('isloggedin', 'true');
-      sessionStorage.setItem('name',res.fullname)
-      sessionStorage.setItem('email',res.email)
-      sessionStorage.setItem('phone',res.phone)
-      this.toastr.success(this.message,'Succssfully otp verification done',{
+      sessionStorage.setItem('name',name)
+      sessionStorage.setItem('email',email)
+      sessionStorage.setItem('phone',phone)
+      this.toastr.success(this.message,'Successfully otp verification done',{
         positionClass: 'toast-top-center'
       });
       //  const headers= new HttpHeaders()

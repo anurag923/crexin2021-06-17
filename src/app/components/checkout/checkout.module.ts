@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { AESEncryptDecryptServiceService } from '../../services/aesencrypt-decrypt-service.service';
 import { CheckoutRoutingModule } from './checkout-routing.module';
 import { CheckoutComponent } from './checkout.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
 import { CheckoutGuard } from 'src/app/guards/guards/checkout.guard';
+
 @NgModule({
   declarations: [CheckoutComponent],
   imports: [
@@ -16,6 +17,6 @@ import { CheckoutGuard } from 'src/app/guards/guards/checkout.guard';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers:[CheckoutService,CheckoutGuard]
+  providers:[CheckoutService,CheckoutGuard,AESEncryptDecryptServiceService]
 })
 export class CheckoutModule { }

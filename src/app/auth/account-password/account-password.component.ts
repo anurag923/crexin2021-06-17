@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { CrexinService } from 'src/app/services/crexin.service';
+import { AESEncryptDecryptServiceService } from '../../services/aesencrypt-decrypt-service.service';
 
 @Component({
   selector: 'app-account-password',
@@ -15,7 +16,7 @@ export class AccountPasswordComponent implements OnInit {
   submitted = false;
   message: string;
   incorrect_credentials: any;
-  constructor(private fb:FormBuilder, private auth:AuthService, private toastr: ToastrService,private router: Router) { }
+  constructor(private aes:AESEncryptDecryptServiceService,private fb:FormBuilder, private auth:AuthService, private toastr: ToastrService,private router: Router) { }
 
   ngOnInit(): void {
     this.AccountPassword = this.fb.group({
@@ -37,11 +38,14 @@ export class AccountPasswordComponent implements OnInit {
       }
       this.auth.login_password(data).subscribe((res)=>{
         console.log(res);
+        var name = this.aes.encrypt(res.fullname);
+        var phone = this.aes.encrypt(res.phone);
+        var email = this.aes.encrypt(res.email);
         sessionStorage.setItem('auth_token',res.token);
         sessionStorage.setItem('isloggedin', 'true');
-        sessionStorage.setItem('name',res.fullname)
-        sessionStorage.setItem('email',res.email)
-        sessionStorage.setItem('phone',res.phone)
+        sessionStorage.setItem('name',name)
+        sessionStorage.setItem('email',email)
+        sessionStorage.setItem('phone',phone)
 
         this.toastr.success(this.message,res.message,{
           positionClass:'toast-top-center'

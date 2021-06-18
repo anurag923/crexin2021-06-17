@@ -10,6 +10,7 @@ import { shareReplay } from 'rxjs/operators';
 import { CrexinService } from 'src/app/services/crexin.service';
 import { CheckoutService } from '../../services/checkout.service';
 import { WindowRefService } from 'src/app/window-ref.service';
+import { AESEncryptDecryptServiceService } from '../../services/aesencrypt-decrypt-service.service';
 
 declare var $: any;
 @Component({
@@ -106,8 +107,8 @@ export class CheckoutComponent implements OnInit {
   w_total_weeks_amount: number;
   w_paid_amount: number;
   w_no_weeks: number;
-  name = sessionStorage.getItem('name');
-  mobile = sessionStorage.getItem('phone')
+  name = '';
+  mobile = '';
   subcategory_name: any;
   subcategory_image: any;
   subcategory_rate: any;
@@ -117,14 +118,18 @@ export class CheckoutComponent implements OnInit {
   w_sub_tot:number;
   site_errors = false;
   billing_errors = false;
-  constructor(private checkoutservice: CheckoutService, private winRef: WindowRefService, private datePipe: DatePipe, private fb: FormBuilder, private toastr: ToastrService, private router: Router, private http: HttpClient, private activeroute: ActivatedRoute, private route: Router, private crexinservice: CrexinService) {
+  constructor(private aes:AESEncryptDecryptServiceService,private checkoutservice: CheckoutService, private winRef: WindowRefService, private datePipe: DatePipe, private fb: FormBuilder, private toastr: ToastrService, private router: Router, private http: HttpClient, private activeroute: ActivatedRoute, private route: Router, private crexinservice: CrexinService) {
     console.log(this.d_enddate);
+    this.name = this.aes.decrypt(sessionStorage.getItem('name'));
+    this.mobile = this.aes.decrypt(sessionStorage.getItem('phone'));
     if (sessionStorage.getItem('time') == null) {
       this.bookingtype = 'hourly';
     }
   }
 
   ngOnInit(): void {
+    this.name = this.aes.decrypt(sessionStorage.getItem('name'));
+    this.mobile = this.aes.decrypt(sessionStorage.getItem('phone'));
     if (sessionStorage.getItem('time') == null) {
       this.bookingtype = 'hourly';
     }

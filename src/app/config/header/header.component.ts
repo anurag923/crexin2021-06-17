@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { shareReplay } from 'rxjs/operators';
 import { CrexinService } from 'src/app/services/crexin.service';
+import { AESEncryptDecryptServiceService } from '../../services/aesencrypt-decrypt-service.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
   userprofile = false;
   submitted = false;
   auth_token = sessionStorage.getItem('auth_token');
-  constructor(private fb:FormBuilder, private toastr: ToastrService, private http:HttpClient,
+  constructor(private aes:AESEncryptDecryptServiceService,private fb:FormBuilder, private toastr: ToastrService, private http:HttpClient,
     private router: Router,private crexinservice:CrexinService) {
       const headers= new HttpHeaders()
       .set('content-type', 'application/json')
@@ -95,10 +96,12 @@ get userstatus(){
    return sessionStorage.getItem('auth_token');
  } 
 get username(){
-  return sessionStorage.getItem('name');
+  var username = this.aes.decrypt(sessionStorage.getItem('name'));
+  return username;
 }
 get userphone(){
- return sessionStorage.getItem('phone');
+  var userphone = this.aes.decrypt(sessionStorage.getItem('phone'));
+  return userphone;
 }
  logout(){
   sessionStorage.clear();

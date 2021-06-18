@@ -20,7 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AESEncryptDecryptServiceService } from './services/aesencrypt-decrypt-service.service';
 
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
@@ -50,7 +50,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [CrexinService, AuthService, {
+  providers: [CrexinService, AuthService, AESEncryptDecryptServiceService,{
     provide: HTTP_INTERCEPTORS,
     useClass: CrexinInterceptor,
     multi: true
