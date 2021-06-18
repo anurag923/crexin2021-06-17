@@ -33,9 +33,12 @@ export class HeaderComponent implements OnInit {
         this.name = res.user.fullname;
         this.email = res.user.email;
         this.phone = res.user.phone
-        sessionStorage.setItem('name',res.user.fullname)
-        sessionStorage.setItem('email',res.user.email)
-        sessionStorage.setItem('phone',res.user.phone)
+        var name = this.aes.encrypt(res.user.fullname)
+        var email = this.aes.encrypt(res.user.email)
+        var phone = this.aes.encrypt(res.user.phone)
+        sessionStorage.setItem('name',name)
+        sessionStorage.setItem('email',email)
+        sessionStorage.setItem('phone',phone)
         this.userprofile = true;
       }) 
       // this.crexinservice.userdata().subscribe(res=>{
@@ -74,9 +77,12 @@ export class HeaderComponent implements OnInit {
       this.name = res.user.fullname;
       this.email = res.user.email;
       this.phone = res.user.phone
-      sessionStorage.setItem('name',res.user.fullname)
-      sessionStorage.setItem('email',res.user.email)
-      sessionStorage.setItem('phone',res.user.phone)
+      var name = this.aes.encrypt(res.user.fullname)
+      var email = this.aes.encrypt(res.user.email)
+      var phone = this.aes.encrypt(res.user.phone)
+      sessionStorage.setItem('name',name)
+      sessionStorage.setItem('email',email)
+      sessionStorage.setItem('phone',phone)      
       this.userprofile = true;
     })
     this.profile_update = this.fb.group({
