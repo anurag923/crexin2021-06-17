@@ -789,144 +789,460 @@ export class CheckoutComponent implements OnInit {
       });
     }
     else {
-      if (sessionStorage.getItem('time') === 'hourly') {
-        // console.log(this.h_sub_total);
-        const data = {
-          duration: this.no_hours,
-          start_date: this.h_startdate,
-          start_time: this.h_starttime,
-          type: 'hourly',
-          booking_id: sessionStorage.getItem('booking_id'),
-          paid_amount: this.h_sub_total,
-          coordinator: this.Site_Details.get('coordinator_name').value,
-          phone: this.Site_Details.get('contact_number').value,
-          address1: this.Site_Details.get('address_one').value,
-          address2: this.Site_Details.get('address_two').value,
-          landmark: this.Site_Details.get('landmark').value,
-          pincode: this.Site_Details.get('pincode').value,
-          city: this.Site_Details.get('city').value,
-          state: this.Site_Details.get('state').value,
-          company_name: this.Billing_Information.get('c_name').value,
-          gstn: this.Billing_Information.get('gst_number').value,
-          email: this.Billing_Information.get('email').value,
-          address: this.Billing_Information.get('c_address').value,
-          companypincode: this.Billing_Information.get('p_code').value,
-          company_city: this.Billing_Information.get('city').value,
-          company_state: this.Billing_Information.get('state').value,
-        }
-        console.log(data);
-        this.checkoutservice.bookings(data).subscribe(res => {
-          console.log(res);
-          sessionStorage.setItem('b_id', res.response.id);
-          sessionStorage.setItem('booked_id', res.response.booked_id)
-          sessionStorage.setItem('booking_id', res.response.booking_id)
-          sessionStorage.setItem('booking_status', res.response.booking_status)
-          this.toastr.success(this.message, res.message, {
-            positionClass: 'toast-top-center'
-          });
-          this.router.navigate(['booked']);
-        }, (error) => {
-          this.toastr.error(this.message, error.error.message, {
-            positionClass: 'toast-top-center'
-          });
-          this.router.navigate(['checkout']);
-        })
+      
+      if(sessionStorage.getItem('time')==null){
+        const formData = {
+          amount: this.h_sub_total*100,
+          currency: 'INR',
+          receipt: this.makeid(10),
+        };
+       
+        this.http.post<any>('https://superuser.crexin.com/api/user/order_id',formData).subscribe(
+          (res) => {
+            console.log(res);
+            res.id;
+            // this.router.navigate(['/patient/payment']);
+            const options: any = {
+              key: 'rzp_test_89ZbQ2LKtoRyRs',
+              amount: this.h_sub_total*100, // amount should be in paise format to display Rs 1255 without decimal point
+              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              currency: 'INR',
+              name: '', // company name or product name
+              description: '', // product description
+              image: '../assets/images/Log_one.png', // company logo or product image
+              order_id: res.id, // order_id created by you in backend
+              modal: {
+                // We should prevent closing of the form when esc key is pressed.
+                escape: false,
+              },
+              notes: {
+                // include notes if any
+              },
+              theme: {
+                color: '#dca101',
+              },
+            };
+            console.log(options);
+            options.handler = (response, error) => {
+              options.response = response;
+              console.log(response);
+              console.log(options);
+              const data = {
+                order_id: res.id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              };
+              console.log(data);
+              this.http.post<any>('https://superuser.crexin.com/api/user/signature',data).subscribe(
+                (res) => {
+                  console.log(res);
+                  const data = {
+                    duration: this.no_hours,
+                    start_date: this.h_startdate,
+                    start_time: this.h_starttime,
+                    type: 'hourly',
+                    booking_id: sessionStorage.getItem('booking_id'),
+                    paid_amount: this.h_sub_total,
+                    coordinator: this.Site_Details.get('coordinator_name').value,
+                    phone: this.Site_Details.get('contact_number').value,
+                    address1: this.Site_Details.get('address_one').value,
+                    address2: this.Site_Details.get('address_two').value,
+                    landmark: this.Site_Details.get('landmark').value,
+                    pincode: this.Site_Details.get('pincode').value,
+                    city: this.Site_Details.get('city').value,
+                    state: this.Site_Details.get('state').value,
+                    company_name: this.Billing_Information.get('c_name').value,
+                    gstn: this.Billing_Information.get('gst_number').value,
+                    email: this.Billing_Information.get('email').value,
+                    address: this.Billing_Information.get('c_address').value,
+                    companypincode: this.Billing_Information.get('p_code').value,
+                    company_city: this.Billing_Information.get('city').value,
+                    company_state: this.Billing_Information.get('state').value,
+                  }
+                  console.log(data);
+                  const headers = new HttpHeaders()
+                  .set('content-type', 'application/json')
+                  .set('Access-Control-Allow-Origin', '*')
+                  .set('Authorization', `Bearer ${this.auth_token}`);
+                  this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
+                    console.log(res);
+                    sessionStorage.setItem('b_id', res.response.id);
+                    sessionStorage.setItem('booked_id', res.response.booked_id)
+                    sessionStorage.setItem('booking_id', res.response.booking_id)
+                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  }, (error) => {
+                    this.toastr.error(this.message, error.error.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  })
+                },
+                (err) => {
+                  this.toastr.error(this.message, 'Payment failed', {
+                    positionClass: 'toast-top-center',
+                  });
+                }
+              );
+            };
+            options.modal.ondismiss = () => {
+              console.log('Transaction cancelled.');
+            };
+            const rzp = new this.winRef.nativeWindow.Razorpay(options);
+            rzp.open();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+      }
+      else if (sessionStorage.getItem('time') === 'hourly') {
+        const formData = {
+          amount: this.h_sub_total*100,
+          currency: 'INR',
+          receipt: this.makeid(10),
+        };
+       
+        this.http.post<any>('https://superuser.crexin.com/api/user/order_id',formData).subscribe(
+          (res) => {
+            console.log(res);
+            res.id;
+            // this.router.navigate(['/patient/payment']);
+            const options: any = {
+              key: 'rzp_test_89ZbQ2LKtoRyRs',
+              amount: this.h_sub_total*100, // amount should be in paise format to display Rs 1255 without decimal point
+              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              currency: 'INR',
+              name: '', // company name or product name
+              description: '', // product description
+              image: '../assets/images/Log_one.png', // company logo or product image
+              order_id: res.id, // order_id created by you in backend
+              modal: {
+                // We should prevent closing of the form when esc key is pressed.
+                escape: false,
+              },
+              notes: {
+                // include notes if any
+              },
+              theme: {
+                color: '#dca101',
+              },
+            };
+            console.log(options);
+            options.handler = (response, error) => {
+              options.response = response;
+              console.log(response);
+              console.log(options);
+              const data = {
+                order_id: res.id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              };
+              console.log(data);
+              this.http.post<any>('https://superuser.crexin.com/api/user/signature',data).subscribe(
+                (res) => {
+                  console.log(res);
+                  const data = {
+                    duration: this.no_hours,
+                    start_date: this.h_startdate,
+                    start_time: this.h_starttime,
+                    type: 'hourly',
+                    booking_id: sessionStorage.getItem('booking_id'),
+                    paid_amount: this.h_sub_total,
+                    coordinator: this.Site_Details.get('coordinator_name').value,
+                    phone: this.Site_Details.get('contact_number').value,
+                    address1: this.Site_Details.get('address_one').value,
+                    address2: this.Site_Details.get('address_two').value,
+                    landmark: this.Site_Details.get('landmark').value,
+                    pincode: this.Site_Details.get('pincode').value,
+                    city: this.Site_Details.get('city').value,
+                    state: this.Site_Details.get('state').value,
+                    company_name: this.Billing_Information.get('c_name').value,
+                    gstn: this.Billing_Information.get('gst_number').value,
+                    email: this.Billing_Information.get('email').value,
+                    address: this.Billing_Information.get('c_address').value,
+                    companypincode: this.Billing_Information.get('p_code').value,
+                    company_city: this.Billing_Information.get('city').value,
+                    company_state: this.Billing_Information.get('state').value,
+                  }
+                  console.log(data);
+                  const headers = new HttpHeaders()
+                  .set('content-type', 'application/json')
+                  .set('Access-Control-Allow-Origin', '*')
+                  .set('Authorization', `Bearer ${this.auth_token}`);
+                  this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
+                    console.log(res);
+                    sessionStorage.setItem('b_id', res.response.id);
+                    sessionStorage.setItem('booked_id', res.response.booked_id)
+                    sessionStorage.setItem('booking_id', res.response.booking_id)
+                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  }, (error) => {
+                    this.toastr.error(this.message, error.error.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  })
+                },
+                (err) => {
+                  this.toastr.error(this.message, 'Payment failed', {
+                    positionClass: 'toast-top-center',
+                  });
+                }
+              );
+            };
+            options.modal.ondismiss = () => {
+              console.log('Transaction cancelled.');
+            };
+            const rzp = new this.winRef.nativeWindow.Razorpay(options);
+            rzp.open();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
       }
       else if (sessionStorage.getItem('time') == 'daily') {
-        console.log(this.no_days);
-        console.log(this.d_endtime);
-        console.log(this.d_enddate)
-        const data = {
-          duration: this.no_days,
-          start_date: this.d_startdate,
-          start_time: this.d_starttime,
-          end_date: this.d_enddate,
-          end_time: this.d_endtime,
-          type: 'daily',
-          booking_id: sessionStorage.getItem('booking_id'),
-          paid_amount: this.d_paid_amount,
-          coordinator: this.Site_Details.get('coordinator_name').value,
-          phone: this.Site_Details.get('contact_number').value,
-          address1: this.Site_Details.get('address_one').value,
-          address2: this.Site_Details.get('address_two').value,
-          landmark: this.Site_Details.get('landmark').value,
-          pincode: this.Site_Details.get('pincode').value,
-          city: this.Site_Details.get('city').value,
-          state: this.Site_Details.get('state').value,
-          company_name: this.Billing_Information.get('c_name').value,
-          gstn: this.Billing_Information.get('gst_number').value,
-          email: this.Billing_Information.get('email').value,
-          address: this.Billing_Information.get('c_address').value,
-          companypincode: this.Billing_Information.get('p_code').value,
-          company_city: this.Billing_Information.get('city').value,
-          company_state: this.Billing_Information.get('state').value,
-        }
-        this.checkoutservice.bookings(data).subscribe(res => {
-          console.log(res);
-          sessionStorage.setItem('b_id', res.response.id);
-          sessionStorage.setItem('booked_id', res.response.booked_id)
-          sessionStorage.setItem('booking_status', res.response.booking_status)
-          this.toastr.success(this.message, res.message, {
-            positionClass: 'toast-top-center'
-          });
-          this.router.navigate(['booked']);
-        }, (error) => {
-          this.toastr.error(this.message, error.error.message, {
-            positionClass: 'toast-top-center'
-          });
-          this.router.navigate(['checkout']);
-        })
+        const formData = {
+          amount: this.d_paid_amount*100,
+          currency: 'INR',
+          receipt: this.makeid(10),
+        };
+       
+        this.http.post<any>('https://superuser.crexin.com/api/user/order_id',formData).subscribe(
+          (res) => {
+            console.log(res);
+            res.id;
+            // this.router.navigate(['/patient/payment']);
+            const options: any = {
+              key: 'rzp_test_89ZbQ2LKtoRyRs',
+              amount: this.d_paid_amount*100, // amount should be in paise format to display Rs 1255 without decimal point
+              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              currency: 'INR',
+              name: '', // company name or product name
+              description: '', // product description
+              image: '../assets/images/Log_one.png', // company logo or product image
+              order_id: res.id, // order_id created by you in backend
+              modal: {
+                // We should prevent closing of the form when esc key is pressed.
+                escape: false,
+              },
+              notes: {
+                // include notes if any
+              },
+              theme: {
+                color: '#dca101',
+              },
+            };
+            console.log(options);
+            options.handler = (response, error) => {
+              options.response = response;
+              console.log(response);
+              console.log(options);
+              const data = {
+                order_id: res.id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              };
+              console.log(data);
+              this.http.post<any>('https://superuser.crexin.com/api/user/signature',data).subscribe(
+                (res) => {
+                  console.log(res);
+                  const data = {
+                    duration: this.no_days,
+                    start_date: this.d_startdate,
+                    start_time: this.d_starttime,
+                    end_date: this.d_enddate,
+                    end_time: this.d_endtime,
+                    type: 'daily',
+                    booking_id: sessionStorage.getItem('booking_id'),
+                    paid_amount: this.d_paid_amount,
+                    coordinator: this.Site_Details.get('coordinator_name').value,
+                    phone: this.Site_Details.get('contact_number').value,
+                    address1: this.Site_Details.get('address_one').value,
+                    address2: this.Site_Details.get('address_two').value,
+                    landmark: this.Site_Details.get('landmark').value,
+                    pincode: this.Site_Details.get('pincode').value,
+                    city: this.Site_Details.get('city').value,
+                    state: this.Site_Details.get('state').value,
+                    company_name: this.Billing_Information.get('c_name').value,
+                    gstn: this.Billing_Information.get('gst_number').value,
+                    email: this.Billing_Information.get('email').value,
+                    address: this.Billing_Information.get('c_address').value,
+                    companypincode: this.Billing_Information.get('p_code').value,
+                    company_city: this.Billing_Information.get('city').value,
+                    company_state: this.Billing_Information.get('state').value,
+                  }
+                  console.log(data);
+                  const headers = new HttpHeaders()
+                  .set('content-type', 'application/json')
+                  .set('Access-Control-Allow-Origin', '*')
+                  .set('Authorization', `Bearer ${this.auth_token}`);
+                  this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
+                    console.log(res);
+                    sessionStorage.setItem('b_id', res.response.id);
+                    sessionStorage.setItem('booked_id', res.response.booked_id)
+                    sessionStorage.setItem('booking_id', res.response.booking_id)
+                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  }, (error) => {
+                    this.toastr.error(this.message, error.error.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  })
+                },
+                (err) => {
+                  this.toastr.error(this.message, 'Payment failed', {
+                    positionClass: 'toast-top-center',
+                  });
+                }
+              );
+            };
+            options.modal.ondismiss = () => {
+              console.log('Transaction cancelled.');
+            };
+            const rzp = new this.winRef.nativeWindow.Razorpay(options);
+            rzp.open();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
       }
       else if (sessionStorage.getItem('time') == 'weekly') {
-        this.Date = new Date(this.w_startdate);
-        this.Date.setDate(this.Date.getDate() + 7);
-        this.due_date = this.datePipe.transform(this.Date, 'yyyy-MM-dd');
-        // this.due_date = this.w_startdate+7
-        console.log(this.due_date);
-        console.log(this.no_weeks);
-        console.log(this.w_endtime);
-        console.log(this.w_enddate)
-        const data = {
-          duration: this.no_weeks,
-          start_date: this.w_startdate,
-          start_time: this.w_starttime,
-          end_date: this.w_enddate,
-          end_time: this.w_endtime,
-          type: 'weekly',
-          booking_id: sessionStorage.getItem('booking_id'),
-          paid_amount: this.w_paid_amount,
-          due_date: this.due_date,
-          coordinator: this.Site_Details.get('coordinator_name').value,
-          phone: this.Site_Details.get('contact_number').value,
-          address1: this.Site_Details.get('address_one').value,
-          address2: this.Site_Details.get('address_two').value,
-          landmark: this.Site_Details.get('landmark').value,
-          pincode: this.Site_Details.get('pincode').value,
-          city: this.Site_Details.get('city').value,
-          state: this.Site_Details.get('state').value,
-          company_name: this.Billing_Information.get('c_name').value,
-          gstn: this.Billing_Information.get('gst_number').value,
-          email: this.Billing_Information.get('email').value,
-          address: this.Billing_Information.get('c_address').value,
-          companypincode: this.Billing_Information.get('p_code').value,
-          company_city: this.Billing_Information.get('city').value,
-          company_state: this.Billing_Information.get('state').value,
-        }
-        this.checkoutservice.bookings(data).subscribe(res => {
-          console.log(res);
-          sessionStorage.setItem('b_id', res.response.id);
-          sessionStorage.setItem('booked_id', res.response.booked_id)
-          sessionStorage.setItem('booking_status', res.response.booking_status)
-          this.toastr.success(this.message, 'You have successfully booked this equipment', {
-            positionClass: 'toast-top-center'
-          });
-          this.router.navigate(['booked']);
-        }, (error) => {
-          this.toastr.error(this.message, error.error.message, {
-            positionClass: 'toast-top-center'
-          });
-          this.router.navigate(['checkout']);
-        })
+        const formData = {
+          amount: this.w_paid_amount*100,
+          currency: 'INR',
+          receipt: this.makeid(10),
+        };
+       
+        this.http.post<any>('https://superuser.crexin.com/api/user/order_id',formData).subscribe(
+          (res) => {
+            console.log(res);
+            res.id;
+            // this.router.navigate(['/patient/payment']);
+            const options: any = {
+              key: 'rzp_test_89ZbQ2LKtoRyRs',
+              amount: this.w_paid_amount*100, // amount should be in paise format to display Rs 1255 without decimal point
+              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              currency: 'INR',
+              name: '', // company name or product name
+              description: '', // product description
+              image: '../assets/images/Log_one.png', // company logo or product image
+              order_id: res.id, // order_id created by you in backend
+              modal: {
+                // We should prevent closing of the form when esc key is pressed.
+                escape: false,
+              },
+              notes: {
+                // include notes if any
+              },
+              theme: {
+                color: '#dca101',
+              },
+            };
+            console.log(options);
+            options.handler = (response, error) => {
+              options.response = response;
+              console.log(response);
+              console.log(options);
+              const data = {
+                order_id: res.id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              };
+              console.log(data);
+              this.http.post<any>('https://superuser.crexin.com/api/user/signature',data).subscribe(
+                (res) => {
+                  console.log(res);
+                  const data = {
+                    duration: this.no_weeks,
+                    start_date: this.w_startdate,
+                    start_time: this.w_starttime,
+                    end_date: this.w_enddate,
+                    end_time: this.w_endtime,
+                    type: 'weekly',
+                    booking_id: sessionStorage.getItem('booking_id'),
+                    paid_amount: this.w_paid_amount,
+                    due_date: this.due_date,
+                    coordinator: this.Site_Details.get('coordinator_name').value,
+                    phone: this.Site_Details.get('contact_number').value,
+                    address1: this.Site_Details.get('address_one').value,
+                    address2: this.Site_Details.get('address_two').value,
+                    landmark: this.Site_Details.get('landmark').value,
+                    pincode: this.Site_Details.get('pincode').value,
+                    city: this.Site_Details.get('city').value,
+                    state: this.Site_Details.get('state').value,
+                    company_name: this.Billing_Information.get('c_name').value,
+                    gstn: this.Billing_Information.get('gst_number').value,
+                    email: this.Billing_Information.get('email').value,
+                    address: this.Billing_Information.get('c_address').value,
+                    companypincode: this.Billing_Information.get('p_code').value,
+                    company_city: this.Billing_Information.get('city').value,
+                    company_state: this.Billing_Information.get('state').value,
+                  }
+                  console.log(data);
+                  const headers = new HttpHeaders()
+                  .set('content-type', 'application/json')
+                  .set('Access-Control-Allow-Origin', '*')
+                  .set('Authorization', `Bearer ${this.auth_token}`);
+                  this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
+                    console.log(res);
+                    sessionStorage.setItem('b_id', res.response.id);
+                    sessionStorage.setItem('booked_id', res.response.booked_id)
+                    sessionStorage.setItem('booking_id', res.response.booking_id)
+                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  }, (error) => {
+                    this.toastr.error(this.message, error.error.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.toastr.success(this.message, res.message, {
+                      positionClass: 'toast-top-center'
+                    });
+                    this.router.navigate(['booked']);
+                  })
+                },
+                (err) => {
+                  this.toastr.error(this.message, 'Payment failed', {
+                    positionClass: 'toast-top-center',
+                  });
+                }
+              );
+            };
+            options.modal.ondismiss = () => {
+              console.log('Transaction cancelled.');
+            };
+            const rzp = new this.winRef.nativeWindow.Razorpay(options);
+            rzp.open();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+
       }
       else {
         this.toastr.error(this.message, 'Please Select the any options', {
@@ -934,20 +1250,16 @@ export class CheckoutComponent implements OnInit {
         });
       }
     }
-    // this.submitted = true;
-    // if(this.General_Details.invalid && this.Site_Details.invalid && this.Billing_Information.invalid){
-    //   return false;
-    // }
-    // else if(sessionStorage.getItem('user_id') === null){
-    //   this.toastr.error(this.message,'Please login to procced',{
-    //     positionClass: 'toast-top-center'
-    //   });
-    // }
-    // else{
-    //   console.log(this.General_Details.value);
-    //   console.log(this.Site_Details.value);
-    //   console.log(this.Billing_Information.value);
-    // }
+  }
+  private makeid(length) {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
   favourites() {
     const data = {
