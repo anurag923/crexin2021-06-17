@@ -14,7 +14,7 @@ import { AESEncryptDecryptServiceService } from '../../services/aesencrypt-decry
   styleUrls: ['./otp.component.css']
 })
 export class OtpComponent implements OnInit {
-  mobile = sessionStorage.getItem('mobile');
+  mobile = localStorage.getItem('mobile');
   Otp:FormGroup; 
   submitted = false;
   one ="";
@@ -26,7 +26,7 @@ export class OtpComponent implements OnInit {
   error:string;
   status: any;
   data: any;
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   constructor(private aes:AESEncryptDecryptServiceService, private crexinservice:CrexinService,private http:HttpClient,private router:Router, private fb:FormBuilder, private toastr:ToastrService, private auth:AuthService) { }
   ngOnInit(): void {
       this.Otp = this.fb.group({
@@ -41,9 +41,9 @@ export class OtpComponent implements OnInit {
       // .set('Authorization',`Bearer ${this.auth_token}`);
       // this.http.get<any>(`https://superuser.crexin.com/api/user/details`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       //   console.log(res.user);
-      //   sessionStorage.setItem('name',res.user.fullname)
-      //   sessionStorage.setItem('email',res.user.email)
-      //   sessionStorage.setItem('phone',res.user.phone)
+      //   localStorage.setItem('name',res.user.fullname)
+      //   localStorage.setItem('email',res.user.email)
+      //   localStorage.setItem('phone',res.user.phone)
       // })
   }
   get f(){
@@ -86,7 +86,7 @@ otpsuccess(){
   }
   else{
     const data = {
-     mobile: sessionStorage.getItem('mobile'),
+     mobile: localStorage.getItem('mobile'),
      otp:this.one + this.two + this.three + this.four
     }
     this.auth.verifyotp(data).subscribe((res)=>{
@@ -94,25 +94,25 @@ otpsuccess(){
       var name = this.aes.encrypt(res.fullname);
       var phone = this.aes.encrypt(res.phone);
       var email = this.aes.encrypt(res.email);
-      sessionStorage.setItem('auth_token',res.token);
-      sessionStorage.setItem('isloggedin', 'true');
-      sessionStorage.setItem('name',name)
-      sessionStorage.setItem('email',email)
-      sessionStorage.setItem('phone',phone)
+      localStorage.setItem('auth_token',res.token);
+      localStorage.setItem('isloggedin', 'true');
+      localStorage.setItem('name',name)
+      localStorage.setItem('email',email)
+      localStorage.setItem('phone',phone)
       this.toastr.success(this.message,'Successfully otp verification done',{
         positionClass: 'toast-top-center'
       });
       //  const headers= new HttpHeaders()
       // .set('content-type', 'application/json')
       // .set('Access-Control-Allow-Origin', '*')
-      // .set('Authorization',`Bearer ${sessionStorage.getItem('auth_token')}`);
+      // .set('Authorization',`Bearer ${localStorage.getItem('auth_token')}`);
       // this.http.get<any>(`https://superuser.crexin.com/api/user/details`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       //   console.log(res.user);
-      //   sessionStorage.setItem('name',res.user.fullname)
-      //   sessionStorage.setItem('email',res.user.email)
-      //   sessionStorage.setItem('phone',res.user.phone)
+      //   localStorage.setItem('name',res.user.fullname)
+      //   localStorage.setItem('email',res.user.email)
+      //   localStorage.setItem('phone',res.user.phone)
       // })
-      if(sessionStorage.getItem('route')=='/rent/bookingtypeselection'){
+      if(localStorage.getItem('route')=='/rent/bookingtypeselection'){
         this.router.navigate(['/rent/bookingtypeselection']);
       }
       else{
@@ -135,7 +135,7 @@ setFocus(nextElement) {
 }
 resendotp(){
   const data ={
-    mobile : sessionStorage.getItem('mobile')
+    mobile : localStorage.getItem('mobile')
   }
   this.auth.login(data).subscribe((res)=>{
     console.log(res);

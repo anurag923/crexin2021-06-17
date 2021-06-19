@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   description="";
   submitted = false;  
   message: string;
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   constructor(private fb:FormBuilder,private toastr:ToastrService,private crexinservice:CrexinService, private authservice:AuthService,private router:Router,private http:HttpClient) { }
 
   ngOnInit(): void {
@@ -80,8 +80,8 @@ export class HomeComponent implements OnInit {
   search_button(search_categorie:any){
     if(search_categorie){
       console.log(search_categorie);
-      sessionStorage.setItem('search_categorie', search_categorie);
-      sessionStorage.setItem('global_search', 'true');
+      localStorage.setItem('search_categorie', search_categorie);
+      localStorage.setItem('global_search', 'true');
       this.router.navigate(['/rent'])
     }
     else {

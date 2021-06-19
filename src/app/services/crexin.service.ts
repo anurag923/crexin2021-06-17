@@ -7,12 +7,12 @@ import { data } from 'jquery';
 
 // const register = "http://127.0.0.1:8000/api/register";
 // const login = "http://127.0.0.1:8000/api/login";
-// const auth_token = sessionStorage.getItem('auth_token');
+// const auth_token = localStorage.getItem('auth_token');
 // const headers= new HttpHeaders()
 //   .set('Content-Type','multipart/form-data')
 //   .set('Accept','application/json')
 //   .set('Access-Control-Allow-Origin', '*');
-var auth_token = sessionStorage.getItem('auth_token');
+var auth_token = localStorage.getItem('auth_token');
 const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
@@ -70,7 +70,7 @@ export class CrexinService {
     return this.http.post<any>(GlobalData.url_api+'user/bookings',data ,{ 'headers': headers })
   }
   singlebooking(){
-    return this.http.get<any>(GlobalData.url_api+`user/singleorder?booking_id=${sessionStorage.getItem('booking_id')}&id=${sessionStorage.getItem('b_id')}&type=${sessionStorage.getItem('type')}` ,{ 'headers': headers })
+    return this.http.get<any>(GlobalData.url_api+`user/singleorder?booking_id=${localStorage.getItem('booking_id')}&id=${localStorage.getItem('b_id')}&type=${localStorage.getItem('type')}` ,{ 'headers': headers })
   }
   allbookings(){
     return this.http.get<any>(GlobalData.url_api+'user/myorders',{ 'headers': headers })

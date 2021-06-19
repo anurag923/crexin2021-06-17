@@ -14,7 +14,7 @@ import { CrexinService } from 'src/app/services/crexin.service';
 export class FavouritesComponent implements OnInit {
 
   constructor(private fb:FormBuilder, private toastr:ToastrService,private router:Router,private http:HttpClient,private activeroute:ActivatedRoute, private route:Router, private crexinservice:CrexinService) { }
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   ngOnInit(): void {
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')

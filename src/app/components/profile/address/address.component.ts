@@ -22,7 +22,7 @@ export class AddressComponent implements OnInit {
   address = "";
   pincode = "";
   type = "";
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   getaddresses: any;
   singlestreet: any;
   singlepincode: any;
@@ -44,7 +44,7 @@ export class AddressComponent implements OnInit {
      .set('content-type', 'application/json')
      .set('Access-Control-Allow-Origin', '*')
      .set('Authorization',`Bearer ${this.auth_token}`);
-     this.http.get('https://www.superuser.crexin.com/api/list_address?userid='+sessionStorage.getItem('user_id'),{'headers':headers}).subscribe((res)=>{
+     this.http.get('https://www.superuser.crexin.com/api/list_address?userid='+localStorage.getItem('user_id'),{'headers':headers}).subscribe((res)=>{
       this.getaddresses = res;
       this.loading = false;
     })
@@ -83,7 +83,7 @@ export class AddressComponent implements OnInit {
     }
     else{
       const data ={
-        userid: sessionStorage.getItem('user_id'),
+        userid: localStorage.getItem('user_id'),
         choose: 'adding',
         street: this.street,
         address: this.address, 
@@ -163,7 +163,7 @@ export class AddressComponent implements OnInit {
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization',`Bearer ${this.auth_token}`);
-    this.http.get('https://www.superuser.crexin.com/api/list_address?userid='+sessionStorage.getItem('user_id'),{'headers':headers}).subscribe((res)=>{
+    this.http.get('https://www.superuser.crexin.com/api/list_address?userid='+localStorage.getItem('user_id'),{'headers':headers}).subscribe((res)=>{
       console.log(res);
       this.getaddresses = res;
     })

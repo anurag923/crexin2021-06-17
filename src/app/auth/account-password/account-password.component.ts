@@ -33,7 +33,7 @@ export class AccountPasswordComponent implements OnInit {
     }    
     else{
       const data = {
-        phone : sessionStorage.getItem('mobile'),
+        phone : localStorage.getItem('mobile'),
         password : this.AccountPassword.get('password').value
       }
       this.auth.login_password(data).subscribe((res)=>{
@@ -41,16 +41,16 @@ export class AccountPasswordComponent implements OnInit {
         var name = this.aes.encrypt(res.fullname);
         var phone = this.aes.encrypt(res.phone);
         var email = this.aes.encrypt(res.email);
-        sessionStorage.setItem('auth_token',res.token);
-        sessionStorage.setItem('isloggedin', 'true');
-        sessionStorage.setItem('name',name)
-        sessionStorage.setItem('email',email)
-        sessionStorage.setItem('phone',phone)
+        localStorage.setItem('auth_token',res.token);
+        localStorage.setItem('isloggedin', 'true');
+        localStorage.setItem('name',name)
+        localStorage.setItem('email',email)
+        localStorage.setItem('phone',phone)
 
         this.toastr.success(this.message,res.message,{
           positionClass:'toast-top-center'
         });
-        if(sessionStorage.getItem('route')=='/rent/bookingtypeselection'){
+        if(localStorage.getItem('route')=='/rent/bookingtypeselection'){
           this.router.navigate(['/rent/bookingtypeselection']);
         }
         else{

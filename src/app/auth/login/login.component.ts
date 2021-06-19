@@ -51,10 +51,10 @@ export class LoginComponent implements OnInit {
       return false
      }
      else{
-       sessionStorage.setItem('mobile', this.Singin.get('mobile').value) 
-       console.log(sessionStorage.getItem('mobile'));
+       localStorage.setItem('mobile', this.Singin.get('mobile').value) 
+       console.log(localStorage.getItem('mobile'));
        const data = {
-        mobile :sessionStorage.getItem('mobile'),
+        mobile :localStorage.getItem('mobile'),
        }
        console.log(data);
        this.auth.login(data).subscribe((res)=>{
