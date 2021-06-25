@@ -7,6 +7,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
 import { CheckoutGuard } from 'src/app/guards/guards/checkout.guard';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [CheckoutComponent],
@@ -15,7 +18,10 @@ import { CheckoutGuard } from 'src/app/guards/guards/checkout.guard';
     CheckoutRoutingModule,
     MatTooltipModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers:[CheckoutService,CheckoutGuard,AESEncryptDecryptServiceService]
 })

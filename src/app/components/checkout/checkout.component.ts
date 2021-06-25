@@ -11,6 +11,7 @@ import { CrexinService } from 'src/app/services/crexin.service';
 import { CheckoutService } from '../../services/checkout.service';
 import { WindowRefService } from 'src/app/window-ref.service';
 import { AESEncryptDecryptServiceService } from '../../services/aesencrypt-decrypt-service.service';
+import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 declare var $: any;
 @Component({
@@ -20,6 +21,9 @@ declare var $: any;
   providers: [DatePipe]
 })
 export class CheckoutComponent implements OnInit {
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
   hourly = false;
