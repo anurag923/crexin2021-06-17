@@ -99,22 +99,22 @@
                           <h1 class="text-danger fs-15 mgb-10 text-center">In this time bookings not available</h1>
                           </div> -->
                 <p *ngIf="show" class="text-danger font-weight-bold">{{error}}</p>
-                <div class="radio-buttons d-flex justify-content-between">
-                  <div class="form-check">
+                <div class="radio-buttons d-flex justify-content-center">
+                  <div class="form-check mr-5">
                     <input class="form-check-input" value="hourly" [checked]="hourly_checked?true:false"
                       (click)="hourly_function()" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                     <label class="form-check-label fs-15 fw-700 text-color cursor-pointer" (click)="hourly_function()">
                       Hourly
                     </label>
                   </div>
-                  <div class="form-check mgl-5 mgr-5">
+                  <div class="form-check mr-5">
                     <input class="form-check-input" value="daily" [checked]="daily_checked?true:false"
                       (click)="daily_function()" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                     <label class="form-check-label fs-15 fw-700 text-color cursor-pointer" (click)="daily_function()">
                       Daily
                     </label>
                   </div>
-                  <div class="form-check">
+                  <div class="form-check mr-5">
                     <input class="form-check-input" value="weekly" [checked]="weekly_checked?true:false"
                       (click)="weekly_function()" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                     <label class="form-check-label fw-700 fs-15 text-color cursor-pointer" (click)="weekly_function()">

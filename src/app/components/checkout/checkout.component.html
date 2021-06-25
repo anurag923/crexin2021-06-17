@@ -11,11 +11,11 @@
       <table class="table-bordered w-100">
         <thead class="header-bg">
           <tr>
-            <th class="text-center text-color fs-17 fw-700">Equipment</th>
-            <th class="text-center text-color fs-17 fw-700 w-60Per">{{bookingtype}}</th>
-            <th class="text-center text-color fs-17 fw-700 w-7per">Total Amount</th>
-            <th class="text-center text-color fs-17 fw-700 w-7per">Advance</th>
-            <th class="text-center text-color fs-17 fw-700 w-10per">Booking Summary</th>
+            <th class="text-center col-2 text-color fs-17 fw-700">Equipment</th>
+            <th class="text-center col-5 text-color fs-17 fw-700">{{bookingtype}}</th>
+            <th class="text-center col-1 text-color fs-17 fw-700">Total Amount</th>
+            <th class="text-center col-1 text-color fs-17 fw-700">Advance</th>
+            <th class="text-center col-2 text-color fs-17 fw-700">Booking Summary</th>
           </tr>
         </thead>
         <tbody class="table-bg">
@@ -89,9 +89,9 @@
                         <div *ngIf="h.h_startdate.errors.required" class="fs-15">Start Date is required</div>
                       </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                       <label for="" class="fs-15 text-color">Start Time</label>
-                      <select class="form-control p-0 w-100 time1 fs-13" aria-label="Default select example"
+                      <select class="form-control p-0 w-75 time1 fs-13" aria-label="Default select example"
                         [(ngModel)]="h_starttime" formControlName="h_starttime"
                         [ngClass]="{ 'is-invalid': submitted_hourly  && h.h_starttime.errors }">
                         <option selected>Select time</option>
@@ -172,11 +172,11 @@
                         <div *ngIf="d.d_startdate.errors.required" class="fs-15">Start Date is required</div>
                       </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                       <label for="" class="fs-15 text-color">Start Time</label>
                       <!-- <input [ngxTimepicker]="picker" (change)="endtime(starttime.value)" #starttime>
                                     <ngx-material-timepicker #picker></ngx-material-timepicker> -->
-                      <select class="form-control p-0 time1" aria-label="Default select example"
+                      <select class="form-control p-0 w-75 time1" aria-label="Default select example"
                         [(ngModel)]="d_starttime" formControlName="d_starttime" (change)="endtime(starttime.value)"
                         [ngClass]="{ 'is-invalid': submitted_daily && d.d_starttime.errors }" #starttime>
                         <option selected>Select time</option>
@@ -229,9 +229,9 @@
                                      <div *ngIf="d.d_enddate.errors.required" class="fs-15 fw-700">End Date is required</div>
                                    </div> -->
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                       <label for="" class="fs-15">End Time</label>
-                      <input type="text" class="form-control time1" value="{{d_endtime}}" readonly>
+                      <input type="text" class="form-control time1 w-75" value="{{d_endtime}}" readonly>
                       <!-- <div *ngIf="submitted_daily && d.d_endtime.errors" class="invalid-feedback">
                                      <div *ngIf="d.d_endtime.errors.required" class="fs-15 fw-700">End Time is required</div>
                                    </div> -->
@@ -277,9 +277,9 @@
                         <div *ngIf="w.w_startdate.errors.required" class="fs-15">Start Date is required</div>
                       </div>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                       <label for="" class="fs-14 text-color">Start Time</label>
-                      <select class="form-control time1 p-0" aria-label="Default select example" class="form-control"
+                      <select class="form-control w-75 time1 p-0" aria-label="Default select example" class="form-control"
                         [(ngModel)]="w_starttime" formControlName="w_starttime"
                         [ngClass]="{ 'is-invalid': submitted_weekly  && w.w_starttime.errors }"
                         (change)="w_end_time(starttime.value)" #starttime>
@@ -327,16 +327,16 @@
                     <div class="col-md-2"></div>
                     <div class="form-group col-md-3">
                       <label for="" class="fs-14 text-color">End Date</label>
-                      <input type="date" placeholder="23-04-21" class="form-control pd-0" value="{{w_enddate}}"
+                      <input type="date" placeholder="23-04-21" class="form-control w-100  pd-0" value="{{w_enddate}}"
                         readonly>
                       <!-- <input type="date" placeholder="23-04-21" class="form-control pd-0" value="{{weekenddate}}"> -->
                       <!-- <div *ngIf="submitted_weekly  && w.w_starttime.errors" class="invalid-feedback">
                                      <div *ngIf="w.w_starttime.errors.required" class="fs-15 fw-700">Start Time is required</div>
                                    </div> -->
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                       <label for="" class="fs-14 text-color">End Time</label>
-                      <input type="text" class="form-control" placeholder="" value="{{w_endtime}}" readonly>
+                      <input type="text" class="form-control w-75" placeholder="" value="{{w_endtime}}" readonly>
                       <!-- <input type="time" class="form-control" placeholder="7AM to 6PM" value="{{weekendtime}}"> -->
                       <!-- <div *ngIf="submitted_weekly  && w.w_endtime.errors" class="invalid-feedback">
                                      <div *ngIf="w.w_endtime.errors.required" class="fs-15 fw-700">End Time is required</div>
@@ -638,7 +638,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="col-md-4">
                       <div class="form-group w1001">
                         <label for="" class="fs-15">City</label>
@@ -729,7 +729,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="col-md-4">
                       <div class="form-group w1001">
                         <label for="" class="fs-15">City</label>
