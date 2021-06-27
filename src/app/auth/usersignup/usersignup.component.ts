@@ -53,13 +53,13 @@ export class UsersignupComponent implements OnInit {
           this.auth.singup(data).subscribe((res)=>{
             console.log(res);
             this.toastr.success(this.message,'Registered successfully.Please login',{
-              positionClass:'toast-top-center'
+              
             });
             this.router.navigate(['accountsucces']);
           },(err)=>{
             console.log(err);
             this.toastr.error(this.message,err.error.message,{
-              positionClass:'toast-top-center'
+              
             });
             this.router.navigate(['usersignup']);
           }

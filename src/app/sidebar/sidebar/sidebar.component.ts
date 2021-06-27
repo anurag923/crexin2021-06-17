@@ -24,8 +24,8 @@ export class SidebarComponent implements OnInit {
   subcategories(event,id:any,name:any,categorie){
     this.selectedItem = categorie.c_name;
     console.log(name);
-    localStorage.setItem('cat_id', id);
-    localStorage.setItem('cat_name', name);
+    sessionStorage.setItem('cat_id', id);
+    sessionStorage.setItem('cat_name', name);
     this.route.navigate(['/rent/subcategories']);
   }
 }

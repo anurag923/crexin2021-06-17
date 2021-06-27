@@ -51,17 +51,17 @@ export class LoginComponent implements OnInit {
       return false
      }
      else{
-       localStorage.setItem('mobile', this.Singin.get('mobile').value) 
-       console.log(localStorage.getItem('mobile'));
+       sessionStorage.setItem('mobile', this.Singin.get('mobile').value) 
+       console.log(sessionStorage.getItem('mobile'));
        const data = {
-        mobile :localStorage.getItem('mobile'),
+        mobile :sessionStorage.getItem('mobile'),
        }
        console.log(data);
        this.auth.login(data).subscribe((res)=>{
          console.log(res);
          this.success = res.message;
           this.toastr.success(this.message,this.success,{
-            positionClass: 'toast-top-center'
+            // positionClass: 'toast-top-center'
            });
          this.router.navigate(['/otp']);
        },(error)=>{
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
          this.error = error.error.message;
          if(this.error === 'This mobile number does not exist'){
           // this.toastr.error(this.message,'This mobile number does not exist.Please signup',{
-          //   positionClass:'toast-top-center'
+          //   
           // });
           this.mobile_not_register = true;
           this.router.navigate(['login']);
@@ -98,5 +98,11 @@ export class LoginComponent implements OnInit {
   //   }
   //   )
   //  }
+  mobilenumber(event){
+    console.log(event.target.value);
+    if(event.target.value.length==0){
+      this.mobile_not_register = false;
+    }
+  }
 }
 

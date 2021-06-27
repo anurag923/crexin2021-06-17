@@ -11,9 +11,9 @@ import { CrexinService } from 'src/app/services/crexin.service';
   styleUrls: ['./rent.component.css']
 })
 export class RentComponent implements OnInit {
-  auth_token = localStorage.getItem('auth_token');
-  booker_id = localStorage.getItem('booked_id');
-  booking_status = localStorage.getItem('booking_status');
+  auth_token = sessionStorage.getItem('auth_token');
+  booker_id = sessionStorage.getItem('booked_id');
+  booking_status = sessionStorage.getItem('booking_status');
   start_date: any;
   type: any;
   start_time: any;
@@ -25,16 +25,16 @@ export class RentComponent implements OnInit {
   res: any;
   constructor(private toastr: ToastrService, private http:HttpClient,
     private router: Router,private crexinservice:CrexinService) { 
-      localStorage.setItem('clicked','false');
+      sessionStorage.setItem('clicked','false');
     }
 
   ngOnInit(): void {
-    localStorage.setItem('clicked','false');
+    sessionStorage.setItem('clicked','false');
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization',`Bearer ${this.auth_token}`);
-    this.http.get<any>(`https://superuser.crexin.com/api/user/bookeditem/${localStorage.getItem('b_id')}/${localStorage.getItem('booking_id')}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
+    this.http.get<any>(`https://superuser.crexin.com/api/user/bookeditem/${sessionStorage.getItem('b_id')}/${sessionStorage.getItem('booking_id')}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       console.log(res);
       this.res = res.response[0]
       console.log(this.res);

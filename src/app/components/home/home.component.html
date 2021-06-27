@@ -60,7 +60,7 @@
           </div>
           <div style="flex-grow: 8">
             <input type="search" aria-label="Last name"
-              class="form-control brd-clr1 width_too border-left-0 pdt-20 pdb-20" placeholder="Find Equipment"
+              class="form-control brd-clr1 width_too border-left-0 pdt-20 pdb-20" (keydown)="search_button_enter($event,search_categorie.value)"  placeholder="Find Equipment"
               #search_categorie />
           </div>
           <div style="flex-grow: 1">

@@ -14,7 +14,7 @@ export class CategorieslistComponent implements OnInit {
   constructor(private route:Router, private crexinservice:CrexinService) { }
 
   ngOnInit(): void {
-   this.cat_id = localStorage.getItem('cat_id');
+   this.cat_id = sessionStorage.getItem('cat_id');
   }
   subcategories(){
     this.route.navigate(['/rent/subcategories'])

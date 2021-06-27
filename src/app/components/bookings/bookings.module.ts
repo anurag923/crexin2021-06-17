@@ -4,6 +4,7 @@ import { CheckoutService } from '../../services/checkout.service';
 import { BookingsRoutingModule } from './bookings-routing.module';
 import { BookingsComponent } from './bookings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     BookingsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule
   ],
   providers:[CheckoutService]
 })

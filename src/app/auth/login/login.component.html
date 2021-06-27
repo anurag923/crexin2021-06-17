@@ -36,7 +36,7 @@
                         </button>
                     </div> -->
                         <div class="form__div mt-3">
-                            <input type="text" class="form__input cls18" placeholder=" " formControlName="mobile"
+                            <input type="text" (keyup)="mobilenumber($event)" class="form__input cls18" placeholder=" " formControlName="mobile"
                                 [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
                             <label for="" class="form__label">Mobile Number</label>
                             <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">

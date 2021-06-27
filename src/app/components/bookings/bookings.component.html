@@ -28,12 +28,14 @@
                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="row mgl-0 mgr-0">
-                                            <div class="col-md-12">
+                                            <!-- <div class="col-md-12">
                                                 <h1 class="fs-16 fw-600 text-color mgb-0">Pending Bookings</h1>
-                                            </div>
+                                            </div> -->
                                             <div *ngIf="loading" class="text-center col-md-12">
                                                 <h1 class="fs-15 fw-700">loading ...</h1>
                                             </div>
+                                            <div *ngIf="nopendingitem;else showpending"><h1 class="fs-16 fw-700 text-color mgb-0">No bookings available</h1></div>
+                                            <ng-template #showpending>
                                             <div class="col-md-4 my-3" *ngFor="let pending of pending_array">
                                                 <div class="card card-shad completed-bookings">
                                                     <div>
@@ -68,6 +70,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            </ng-template>
                                         </div>
                                     </div>
                                 </div>
@@ -84,12 +87,14 @@
                                     data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="row mgl-0 mgr-0">
-                                            <div class="col-md-12">
+                                            <!-- <div class="col-md-12">
                                                 <h1 class="fs-16 fw-700 text-color mgb-0">On-Going Bookings</h1>
-                                            </div>
+                                            </div> -->
                                             <div *ngIf="loading" class="text-center col-md-12">
                                                 <h1 class="fs-15 fw-700">loading ...</h1>
                                             </div>
+                                            <div *ngIf="noongoingitem;else showongoing"><h1 class="fs-16 fw-700 text-color mgb-0">No bookings available</h1></div>
+                                            <ng-template #showongoing>
                                             <div class="col-md-4 my-3" *ngFor="let ongoing of ongoing_array"
                                                 (click)="ongoing_singlebooking(ongoing.type,ongoing.booking.booking_id,ongoing.booking.id)">
                                                 <div class="card on-going-booings">
@@ -123,6 +128,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </ng-template>
                                         </div>
                                     </div>
                                 </div>
@@ -140,12 +146,14 @@
                                     <div class="accordion-body">
                                         <div class="row mgl-0 mgr-0">
                                             <div class="row mgl-0 mgr-0">
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
                                                     <h1 class="fs-16 fw-700 text-color mgb-0">Scheduled Bookings</h1>
-                                                </div>
+                                                </div> -->
                                                 <div *ngIf="loading" class="text-center col-md-12">
                                                     <h1 class="fs-15 fw-700">loading ...</h1>
                                                 </div>
+                                                <div *ngIf="noscheduleditem;else showscheduled"><h1 class="fs-16 fw-700 text-color mgb-0">No bookings available</h1></div>
+                                                <ng-template #showscheduled>
                                                 <div class="col-md-4 my-3" *ngFor="let scheduled of scheduled_array"
                                                     (click)="sheduled_singlebooking(scheduled.type,scheduled.booking.booking_id,scheduled.booking.id)">
                                                     <div class="card scheduled-bookings">
@@ -179,6 +187,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                </ng-template>
                                             </div>
                                         </div>
                                     </div>
@@ -197,12 +206,14 @@
                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="row mgl-0 mgr-0">
-                                            <div class="col-md-12">
+                                            <!-- <div class="col-md-12">
                                                 <h1 class="fs-16 fw-700 text-color mgb-0">Completed Bookings</h1>
-                                            </div>
+                                            </div> -->
                                             <div *ngIf="loading" class="text-center col-md-12">
                                                 <h1 class="fs-15 fw-700">loading ...</h1>
                                             </div>
+                                            <div *ngIf="nocompleteditem;else showcompleteditem"><h1 class="fs-16 fw-700 text-color mgb-0">No bookings available</h1></div>
+                                            <ng-template #showcompleteditem>
                                             <div class="col-md-4 my-3" *ngFor="let completed of completed_array"
                                                 (click)="sheduled_singlebooking(completed.type,completed.booking.booking_id,completed.booking.id)">
                                                 <div class="card completed-bookings">
@@ -236,6 +247,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            </ng-template>
                                         </div>
                                     </div>
                                 </div>

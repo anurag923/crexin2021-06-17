@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { shareReplay } from 'rxjs/operators';
 import { CrexinService } from 'src/app/services/crexin.service';
 import { CheckoutService } from '../../services/checkout.service';
+import { GlobalData } from '../../globaldata/global.data';
 
 @Component({
   selector: 'app-bookings',
@@ -14,7 +15,7 @@ import { CheckoutService } from '../../services/checkout.service';
 })
 export class BookingsComponent implements OnInit {
   loading = true;
-  auth_token = localStorage.getItem('auth_token');
+  auth_token = sessionStorage.getItem('auth_token');
   ongoing: any;
   scheduled: any;
   completed: any;
@@ -24,17 +25,22 @@ export class BookingsComponent implements OnInit {
   completed_array=[];
   pending_array=[];
   type: any;
+  noongoingitem:boolean;
+  nopendingitem:boolean;
+  noscheduleditem:boolean;
+  nocompleteditem:boolean;
+  isLinear = false;
   constructor(private checkoutservice:CheckoutService, private fb:FormBuilder, private toastr:ToastrService,private router:Router,private http:HttpClient,private activeroute:ActivatedRoute, private route:Router, private crexinservice:CrexinService) { }
 
   ngOnInit(): void {
-    // const headers= new HttpHeaders()
-    // .set('content-type', 'application/json')
-    // .set('Access-Control-Allow-Origin', '*')
-    // .set('Authorization',`Bearer ${this.auth_token}`);
+    const headers= new HttpHeaders()
+    .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Authorization',`Bearer ${this.auth_token}`);
     // this.http.get<any>('https://superuser.crexin.com/api/user/bookeditem/',{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
     //   console.log(res);
     // })
-    this.checkoutservice.allbookings().subscribe((res)=>{
+    this.http.get<any>(GlobalData.url_api+'user/myorders',{ 'headers': headers }).subscribe((res)=>{
       console.log(res);
       this.ongoing = res.ongoing;
       console.log(this.ongoing);
@@ -45,6 +51,7 @@ export class BookingsComponent implements OnInit {
           console.log(this.ongoing_array);
         }
       }
+      
       this.scheduled = res.scheduled;
       console.log(this.scheduled);
       for(var i=0;i<this.scheduled.length;i++){
@@ -73,12 +80,24 @@ export class BookingsComponent implements OnInit {
         }
       }
       this.loading = false
+      if(this.ongoing_array.length==0){
+        this.noongoingitem = true;
+      }
+      if(this.pending_array.length==0){
+        this.nopendingitem = true;
+      }
+      if(this.scheduled_array.length==0){
+        this.noscheduleditem = true;
+      }
+      if(this.completed_array.length==0){
+        this.nocompleteditem = true;
+      }
     })
   }
   ongoing_singlebooking(type:any,booking_id:any,id:any){
-    localStorage.setItem('booking_id', booking_id)
-    localStorage.setItem('b_id', id)
-    localStorage.setItem('type', type)
+    sessionStorage.setItem('booking_id', booking_id)
+    sessionStorage.setItem('b_id', id)
+    sessionStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){
@@ -92,9 +111,9 @@ export class BookingsComponent implements OnInit {
     }
   }
   sheduled_singlebooking(type:any,booking_id:any,id:any){
-    localStorage.setItem('booking_id', booking_id)
-    localStorage.setItem('b_id', id)
-    localStorage.setItem('type', type)
+    sessionStorage.setItem('booking_id', booking_id)
+    sessionStorage.setItem('b_id', id)
+    sessionStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){
@@ -108,9 +127,9 @@ export class BookingsComponent implements OnInit {
     }
   }
   completed_singlebooking(type:any,booking_id:any,id:any){
-    localStorage.setItem('booking_id', booking_id)
-    localStorage.setItem('b_id', id)
-    localStorage.setItem('type', type)
+    sessionStorage.setItem('booking_id', booking_id)
+    sessionStorage.setItem('b_id', id)
+    sessionStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){
@@ -125,9 +144,9 @@ export class BookingsComponent implements OnInit {
   }
 
   pending_singlebooking(type:any,booking_id:any,id:any){
-    localStorage.setItem('booking_id', booking_id)
-    localStorage.setItem('b_id', id)
-    localStorage.setItem('type', type)
+    sessionStorage.setItem('booking_id', booking_id)
+    sessionStorage.setItem('b_id', id)
+    sessionStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){

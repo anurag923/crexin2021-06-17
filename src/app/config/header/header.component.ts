@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   name:any;
   userprofile = false;
   submitted = false;
-  auth_token = localStorage.getItem('auth_token');
+  auth_token = sessionStorage.getItem('auth_token');
   constructor(private aes:AESEncryptDecryptServiceService,private fb:FormBuilder, private toastr: ToastrService, private http:HttpClient,
     private router: Router,private crexinservice:CrexinService) {
       const headers= new HttpHeaders()
@@ -36,9 +36,9 @@ export class HeaderComponent implements OnInit {
         var name = this.aes.encrypt(res.user.fullname)
         var email = this.aes.encrypt(res.user.email)
         var phone = this.aes.encrypt(res.user.phone)
-        localStorage.setItem('name',name)
-        localStorage.setItem('email',email)
-        localStorage.setItem('phone',phone)
+        sessionStorage.setItem('name',name)
+        sessionStorage.setItem('email',email)
+        sessionStorage.setItem('phone',phone)
         this.userprofile = true;
       }) 
       // this.crexinservice.userdata().subscribe(res=>{
@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
       //   this.phone = res.user.phone
       //   this.userprofile = true;
       // });
-      // if(localStorage.getItem('isloggedin') === 'true'){
+      // if(sessionStorage.getItem('isloggedin') === 'true'){
       
       // }
       // else{
@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
       // }
     }
   ngOnInit(): void {
-    // if(localStorage.getItem('isloggedin') === 'true'){
+    // if(sessionStorage.getItem('isloggedin') === 'true'){
       // this.crexinservice.userdata().subscribe(res=>{
       //   console.log(res.user);
       //   this.name = res.user.fullname
@@ -80,9 +80,9 @@ export class HeaderComponent implements OnInit {
       var name = this.aes.encrypt(res.user.fullname)
       var email = this.aes.encrypt(res.user.email)
       var phone = this.aes.encrypt(res.user.phone)
-      localStorage.setItem('name',name)
-      localStorage.setItem('email',email)
-      localStorage.setItem('phone',phone)      
+      sessionStorage.setItem('name',name)
+      sessionStorage.setItem('email',email)
+      sessionStorage.setItem('phone',phone)      
       this.userprofile = true;
     })
     this.profile_update = this.fb.group({
@@ -99,21 +99,21 @@ export class HeaderComponent implements OnInit {
        this.collapsed = !this.collapsed;
      }
 get userstatus(){
-   return localStorage.getItem('auth_token');
+   return sessionStorage.getItem('auth_token');
  } 
 get username(){
-  var username = this.aes.decrypt(localStorage.getItem('name'));
+  var username = this.aes.decrypt(sessionStorage.getItem('name'));
   return username;
 }
 get userphone(){
-  var userphone = this.aes.decrypt(localStorage.getItem('phone'));
+  var userphone = this.aes.decrypt(sessionStorage.getItem('phone'));
   return userphone;
 }
  logout(){
-  localStorage.clear();
-  localStorage.clear();
+  sessionStorage.clear();
+  sessionStorage.clear();
   this.toastr.success(this.message,'Logout Successfully',{
-    positionClass:'toast-top-center'
+    
   });
   this.router.navigate(['/']);
  }   

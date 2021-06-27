@@ -67,14 +67,14 @@ export class VendorComponent implements OnInit {
        console.log(res);
        this.success = res.message
        this.toastr.success(this.message,this.success,{
-        positionClass:'toast-top-center'
+        
       });
       this.router.navigate(['/']);
     },(err)=>{
       console.log(err);
       this.error = err.error.message;
       this.toastr.error(this.message,this.error,{
-        positionClass:'toast-top-center'
+        
       });
     });
   }

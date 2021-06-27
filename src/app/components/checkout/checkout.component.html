@@ -12,7 +12,7 @@
         <thead class="header-bg">
           <tr>
             <th class="text-center col-2 text-color fs-17 fw-700">Equipment</th>
-            <th class="text-center col-5 text-color fs-17 fw-700">{{bookingtype}}</th>
+            <th class="text-center col-5 text-color fs-17 fw-700">Booking Type</th>
             <th class="text-center col-1 text-color fs-17 fw-700">Total Amount</th>
             <th class="text-center col-1 text-color fs-17 fw-700">Advance</th>
             <th class="text-center col-2 text-color fs-17 fw-700">Booking Summary</th>
@@ -25,7 +25,7 @@
                 <div class="checkout-img">
                   <img src="{{subcategory_image}}" alt="" class="img-fluid">
                   <p class="mt-2 fs-17 text-color fw-700 text-center">{{subcategory_name}}</p>
-                  <p class="mt-2 fs-17 text-color fw-700 text-center">{{bookingtype}} rate- ₹ {{subcategory_rate}}</p>
+                  <p class="mt-2 fs-17 text-color fw-700 text-center">{{bookingtype}} Rate- ₹ {{subcategory_rate}}</p>
                 </div>
               </div>
             </td>
@@ -531,43 +531,239 @@
 
     <div class="row">
       <div class="container-fluid">
-        <mat-horizontal-stepper orientation="vertical" [linear]="isLinear" #stepper>
+        <mat-vertical-stepper  [linear]="isLinear" #stepper>
           <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
-              <ng-template matStepLabel>Fill out your name</ng-template>
-              <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-              </mat-form-field>
+            <form [formGroup]="General_Details">
+              <ng-template matStepLabel>General Details</ng-template>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Name</label>
+                    <input type="text" placeholder="Name" [(ngModel)]="name" class="form-control"
+                      formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" readonly>
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                      <div *ngIf="f.name.errors.required" class="fs-13 fw-600">Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Contact Number</label>
+                    <input type="tel" placeholder="Contact Number" [(ngModel)]="mobile" class="form-control"
+                      formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" readonly>
+                    <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                      <div *ngIf="f.mobile.errors.required" class="fs-13 fw-600">Mobile Number is required</div>
+                      <div *ngIf="f.mobile.errors.pattern" class="fs-13 fw-600">Mobile Number must be at 10 digits
+                        required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext class="btn btn fs-15 fw-600 paynow-btn">Next</button>
               </div>
             </form>
           </mat-step>
           <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel>Fill out your address</ng-template>
-              <mat-form-field appearance="fill">
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                       required>
-              </mat-form-field>
+            <form [formGroup]="Site_Details">
+              <ng-template matStepLabel>Site Information <i *ngIf="site_errors" class="fa fa-exclamation-circle" style="color:#dc3545;font-size:18px;"></i></ng-template>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Site Co-Ordinator Name</label>
+                    <input type="text" placeholder="Site Co-Ordinator Name" class="form-control"
+                      formControlName="coordinator_name"
+                      [ngClass]="{ 'is-invalid': submitted && s.coordinator_name.errors }">
+                    <div *ngIf="submitted && s.coordinator_name.errors" class="invalid-feedback">
+                      <div *ngIf="s.coordinator_name.errors.required" class="fs-13 fw-600">Site Co-Ordinator Name is
+                        required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Contact Number</label>
+                    <input type="tel" placeholder="Contact Number" class="form-control"
+                      formControlName="contact_number"
+                      [ngClass]="{ 'is-invalid': submitted && s.contact_number.errors }">
+                    <div *ngIf="submitted && s.contact_number.errors" class="invalid-feedback">
+                      <div *ngIf="s.contact_number.errors.required" class="fs-13 fw-600">Contact Number is required
+                      </div>
+                      <div *ngIf="s.contact_number.errors.pattern" class="fs-13 fw-600">Contact Number must be at 10
+                        digits
+                        required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Plot/Flat No. & Building Name</label>
+                    <input type="text" placeholder="Plot/Flat No. & Building Name" class="form-control"
+                      formControlName="address_one" [ngClass]="{ 'is-invalid': submitted && s.address_one.errors }">
+                    <div *ngIf="submitted && s.address_one.errors" class="invalid-feedback">
+                      <div *ngIf="s.address_one.errors.required" class="fs-13 fw-600">Plot/Flat No. & Building Name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Street Name/Area</label>
+                    <input type="text" placeholder="Street Name/Area" class="form-control"
+                      formControlName="address_two" [ngClass]="{ 'is-invalid': submitted && s.address_two.errors }">
+                    <div *ngIf="submitted && s.address_two.errors" class="invalid-feedback">
+                      <div *ngIf="s.address_two.errors.required" class="fs-13 fw-600">Street Name/Area is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Landmark</label>
+                    <input type="text" placeholder="Landmark" class="form-control" formControlName="landmark"
+                      [ngClass]="{ 'is-invalid': submitted && s.landmark.errors }">
+                    <div *ngIf="submitted && s.landmark.errors" class="invalid-feedback">
+                      <div *ngIf="s.landmark.errors.required" class="fs-13 fw-600">Landmark is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">City</label>
+                    <input type="text" placeholder="City" class="form-control" formControlName="city"
+                      [ngClass]="{ 'is-invalid': submitted && s.city.errors }">
+                    <div *ngIf="submitted && b.city.errors" class="invalid-feedback">
+                      <div *ngIf="b.city.errors.required" class="fs-13 fw-600">City is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">State</label>
+                    <input type="text" placeholder="State" class="form-control" formControlName="state"
+                      [ngClass]="{ 'is-invalid': submitted && s.state.errors }">
+                    <div *ngIf="submitted && s.state.errors" class="invalid-feedback">
+                      <div *ngIf="s.state.errors.required" class="fs-13 fw-600">State is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Pincode</label>
+                    <input type="number" placeholder="Pincode" class="form-control" formControlName="pincode"
+                      [ngClass]="{ 'is-invalid': submitted && s.pincode.errors }" maxlength="6">
+                    <div *ngIf="submitted && s.pincode.errors" class="invalid-feedback">
+                      <div *ngIf="s.pincode.errors.required" class="fs-13 fw-600">Pincode is required</div>
+                      <div *ngIf="s.pincode.errors.pattern" class="fs-13 fw-600">pincode must be at 6 digits
+                        required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperPrevious class="btn btn fs-15 fw-600 paynow-btn mr-2">Back</button>
+                <button mat-button matStepperNext class="btn btn fs-15 fw-600 paynow-btn">Next</button>
               </div>
             </form>
           </mat-step>
           <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
+            <form [formGroup]="Billing_Information">
+              <ng-template matStepLabel>Billing Information<i *ngIf="billing_errors" class="fa fa-exclamation-circle" style="color:#dc3545;font-size:18px;"></i></ng-template>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Company Name</label>
+                    <input type="text" placeholder="Company Name" class="form-control" formControlName="c_name"
+                      [ngClass]="{ 'is-invalid': submitted && b.c_name.errors }">
+                    <div *ngIf="submitted && b.c_name.errors" class="invalid-feedback">
+                      <div *ngIf="b.c_name.errors.required" class="fs-13 fw-600">Company Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">GSTN Number</label>
+                    <input type="text" placeholder="GSTN Number" class="form-control" formControlName="gst_number"
+                      [ngClass]="{ 'is-invalid': submitted && b.gst_number.errors }">
+                    <div *ngIf="submitted && b.gst_number.errors" class="invalid-feedback">
+                      <div *ngIf="b.gst_number.errors.required" class="fs-13 fw-600">GST Number is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Email</label>
+                    <input type="email" placeholder="Email id" class="form-control" formControlName="email"
+                      [ngClass]="{ 'is-invalid': submitted && b.email.errors }">
+                    <div *ngIf="submitted && b.email.errors" class="invalid-feedback">
+                      <div *ngIf="b.email.errors.required" class="fs-13 fw-600">Email id is required</div>
+                      <div *ngIf="b.email.errors.email" class="fs-13 fw-600">Please provide a valid email address
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Company Address</label>
+                    <input type="text" placeholder="Company Address" class="form-control"
+                      formControlName="c_address" [ngClass]="{ 'is-invalid': submitted && b.c_address.errors }">
+                    <div *ngIf="submitted && b.c_address.errors" class="invalid-feedback">
+                      <div *ngIf="b.c_address.errors.required" class="fs-13 fw-600">Company Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">City</label>
+                    <input type="text" placeholder="City" class="form-control" formControlName="city"
+                      [ngClass]="{ 'is-invalid': submitted && b.city.errors }">
+                    <div *ngIf="submitted && b.city.errors" class="invalid-feedback">
+                      <div *ngIf="b.city.errors.required" class="fs-13 fw-600">City is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">State</label>
+                    <input type="text" placeholder="State" class="form-control" formControlName="state"
+                      [ngClass]="{ 'is-invalid': submitted && b.state.errors }">
+                    <div *ngIf="submitted && b.state.errors" class="invalid-feedback">
+                      <div *ngIf="b.state.errors.required" class="fs-13 fw-600">State is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group w1001">
+                    <label for="" class="fs-15">Pincode</label>
+                    <input type="number" placeholder="Pincode" class="form-control" formControlName="p_code"
+                      [ngClass]="{ 'is-invalid': submitted && b.p_code.errors }">
+                    <div *ngIf="submitted && b.p_code.errors" class="invalid-feedback">
+                      <div *ngIf="b.p_code.errors.required" class="fs-13 fw-600">Pincode is required</div>
+                      <div *ngIf="b.p_code.errors.pattern" class="fs-13 fw-600">pincode must be at 6 digits required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button mat-button matStepperPrevious class="btn btn fs-15 fw-600 paynow-btn mr-2">Back</button>
+                <button mat-button (click)="stepper.reset()" class="btn btn fs-15 fw-600 paynow-btn">Reset</button>
+              </div>
+            </form>
+            <!-- <ng-template matStepLabel>Done</ng-template>
             <p>You are now done.</p>
             <div>
               <button mat-button matStepperPrevious>Back</button>
               <button mat-button (click)="stepper.reset()">Reset</button>
-            </div>
+            </div> -->
           </mat-step>
-        </mat-horizontal-stepper>
-        <div id="accordion" class="accordion">
+        </mat-vertical-stepper>
+        <!-- <div id="accordion" class="accordion">
           <div class="mb-0">
             <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
               <a class="card-title fs-18">
@@ -803,7 +999,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

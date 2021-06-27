@@ -5,7 +5,7 @@ import { GlobalData } from '../globaldata/global.data';
 import { pluck, share, shareReplay, tap } from 'rxjs/operators';
 import { data } from 'jquery';
 
-var auth_token = localStorage.getItem('auth_token');
+var auth_token = sessionStorage.getItem('auth_token');
 const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
