@@ -5,6 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { shareReplay } from 'rxjs/operators';
 import { CrexinService } from 'src/app/services/crexin.service';
+import { WindowRefService } from 'src/app/window-ref.service';
+declare var $: any;
 
 @Component({
   selector: 'app-categories',
@@ -16,7 +18,7 @@ export class CategoriesComponent implements OnInit {
   c_unactive = false;
   c_active = true;
   cat_id: any;
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   allcategories: any;
   message: any;
   loading = true;
@@ -41,25 +43,35 @@ export class CategoriesComponent implements OnInit {
     document.getElementById("gsearch").addEventListener("search", function(event) {
       window.location.reload();
     });
-  if(sessionStorage.getItem('global_search') === 'true'){
+    $(document).ready(function () {
+      $(".input").focusin(function () {
+        $(".close-btn").addClass("active");
+      });
+
+      $(".input").focusout(function () {
+        $(".close-btn").removeClass('active');
+        $(this).val("");
+      });
+    })
+  if(localStorage.getItem('global_search') === 'true'){
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization',`Bearer ${this.auth_token}`);
-    this.http.get<any>('https://superuser.crexin.com/api/searchcategories?category='+sessionStorage.getItem('search_categorie'),{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
+    this.http.get<any>('https://superuser.crexin.com/api/searchcategories?category='+localStorage.getItem('search_categorie'),{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       console.log(res.categories);
-      sessionStorage.setItem('global_search', 'false');
+      localStorage.setItem('global_search', 'false');
       if(res.categories.length === 0){
          this.toastr.error(this.message,'No data found',{
         positionClass: 'toast-top-center'
        });
-       sessionStorage.setItem('global_search', 'false');
+       localStorage.setItem('global_search', 'false');
        this.loading = false;
       }
      else{
       this.searchcategories = res.categories;
       // this.products = res.products;
-      sessionStorage.setItem('global_search', 'false');
+      localStorage.setItem('global_search', 'false');
       this.globalsearch = true;
       this.categories = false;
       this.loading = false;
@@ -103,12 +115,12 @@ export class CategoriesComponent implements OnInit {
     // this.router.navigate(['/categorie'])
   }
   singleproduct(id:any){
-   sessionStorage.setItem('p_id', id);
+   localStorage.setItem('p_id', id);
    this.route.navigate(['/rent/subcategories'])
   }
   search(search_categorie){
     this.searchval = search_categorie;
-    sessionStorage.setItem('searchval',this.searchval);
+    localStorage.setItem('searchval',this.searchval);
     if(this.searchval.length!=0){
       this.searchcat = true;
       this.allcat = false;
@@ -117,7 +129,7 @@ export class CategoriesComponent implements OnInit {
       this.searchcat = false;
       this.allcat = true;
     }
-    sessionStorage.setItem('searchval',search_categorie);
+    localStorage.setItem('searchval',search_categorie);
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
@@ -131,14 +143,14 @@ export class CategoriesComponent implements OnInit {
   subcategories(index:number,id:any,name:any){
     this.selectedIndex = index;
     console.log(name);
-    sessionStorage.setItem('cat_id',id);
-    sessionStorage.setItem('cat_name',name);
-    sessionStorage.setItem('index',index.toString());
+    localStorage.setItem('cat_id',id);
+    localStorage.setItem('cat_name',name);
+    localStorage.setItem('index',index.toString());
     this.c_active = false;
     this.c_unactive = true;
-    if(sessionStorage.getItem('searchval')!=null){
-      if(sessionStorage.getItem('searchval').length!=0){
-        sessionStorage.setItem('global_search','true');
+    if(localStorage.getItem('searchval')!=null){
+      if(localStorage.getItem('searchval').length!=0){
+        localStorage.setItem('global_search','true');
       }
     }
       this.route.navigate(['/rent/subcategories']);
@@ -147,5 +159,7 @@ export class CategoriesComponent implements OnInit {
   all_categories(){
     this.router.navigate(['/rent']);
   }
-
+  removeval(){
+    window.location.reload();
+  }
 }

@@ -22,10 +22,11 @@
                         <div class="crexin-search">
                             <div class="search">
                                 <div class="form-group has-search w-100">
-                                    <span class="fa search_icon fa-search form-control-feedback"></span>
-                                    <input type="search" id="gsearch" [(ngModel)]="searchval" name="gsearch" class="searchTerm"
-                                        placeholder="Search for an Equipment" (keyup)="search(search_categorie.value)"
-                                        #search_categorie>
+                                    <span class="fa search-cls fa-search form-control-feedback"></span>
+                                    <input type="search" id="gsearch" [(ngModel)]="searchval" name="gsearch"
+                                        class="input searchTerm" placeholder="Search for an Equipment"
+                                        (keyup)="search(search_categorie.value)" #search_categorie>
+                                    <div class="close-btn" (click)="removeval()">&times;</div>
                                 </div>
                             </div>
                         </div>

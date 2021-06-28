@@ -4,14 +4,14 @@ import { TermsandconditionsComponent } from './components/termsandconditions/ter
 
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'orders', loadChildren: () => import('./components/orders/orders.module').then(m => m.OrdersModule) },
-  { path: 'careers', loadChildren: () => import('./components/careers/careers.module').then(m => m.CareersModule) }, 
+  { path: 'careers', loadChildren: () => import('./components/careers/careers.module').then(m => m.CareersModule) },
   { path: 'blog', loadChildren: () => import('./components/blog/blog.module').then(m => m.BlogModule) },
-  { path: 'contact', loadChildren: () => import('./components/contact/contact.module').then(m => m.ContactModule) },   { path: 'registerequipment', loadChildren: () => import('./components/registerequipment/registerequipment.module').then(m => m.RegisterequipmentModule) },
-  { path: 'vendorsignup', loadChildren: () => import('./auth/vendorsignup/vendorsignup.module').then(m => m.VendorsignupModule) }, 
-  { path: 'usersignup', loadChildren: () => import('./auth/usersignup/usersignup.module').then(m => m.UsersignupModule) }, 
-  { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) }, 
+  { path: 'contact', loadChildren: () => import('./components/contact/contact.module').then(m => m.ContactModule) }, { path: 'registerequipment', loadChildren: () => import('./components/registerequipment/registerequipment.module').then(m => m.RegisterequipmentModule) },
+  { path: 'vendorsignup', loadChildren: () => import('./auth/vendorsignup/vendorsignup.module').then(m => m.VendorsignupModule) },
+  { path: 'usersignup', loadChildren: () => import('./auth/usersignup/usersignup.module').then(m => m.UsersignupModule) },
+  { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
   { path: 'otp', loadChildren: () => import('./auth/otp/otp.module').then(m => m.OtpModule) },
   { path: 'vendor', loadChildren: () => import('./vendor/vendor/vendor.module').then(m => m.VendorModule) },
   { path: 'otpsuccess', loadChildren: () => import('./auth/otpsuccess/otpsuccess.module').then(m => m.OtpsuccessModule) },
@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('./components/profile/profile.module').then(m => m.ProfileModule) },
   { path: 'rent/check-out', loadChildren: () => import('./components/checkout/checkout.module').then(m => m.CheckoutModule) },
   { path: 'rent/bookingtypeselection', loadChildren: () => import('./components/singleproduct/singleproduct.module').then(m => m.SingleproductModule) },
-  {path: 'Termsandconditions', component:TermsandconditionsComponent},
+  { path: 'Termsandconditions', component: TermsandconditionsComponent },
   { path: 'account_password', loadChildren: () => import('./auth/account-password/account-password.module').then(m => m.AccountPasswordModule) },
   { path: 'notifications', loadChildren: () => import('./components/notifications/notifications.module').then(m => m.NotificationsModule) },
   { path: 'helpcenter', loadChildren: () => import('./components/helpcenter/helpcenter.module').then(m => m.HelpcenterModule) },
@@ -37,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy',preloadingStrategy: PreloadAllModules })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy', preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

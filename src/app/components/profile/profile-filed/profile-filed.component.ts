@@ -13,9 +13,9 @@ export class ProfileFiledComponent implements OnInit {
   closeResult: string;
   submitted = false;
   Profile:FormGroup;
-  // mobile = sessionStorage.getItem('mobile');
-  // firstname = sessionStorage.getItem('firstname');
-  // email = sessionStorage.getItem('email');
+  // mobile = localStorage.getItem('mobile');
+  // firstname = localStorage.getItem('firstname');
+  // email = localStorage.getItem('email');
   message: string;
   success: any;
   modal_close:boolean;
@@ -57,7 +57,7 @@ export class ProfileFiledComponent implements OnInit {
      }
      else{
        const data = {
-          //  id : sessionStorage.getItem('user_id'),
+          //  id : localStorage.getItem('user_id'),
           fullname : this.Profile.get('fullname').value,
           mobile : this.Profile.get('mobile').value,
           email : this.Profile.get('email').value
@@ -65,9 +65,9 @@ export class ProfileFiledComponent implements OnInit {
        console.log(data)
        this.crexinService.profileupdate(data).subscribe((res)=>{
          console.log(res.data);
-         sessionStorage.setItem('firstname',res.data.firstname);
-         sessionStorage.setItem('email',res.data.email);
-         sessionStorage.setItem('mobile',res.data.mobile);
+         localStorage.setItem('firstname',res.data.firstname);
+         localStorage.setItem('email',res.data.email);
+         localStorage.setItem('mobile',res.data.mobile);
          this.success = res.message;
          this.toastr.success(this.message,this.success,{
           positionClass: 'toast-top-center'
@@ -81,12 +81,12 @@ export class ProfileFiledComponent implements OnInit {
      }
   }
  get firstname(){
-   return sessionStorage.getItem('firstname');
+   return localStorage.getItem('firstname');
  }
  get mobile(){
-  return sessionStorage.getItem('mobile');
+  return localStorage.getItem('mobile');
 }
 get email(){
-  return sessionStorage.getItem('email');
+  return localStorage.getItem('email');
 }
 }

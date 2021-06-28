@@ -130,7 +130,7 @@
                   <form [formGroup]="Hourly">
                     <div class="row mgl-0 mgr-0">
                       <div class="form-group col-md-2">
-                        <label for="" class="fs-14 text-color">No of Hours</label>
+                        <label for="" class="fs-13 text-color">No of Hours</label>
                         <select name="hrs" id="hrs" [(ngModel)]="no_of_hours" class="form-control w-100 bdr"
                           formControlName="no_hours"
                           [ngClass]="{ 'is-invalid': submitted_hourly  && h.no_hours.errors }">
@@ -145,7 +145,7 @@
                         </div>
                       </div>
                       <div class="form-group col-md-4">
-                        <label for="" class="fs-14 text-color">Start Date</label>
+                        <label for="" class="fs-13 text-color">Start Date</label>
                         <input type="date" min="{{book_date1}}" [(ngModel)]="start_date" (click)="getcurrentdate()"
                           placeholder="23-04-21" class="form-control p-0 time1" formControlName="h_startdate"
                           [ngClass]="{ 'is-invalid': submitted_hourly && h.h_startdate.errors }">
@@ -154,7 +154,7 @@
                         </div>
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="" class="fs-14 text-color">Start Time</label>
+                        <label for="" class="fs-13 text-color">Start Time</label>
                         <select class="form-control p-0 w-75 time1" [(ngModel)]="start_time"
                           aria-label="Default select example" formControlName="h_starttime"
                           [ngClass]="{ 'is-invalid': submitted_hourly  && h.h_starttime.errors }">
@@ -220,7 +220,7 @@
                   <form [formGroup]="Daily">
                     <div class="row mgl-0 mgr-0">
                       <div class="form-group col-md-2">
-                        <label for="" class="fs-14 text-color">No of Days</label>
+                        <label for="" class="fs-13 text-color">No of Days</label>
                         <select name="" id="" class="form-control w-100" [(ngModel)]="no_of_days" (click)="d_days()"
                           formControlName="no_days" [ngClass]="{ 'is-invalid': submitted_daily && d.no_days.errors }">
                           <option value="1">1Day</option>
@@ -234,7 +234,7 @@
                         </div>
                       </div>
                       <div class="form-group col-md-4">
-                        <label for="" class="fs-14 text-color">Start Date</label>
+                        <label for="" class="fs-13 text-color">Start Date</label>
                         <input min="{{book_date1}}" type="date" [(ngModel)]="d_start_date" placeholder="23-04-21"
                           (click)="getcurrentdate()" class="form-control pd-0 time1" formControlName="d_startdate"
                           (change)="enddata(startdate.value)"
@@ -244,7 +244,7 @@
                         </div>
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="" class="fs-14 text-color">Start Time</label>
+                        <label for="" class="fs-13 text-color">Start Time</label>
                         <!-- <input [ngxTimepicker]="picker" (change)="endtime(starttime.value)" #starttime>
                                <ngx-material-timepicker #picker></ngx-material-timepicker> -->
                         <select class="form-control" [(ngModel)]="d_start_time" aria-label="Default select example"
@@ -296,7 +296,7 @@
                     <div class="row mgl-0 mgr-0">
                       <div class="col-md-2"></div>
                       <div class="form-group col-md-4">
-                        <label for="" class="fs-14 ">End Date</label>
+                        <label for="" class="fs-13">End Date</label>
                         <input type="date" placeholder="23-04-21" class="form-control p-0 date1" value="{{end_date}}"
                           readonly>
                         <!-- <div *ngIf="submitted_daily && d.d_enddate.errors" class="invalid-feedback" >
@@ -304,7 +304,7 @@
                               </div> -->
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="" class="fs-14 ">End Time</label>
+                        <label for="" class="fs-13">End Time</label>
                         <!-- <select name="" id="" class="form-control" placeholder="7AM to 6PM" value="{{end_time}}" readonly></select> -->
                         <input type="text" class="form-control w-75 time1" value="{{end_time}}" readonly>
                         <!-- <div *ngIf="submitted_daily && d.d_endtime.errors" class="invalid-feedback">
@@ -326,7 +326,7 @@
                   <form [formGroup]="Weekly">
                     <div class="row mgl-0 mgr-0">
                       <div class="form-group col-md-2">
-                        <label for="" class="fs-14 text-color">No of Weeks</label>
+                        <label for="" class="fs-12 text-color">No of Weeks</label>
                         <select name="" id="" (click)="w_days()" class="form-control w-100 time1"
                           [(ngModel)]="no_of_weeks" formControlName="no_weeks"
                           [ngClass]="{ 'is-invalid': submitted_weekly && w.no_weeks.errors }">
@@ -348,7 +348,7 @@
                         </div>
                       </div>
                       <div class="form-group col-md-4">
-                        <label for="" class="fs-14 text-color">Start Date</label>
+                        <label for="" class="fs-12 text-color">Start Date</label>
                         <input type="date" min="{{book_date1}}" [(ngModel)]="w_start_date" (click)="getcurrentdate()"
                           placeholder="23-04-21" class="form-control pd-0 time1" formControlName="w_startdate"
                           [ngClass]="{ 'is-invalid': submitted_weekly  && w.w_startdate.errors }"
@@ -358,7 +358,7 @@
                         </div>
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="" class="fs-14 text-color">Start Time</label>
+                        <label for="" class="fs-12 text-color">Start Time</label>
                         <select [(ngModel)]="w_start_time" aria-label="Default select example"
                           class="form-control w-75 p-0 time1" placeholder="7AM to 6PM" formControlName="w_starttime"
                           [ngClass]="{ 'is-invalid': submitted_weekly  && w.w_starttime.errors }"
@@ -410,7 +410,7 @@
                     <div class="row mgl-0 mgr-0">
                       <div class="col-md-2"></div>
                       <div class="form-group col-md-4">
-                        <label for="" class="fs-14 text-color">End Date</label>
+                        <label for="" class="fs-13 text-color">End Date</label>
                         <input type="date" placeholder="23-04-21" class="form-control pd-0 time1" value="{{wend_date}}"
                           readonly>
                         <!-- <div *ngIf="submitted_weekly  && w.w_starttime.errors" class="invalid-feedback">

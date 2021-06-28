@@ -19,34 +19,34 @@ export class CheckoutGuard implements CanDeactivate<IDeactivateComponent> {
                 route: ActivatedRouteSnapshot, 
                 state: RouterStateSnapshot,
                 nextState: RouterStateSnapshot) : Observable<boolean> | Promise<boolean> | boolean {
-        sessionStorage.removeItem('rentclicked');
-        if(sessionStorage.getItem('time')==null){
-          sessionStorage.removeItem('no_hours');
-          sessionStorage.removeItem('h_startdate');
-          sessionStorage.removeItem('h_starttime');
+        localStorage.removeItem('rentclicked');
+        if(localStorage.getItem('time')==null){
+          localStorage.removeItem('no_hours');
+          localStorage.removeItem('h_startdate');
+          localStorage.removeItem('h_starttime');
           }
-        else if(sessionStorage.getItem('time')=='hourly'){
-          sessionStorage.removeItem('no_hours');
-          sessionStorage.removeItem('h_startdate');
-          sessionStorage.removeItem('h_starttime');
-          sessionStorage.removeItem('time');
+        else if(localStorage.getItem('time')=='hourly'){
+          localStorage.removeItem('no_hours');
+          localStorage.removeItem('h_startdate');
+          localStorage.removeItem('h_starttime');
+          localStorage.removeItem('time');
         }
-        else if(sessionStorage.getItem('time')=='daily'){
-          sessionStorage.removeItem('no_days');
-          sessionStorage.removeItem('d_starttime');
-          sessionStorage.removeItem('d_startdate');
-          sessionStorage.removeItem('d_endtime');
-          sessionStorage.removeItem('d_enddate');
-          sessionStorage.removeItem('time');
+        else if(localStorage.getItem('time')=='daily'){
+          localStorage.removeItem('no_days');
+          localStorage.removeItem('d_starttime');
+          localStorage.removeItem('d_startdate');
+          localStorage.removeItem('d_endtime');
+          localStorage.removeItem('d_enddate');
+          localStorage.removeItem('time');
         }
   
-        else if(sessionStorage.getItem('time')=='weekly'){
-          sessionStorage.removeItem('no_weeks');
-          sessionStorage.removeItem('w_starttime');
-          sessionStorage.removeItem('w_startdate');
-          sessionStorage.removeItem('w_endtime');
-          sessionStorage.removeItem('w_enddate');
-          sessionStorage.removeItem('time');
+        else if(localStorage.getItem('time')=='weekly'){
+          localStorage.removeItem('no_weeks');
+          localStorage.removeItem('w_starttime');
+          localStorage.removeItem('w_startdate');
+          localStorage.removeItem('w_endtime');
+          localStorage.removeItem('w_enddate');
+          localStorage.removeItem('time');
         }
         return component.canExit ? component.canExit() : true;
   }

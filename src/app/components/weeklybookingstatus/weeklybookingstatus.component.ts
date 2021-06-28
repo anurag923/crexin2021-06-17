@@ -23,13 +23,13 @@ export class WeeklybookingstatusComponent implements OnInit {
   weekly_rate: any;
   booking_amount: number;
   constructor(private fb:FormBuilder, private toastr:ToastrService,private router:Router,private http:HttpClient,private activeroute:ActivatedRoute, private route:Router, private crexinservice:CrexinService) { }
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   ngOnInit(): void {
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization',`Bearer ${this.auth_token}`);
-    this.http.get<any>(`https://superuser.crexin.com/api/user/singleorder?booking_id=${sessionStorage.getItem('booking_id')}&id=${sessionStorage.getItem('b_id')}&type=${sessionStorage.getItem('type')}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
+    this.http.get<any>(`https://superuser.crexin.com/api/user/singleorder?booking_id=${localStorage.getItem('booking_id')}&id=${localStorage.getItem('b_id')}&type=${localStorage.getItem('type')}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       // this.crexinservice.singlebooking().subscribe((res)=>{
      console.log(res)
      if(res.singleresponse[0].work_status === 'ongoing'){

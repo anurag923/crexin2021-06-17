@@ -62,7 +62,10 @@ label{
     position: absolute;
     pointer-events: none;
   }
-  
+  .red-cls
+  {
+      color:red;
+  }
   .selectdiv select {
     -webkit-appearance: none;
     -moz-appearance: none;

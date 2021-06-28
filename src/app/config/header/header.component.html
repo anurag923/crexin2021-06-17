@@ -177,24 +177,60 @@
               [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
             <label for="" class="form__label">Mobile Number</label>
             <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
-              <div *ngIf="f.mobile.errors.required" class="fs-13">Mobile no is required</div>
-              <div *ngIf="f.mobile.errors.pattern" class="fs-13">Mobil Number must be at 10 digits required</div>
+              <div *ngIf="f.mobile.errors.required" class="fs-13 error_pos">Mobile no is required</div>
+              <div *ngIf="f.mobile.errors.pattern" class="fs-13 error_pos">Mobile Number must be of 10 digits</div>
             </div>
           </div>
           <div class="form__div mt-3 col-md-10 offset-1">
             <input type="email" class="form__input" placeholder=" " formControlName="email" [(ngModel)]="email"
               [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
             <label for="" class="form__label">Email Id</label>
-            <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
-              <div *ngIf="f.mobile.errors.required" class="fs-13">Email is required</div>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required" class="fs-13 error_pos">Email is required</div>
+              <div *ngIf="f.pincode.errors.pattern" class="fs-13 fw-600 error_pos">Please enter a valid email
+              </div>
             </div>
           </div>
           <div class="form__div mt-3 col-md-10 offset-1">
-            <input type="text" class="form__input" placeholder=" " formControlName="address"
-              [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
-            <label for="" class="form__label">Address</label>
-            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-              <div *ngIf="f.address.errors.required" class="fs-13">Address is required</div>
+            <input type="text" class="form__input" placeholder=" " formControlName="address1"
+              [ngClass]="{ 'is-invalid': submitted && f.address1.errors }">
+            <label for="" class="form__label">Plot/Flat No. & Building Name</label>
+            <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+              <div *ngIf="f.address1.errors.required" class="fs-13 error_pos">Plot/Flat No. & Building Name is required</div>
+            </div>
+          </div>
+          <div class="form__div mt-3 col-md-10 offset-1">
+            <input type="text" class="form__input" placeholder=" " formControlName="address2"
+              [ngClass]="{ 'is-invalid': submitted && f.address2.errors }">
+            <label for="" class="form__label">Street Name/Area</label>
+            <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+              <div *ngIf="f.address2.errors.required" class="fs-13 error_pos">Street Name/Area is required</div>
+            </div>
+          </div>
+          <div class="form__div mt-3 col-md-10 offset-1">
+            <input type="text" class="form__input" placeholder=" " formControlName="city"
+              [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+            <label for="" class="form__label">City</label>
+            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+              <div *ngIf="f.city.errors.required" class="fs-13 error_pos">City is required</div>
+            </div>
+          </div>
+          <div class="form__div mt-3 col-md-10 offset-1">
+            <input type="text" class="form__input" placeholder=" " formControlName="state"
+              [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+            <label for="" class="form__label">State</label>
+            <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+              <div *ngIf="f.state.errors.required" class="fs-13 error_pos">State is required</div>
+            </div>
+          </div>
+          <div class="form__div mt-3 col-md-10 offset-1">
+            <input type="text" class="form__input" placeholder=" " formControlName="pincode"
+              [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }">
+            <label for="" class="form__label">Pincode</label>
+            <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+              <div *ngIf="f.pincode.errors.required" class="fs-13 fw-600 error_pos">Pincode is required</div>
+              <div *ngIf="f.pincode.errors.pattern" class="fs-13 fw-600 error_pos">pincode must be of 6 digits
+              </div>
             </div>
           </div>
           <div class="col-md-10 offset-1">

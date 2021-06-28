@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-var auth_token = sessionStorage.getItem('auth_token');
+var auth_token = localStorage.getItem('auth_token');
 @Injectable()
 export class CrexinInterceptor implements HttpInterceptor {
 

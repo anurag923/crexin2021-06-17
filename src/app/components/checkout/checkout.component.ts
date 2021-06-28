@@ -21,6 +21,7 @@ declare var $: any;
 })
 export class CheckoutComponent implements OnInit {
   isLinear = false;
+  disabled = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
@@ -30,7 +31,7 @@ export class CheckoutComponent implements OnInit {
   weekly = false;
   allcategories: any;
   cat_id: any;
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   singleproduct: any;
   message: string;
   products: any;
@@ -55,29 +56,32 @@ export class CheckoutComponent implements OnInit {
   single_product = true;
   categorie_products: boolean;
   bookingtype:any;
+  submitted_site:boolean;
+  submitted_billing:boolean;
+
   // weekendtime = "";
   // weekenddate = "";
-  ammount = sessionStorage.getItem('subtotal');
-  grandtotal = sessionStorage.getItem('grandtotal');
-  gst = sessionStorage.getItem('gst');
+  ammount = localStorage.getItem('subtotal');
+  grandtotal = localStorage.getItem('grandtotal');
+  gst = localStorage.getItem('gst');
   General_Details: FormGroup;
   Site_Details: FormGroup;
   Billing_Information: FormGroup;
-  no_hours = sessionStorage.getItem('no_hours');
-  h_startdate = sessionStorage.getItem('h_startdate');
-  h_starttime = sessionStorage.getItem('h_starttime');
-  no_days = sessionStorage.getItem('no_days');
-  d_startdate = sessionStorage.getItem('d_startdate');
-  d_starttime = sessionStorage.getItem('d_starttime');
-  d_endtime = sessionStorage.getItem('d_endtime');
-  // d_enddate = sessionStorage.getItem('d_enddate');
-  d_enddate = this.datePipe.transform(sessionStorage.getItem('d_enddate'), 'yyyy-MM-dd');
-  no_weeks = sessionStorage.getItem('no_weeks');
-  w_startdate = sessionStorage.getItem('w_startdate');
-  w_starttime = sessionStorage.getItem('w_starttime');
-  w_endtime = sessionStorage.getItem('w_endtime');
-  // w_enddate = sessionStorage.getItem('w_enddate');
-  w_enddate = this.datePipe.transform(sessionStorage.getItem('w_enddate'), 'yyyy-MM-dd');
+  no_hours = localStorage.getItem('no_hours');
+  h_startdate = localStorage.getItem('h_startdate');
+  h_starttime = localStorage.getItem('h_starttime');
+  no_days = localStorage.getItem('no_days');
+  d_startdate = localStorage.getItem('d_startdate');
+  d_starttime = localStorage.getItem('d_starttime');
+  d_endtime = localStorage.getItem('d_endtime');
+  // d_enddate = localStorage.getItem('d_enddate');
+  d_enddate = this.datePipe.transform(localStorage.getItem('d_enddate'), 'yyyy-MM-dd');
+  no_weeks = localStorage.getItem('no_weeks');
+  w_startdate = localStorage.getItem('w_startdate');
+  w_starttime = localStorage.getItem('w_starttime');
+  w_endtime = localStorage.getItem('w_endtime');
+  // w_enddate = localStorage.getItem('w_enddate');
+  w_enddate = this.datePipe.transform(localStorage.getItem('w_enddate'), 'yyyy-MM-dd');
   checked_hourly: boolean;
   checked_daily: boolean;
   checked_weekly: boolean;
@@ -86,11 +90,11 @@ export class CheckoutComponent implements OnInit {
   book_date1: string;
   w_s_date: any;
   s_date: any;
-  h_rate = sessionStorage.getItem('hourly_rate');
+  h_rate = localStorage.getItem('hourly_rate');
   hourly_rate: any;
-  d_rate = sessionStorage.getItem('daily_rate');
+  d_rate = localStorage.getItem('daily_rate');
   daily_rate: any;
-  w_rate = sessionStorage.getItem('weekly_rate');
+  w_rate = localStorage.getItem('weekly_rate');
   weekly_rate: any;
   h_sub_total: any;
   d_sub_total: any;
@@ -123,21 +127,21 @@ export class CheckoutComponent implements OnInit {
   billing_errors = false;
   constructor(private aes:AESEncryptDecryptServiceService,private checkoutservice: CheckoutService, private winRef: WindowRefService, private datePipe: DatePipe, private fb: FormBuilder, private toastr: ToastrService, private router: Router, private http: HttpClient, private activeroute: ActivatedRoute, private route: Router, private crexinservice: CrexinService) {
     console.log(this.d_enddate);
-    this.name = this.aes.decrypt(sessionStorage.getItem('name'));
-    this.mobile = this.aes.decrypt(sessionStorage.getItem('phone'));
-    if (sessionStorage.getItem('time') == null) {
+    this.name = this.aes.decrypt(localStorage.getItem('name'));
+    this.mobile = this.aes.decrypt(localStorage.getItem('phone'));
+    if (localStorage.getItem('time') == null) {
       this.bookingtype = 'Hourly';
     }
   }
 
   ngOnInit(): void {
-    this.name = this.aes.decrypt(sessionStorage.getItem('name'));
-    this.mobile = this.aes.decrypt(sessionStorage.getItem('phone'));
-    if (sessionStorage.getItem('time') == null) {
+    this.name = this.aes.decrypt(localStorage.getItem('name'));
+    this.mobile = this.aes.decrypt(localStorage.getItem('phone'));
+    if (localStorage.getItem('time') == null) {
       this.bookingtype = 'Hourly';
     }
     document.getElementById('paynow').onclick = function () {
-      sessionStorage.setItem('clicked', 'true');
+      localStorage.setItem('clicked', 'true');
     };
     this.Hourly = this.fb.group({
       no_hours: ['', Validators.required],
@@ -170,7 +174,7 @@ export class CheckoutComponent implements OnInit {
     });
     this.Billing_Information = this.fb.group({
       c_name: ['', Validators.required],
-      gst_number: ['', Validators.required],
+      gst_number: ['', [Validators.required,Validators.pattern("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$")]],
       email: ['', [Validators.required, Validators.email]],
       c_address: ['', Validators.required],
       p_code: ['', [Validators.required, Validators.pattern("[0-9]{6}$"), Validators.maxLength(6)]],
@@ -181,33 +185,33 @@ export class CheckoutComponent implements OnInit {
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*')
       .set('Authorization', `Bearer ${this.auth_token}`);
-    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + sessionStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
+    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + localStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
       console.log(res);
       this.singleproduct = res.response;
       this.subcategory_name = res.response.sc_name
       this.subcategory_image = res.response.sc_image
       // this.hourly_rate = res.equipment.hourly_rate
-      if (sessionStorage.getItem('time') == 'hourly') {
+      if (localStorage.getItem('time') == 'hourly') {
         this.subcategory_rate = res.response.hourly_rate
       }
-      if (sessionStorage.getItem('time') == 'daily') {
+      if (localStorage.getItem('time') == 'daily') {
         this.subcategory_rate = res.response.daily_rate
       }
-      if (sessionStorage.getItem('time') == 'weekly') {
+      if (localStorage.getItem('time') == 'weekly') {
         this.subcategory_rate = res.response.weekly_rate
       }
 
-      if (sessionStorage.getItem('time') == null) {
+      if (localStorage.getItem('time') == null) {
         this.subcategory_rate = res.response.hourly_rate
       }
-      sessionStorage.setItem('hourly_rate', res.response.hourly_rate)
-      sessionStorage.setItem('daily_rate', res.response.daily_rate)
-      sessionStorage.setItem('weekly_rate', res.response.weekly_rate)
-      // console.log(sessionStorage.getItem('hourly_rate'))
+      localStorage.setItem('hourly_rate', res.response.hourly_rate)
+      localStorage.setItem('daily_rate', res.response.daily_rate)
+      localStorage.setItem('weekly_rate', res.response.weekly_rate)
+      // console.log(localStorage.getItem('hourly_rate'))
       // this.daily_rate = res.equipment.daily_rate
       // this.weekly_rate =  res.equipment.weekly_rate
     });
-    if (sessionStorage.getItem('time') == 'hourly') {
+    if (localStorage.getItem('time') == 'hourly') {
       this.checked_hourly = true;
       this.checked_daily = false;
       this.checked_weekly = false;
@@ -226,7 +230,7 @@ export class CheckoutComponent implements OnInit {
       this.gstval = +gstround;
       console.log(this.gstval)
     }
-    else if (sessionStorage.getItem('time') == 'daily') {
+    else if (localStorage.getItem('time') == 'daily') {
       this.checked_hourly = false;
       this.checked_daily = true;
       this.checked_weekly = false;
@@ -247,7 +251,7 @@ export class CheckoutComponent implements OnInit {
       this.gstval = +d_gst_round
       console.log(this.gstval)
     }
-    else if (sessionStorage.getItem('time') == 'weekly') {
+    else if (localStorage.getItem('time') == 'weekly') {
       this.checked_hourly = false;
       this.checked_daily = false;
       this.checked_weekly = true;
@@ -269,7 +273,7 @@ export class CheckoutComponent implements OnInit {
       console.log(this.gstval);
     }
 
-    else if (sessionStorage.getItem('time') == null) {
+    else if (localStorage.getItem('time') == null) {
       this.checked_hourly = true;
       this.checked_daily = false;
       this.checked_weekly = false;
@@ -328,10 +332,10 @@ export class CheckoutComponent implements OnInit {
     console.log(this.d_enddate);
   }
   nohours() {
-    sessionStorage.setItem('time', 'hourly')
-    // sessionStorage.setItem('no_hours',this.Hourly.get('no_hours').value);
+    localStorage.setItem('time', 'hourly')
+    // localStorage.setItem('no_hours',this.Hourly.get('no_hours').value);
     this.h_no_hours = +this.no_hours
-    this.hourly_rate = sessionStorage.getItem('hourly_rate');
+    this.hourly_rate = localStorage.getItem('hourly_rate');
     this.h_sub_total = this.h_no_hours * this.hourly_rate
     // console.log(this.h_sub_total)
     // this.h_grandtotal = this.h_sub_total+0
@@ -345,9 +349,9 @@ export class CheckoutComponent implements OnInit {
       console.log(this.gstval);
   }
   d_days() {
-    sessionStorage.setItem('time', 'daily')
-    // sessionStorage.setItem('no_days',this.Daily.get('no_days').value);
-    this.daily_rate = sessionStorage.getItem('daily_rate')
+    localStorage.setItem('time', 'daily')
+    // localStorage.setItem('no_days',this.Daily.get('no_days').value);
+    this.daily_rate = localStorage.getItem('daily_rate')
     this.d_no_days = +this.no_days
     this.d_total_days_amount = this.d_no_days * this.daily_rate
     console.log(this.d_total_days_amount);
@@ -405,9 +409,9 @@ export class CheckoutComponent implements OnInit {
     console.log(this.w_endtime);
   }
   w_days() {
-    sessionStorage.setItem('time', 'weekly')
-    // this.weekly_rate = sessionStorage.getItem('weekly_rate')
-    this.weekly_rate = sessionStorage.getItem('weekly_rate')
+    localStorage.setItem('time', 'weekly')
+    // this.weekly_rate = localStorage.getItem('weekly_rate')
+    this.weekly_rate = localStorage.getItem('weekly_rate')
     this.w_no_weeks = +this.no_weeks
     this.w_total_weeks_amount = this.w_no_weeks * this.weekly_rate
     console.log(this.w_total_weeks_amount);
@@ -425,7 +429,7 @@ export class CheckoutComponent implements OnInit {
       var w_gst_round = w_gst.toFixed(2);
       this.gstval = +w_gst_round;
       console.log(this.gstval);
-    sessionStorage.setItem('no_hours', this.Weekly.get('no_weeks').value);
+    localStorage.setItem('no_hours', this.Weekly.get('no_weeks').value);
     var str = this.Weekly.get('no_weeks').value
     console.log(str);
     var no_weeks = str * 7;
@@ -443,7 +447,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
   hourly_function() {
-    sessionStorage.setItem('time', 'hourly');
+    localStorage.setItem('time', 'hourly');
     this.hourly = true;
     this.daily = false;
     this.weekly = false;
@@ -456,35 +460,35 @@ export class CheckoutComponent implements OnInit {
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*')
       .set('Authorization', `Bearer ${this.auth_token}`);
-    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + sessionStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
+    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + localStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
       console.log(res);
       this.singleproduct = res.response;
       this.subcategory_name = res.response.sc_name
       this.subcategory_image = res.response.sc_image
       // this.hourly_rate = res.equipment.hourly_rate
-      if (sessionStorage.getItem('time') == 'hourly') {
+      if (localStorage.getItem('time') == 'hourly') {
         this.subcategory_rate = res.response.hourly_rate
       }
-      if (sessionStorage.getItem('time') == 'daily') {
+      if (localStorage.getItem('time') == 'daily') {
         this.subcategory_rate = res.response.daily_rate
         this.gstval = 0;
       }
-      if (sessionStorage.getItem('time') == 'weekly') {
+      if (localStorage.getItem('time') == 'weekly') {
         this.subcategory_rate = res.response.weekly_rate
         this.gstval = 0;
       }
 
-      if (sessionStorage.getItem('time') == null) {
+      if (localStorage.getItem('time') == null) {
         this.subcategory_rate = res.response.hourly_rate
       }
-      sessionStorage.setItem('hourly_rate', res.response.hourly_rate)
-      sessionStorage.setItem('daily_rate', res.response.daily_rate)
-      sessionStorage.setItem('weekly_rate', res.response.weekly_rate)
-      // console.log(sessionStorage.getItem('hourly_rate'))
+      localStorage.setItem('hourly_rate', res.response.hourly_rate)
+      localStorage.setItem('daily_rate', res.response.daily_rate)
+      localStorage.setItem('weekly_rate', res.response.weekly_rate)
+      // console.log(localStorage.getItem('hourly_rate'))
       // this.daily_rate = res.equipment.daily_rate
       // this.weekly_rate =  res.equipment.weekly_rate
     });
-    if (sessionStorage.getItem('time') == 'hourly') {
+    if (localStorage.getItem('time') == 'hourly') {
       this.checked_hourly = true;
       this.checked_daily = false;
       this.checked_weekly = false;
@@ -506,7 +510,7 @@ export class CheckoutComponent implements OnInit {
       // this.d_time = false;
       // this.d_time = false;
     }
-    else if (sessionStorage.getItem('time') == 'daily') {
+    else if (localStorage.getItem('time') == 'daily') {
       this.checked_hourly = false;
       this.checked_daily = true;
       this.checked_weekly = false;
@@ -527,7 +531,7 @@ export class CheckoutComponent implements OnInit {
       this.gstval = +d_gst_round
       console.log(this.gstval);
     }
-    else if (sessionStorage.getItem('time') == 'weekly') {
+    else if (localStorage.getItem('time') == 'weekly') {
       this.checked_hourly = false;
       this.checked_daily = false;
       this.checked_weekly = true;
@@ -551,7 +555,7 @@ export class CheckoutComponent implements OnInit {
 
   }
   daily_function() {
-    sessionStorage.setItem('time', 'daily');
+    localStorage.setItem('time', 'daily');
     this.daily = true;
     this.hourly = false
     this.weekly = false;
@@ -567,37 +571,37 @@ export class CheckoutComponent implements OnInit {
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*')
       .set('Authorization', `Bearer ${this.auth_token}`);
-    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + sessionStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
+    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + localStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
       console.log(res);
       this.singleproduct = res.response;
       this.subcategory_name = res.response.sc_name
       this.subcategory_image = res.response.sc_image
       // this.hourly_rate = res.equipment.hourly_rate
-      if (sessionStorage.getItem('time') == 'hourly') {
+      if (localStorage.getItem('time') == 'hourly') {
         this.subcategory_rate = res.response.hourly_rate
         this.gstval = 0;
       }
-      if (sessionStorage.getItem('time') == 'daily') {
+      if (localStorage.getItem('time') == 'daily') {
         this.subcategory_rate = res.response.daily_rate
       }
-      if (sessionStorage.getItem('time') == 'weekly') {
+      if (localStorage.getItem('time') == 'weekly') {
         this.subcategory_rate = res.response.weekly_rate
         this.gstval = 0;
       }
 
-      if (sessionStorage.getItem('time') == null) {
+      if (localStorage.getItem('time') == null) {
         this.subcategory_rate = res.response.hourly_rate;
         this.gstval = 0;
         
       }
-      sessionStorage.setItem('hourly_rate', res.response.hourly_rate)
-      sessionStorage.setItem('daily_rate', res.response.daily_rate)
-      sessionStorage.setItem('weekly_rate', res.response.weekly_rate)
-      // console.log(sessionStorage.getItem('hourly_rate'))
+      localStorage.setItem('hourly_rate', res.response.hourly_rate)
+      localStorage.setItem('daily_rate', res.response.daily_rate)
+      localStorage.setItem('weekly_rate', res.response.weekly_rate)
+      // console.log(localStorage.getItem('hourly_rate'))
       // this.daily_rate = res.equipment.daily_rate
       // this.weekly_rate =  res.equipment.weekly_rate
     });
-    if (sessionStorage.getItem('time') == 'hourly') {
+    if (localStorage.getItem('time') == 'hourly') {
       this.checked_hourly = true;
       this.checked_daily = false;
       this.checked_weekly = false;
@@ -619,7 +623,7 @@ export class CheckoutComponent implements OnInit {
       // this.d_time = false;
       // this.d_time = false;
     }
-    else if (sessionStorage.getItem('time') == 'daily') {
+    else if (localStorage.getItem('time') == 'daily') {
       this.checked_hourly = false;
       this.checked_daily = true;
       this.checked_weekly = false;
@@ -640,7 +644,7 @@ export class CheckoutComponent implements OnInit {
       this.gstval = +d_gst_round
       console.log(this.gstval);
     }
-    else if (sessionStorage.getItem('time') == 'weekly') {
+    else if (localStorage.getItem('time') == 'weekly') {
       this.checked_hourly = false;
       this.checked_daily = false;
       this.checked_weekly = true;
@@ -663,7 +667,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
   weekly_function() {
-    sessionStorage.setItem('time', 'weekly');
+    localStorage.setItem('time', 'weekly');
     console.log(this.weekly_type);
     this.weekly = true;
     this.daily = false;
@@ -677,36 +681,36 @@ export class CheckoutComponent implements OnInit {
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*')
       .set('Authorization', `Bearer ${this.auth_token}`);
-    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + sessionStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
+    this.http.get<any>('https://superuser.crexin.com/api/subcategory/' + localStorage.getItem('sub_id'), { 'headers': headers }).pipe(shareReplay(1)).subscribe((res) => {
       console.log(res);
       this.singleproduct = res.response;
       this.subcategory_name = res.response.sc_name
       this.subcategory_image = res.response.sc_image
       // this.hourly_rate = res.equipment.hourly_rate
-      if (sessionStorage.getItem('time') == 'hourly') {
+      if (localStorage.getItem('time') == 'hourly') {
         this.subcategory_rate = res.response.hourly_rate
         this.gstval = 0;
       }
-      if (sessionStorage.getItem('time') == 'daily') {
+      if (localStorage.getItem('time') == 'daily') {
         this.subcategory_rate = res.response.daily_rate
         this.gstval = 0;
       }
-      if (sessionStorage.getItem('time') == 'weekly') {
+      if (localStorage.getItem('time') == 'weekly') {
         this.subcategory_rate = res.response.weekly_rate
       }
 
-      if (sessionStorage.getItem('time') == null) {
+      if (localStorage.getItem('time') == null) {
         this.subcategory_rate = res.response.hourly_rate
         this.gstval = 0;
       }
-      sessionStorage.setItem('hourly_rate', res.response.hourly_rate)
-      sessionStorage.setItem('daily_rate', res.response.daily_rate)
-      sessionStorage.setItem('weekly_rate', res.response.weekly_rate)
-      // console.log(sessionStorage.getItem('hourly_rate'))
+      localStorage.setItem('hourly_rate', res.response.hourly_rate)
+      localStorage.setItem('daily_rate', res.response.daily_rate)
+      localStorage.setItem('weekly_rate', res.response.weekly_rate)
+      // console.log(localStorage.getItem('hourly_rate'))
       // this.daily_rate = res.equipment.daily_rate
       // this.weekly_rate =  res.equipment.weekly_rate
     });
-    if (sessionStorage.getItem('time') == 'hourly') {
+    if (localStorage.getItem('time') == 'hourly') {
       this.checked_hourly = true;
       this.checked_daily = false;
       this.checked_weekly = false;
@@ -728,7 +732,7 @@ export class CheckoutComponent implements OnInit {
       // this.d_time = false;
       // this.d_time = false;
     }
-    else if (sessionStorage.getItem('time') == 'daily') {
+    else if (localStorage.getItem('time') == 'daily') {
       this.checked_hourly = false;
       this.checked_daily = true;
       this.checked_weekly = false;
@@ -749,7 +753,7 @@ export class CheckoutComponent implements OnInit {
       this.gstval = +d_gst_round
       console.log(this.gstval);
     }
-    else if (sessionStorage.getItem('time') == 'weekly') {
+    else if (localStorage.getItem('time') == 'weekly') {
       this.checked_hourly = false;
       this.checked_daily = false;
       this.checked_weekly = true;
@@ -786,14 +790,14 @@ export class CheckoutComponent implements OnInit {
     else if (this.Billing_Information.invalid) {
       return false;
     }
-    else if (sessionStorage.getItem('auth_token') === null) {
+    else if (localStorage.getItem('auth_token') === null) {
       this.toastr.error(this.message, 'Please login to procced', {
         positionClass: 'toast-top-center'
       });
     }
     else {
       
-      if(sessionStorage.getItem('time')==null){
+      if(localStorage.getItem('time')==null){
         const formData = {
           amount: this.h_sub_total*100,
           currency: 'INR',
@@ -808,7 +812,7 @@ export class CheckoutComponent implements OnInit {
             const options: any = {
               key: 'rzp_test_89ZbQ2LKtoRyRs',
               amount: this.h_sub_total*100, // amount should be in paise format to display Rs 1255 without decimal point
-              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              // amount: Math.floor(+localStorage.getItem('amount')*100),
               currency: 'INR',
               name: '', // company name or product name
               description: '', // product description
@@ -844,7 +848,7 @@ export class CheckoutComponent implements OnInit {
                     start_date: this.h_startdate,
                     start_time: this.h_starttime,
                     type: 'hourly',
-                    booking_id: sessionStorage.getItem('booking_id'),
+                    booking_id: localStorage.getItem('booking_id'),
                     paid_amount: this.h_sub_total,
                     coordinator: this.Site_Details.get('coordinator_name').value,
                     phone: this.Site_Details.get('contact_number').value,
@@ -869,10 +873,10 @@ export class CheckoutComponent implements OnInit {
                   .set('Authorization', `Bearer ${this.auth_token}`);
                   this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
                     console.log(res);
-                    sessionStorage.setItem('b_id', res.response.id);
-                    sessionStorage.setItem('booked_id', res.response.booked_id)
-                    sessionStorage.setItem('booking_id', res.response.booking_id)
-                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    localStorage.setItem('b_id', res.response.id);
+                    localStorage.setItem('booked_id', res.response.booked_id)
+                    localStorage.setItem('booking_id', res.response.booking_id)
+                    localStorage.setItem('booking_status', res.response.booking_status)
                     this.toastr.success(this.message, res.message, {
                       positionClass: 'toast-top-center'
                     });
@@ -905,7 +909,7 @@ export class CheckoutComponent implements OnInit {
           }
         );
       }
-      else if (sessionStorage.getItem('time') === 'hourly') {
+      else if (localStorage.getItem('time') === 'hourly') {
         const formData = {
           amount: this.h_sub_total*100,
           currency: 'INR',
@@ -920,7 +924,7 @@ export class CheckoutComponent implements OnInit {
             const options: any = {
               key: 'rzp_test_89ZbQ2LKtoRyRs',
               amount: this.h_sub_total*100, // amount should be in paise format to display Rs 1255 without decimal point
-              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              // amount: Math.floor(+localStorage.getItem('amount')*100),
               currency: 'INR',
               name: '', // company name or product name
               description: '', // product description
@@ -956,7 +960,7 @@ export class CheckoutComponent implements OnInit {
                     start_date: this.h_startdate,
                     start_time: this.h_starttime,
                     type: 'hourly',
-                    booking_id: sessionStorage.getItem('booking_id'),
+                    booking_id: localStorage.getItem('booking_id'),
                     paid_amount: this.h_sub_total,
                     coordinator: this.Site_Details.get('coordinator_name').value,
                     phone: this.Site_Details.get('contact_number').value,
@@ -981,10 +985,10 @@ export class CheckoutComponent implements OnInit {
                   .set('Authorization', `Bearer ${this.auth_token}`);
                   this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
                     console.log(res);
-                    sessionStorage.setItem('b_id', res.response.id);
-                    sessionStorage.setItem('booked_id', res.response.booked_id)
-                    sessionStorage.setItem('booking_id', res.response.booking_id)
-                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    localStorage.setItem('b_id', res.response.id);
+                    localStorage.setItem('booked_id', res.response.booked_id)
+                    localStorage.setItem('booking_id', res.response.booking_id)
+                    localStorage.setItem('booking_status', res.response.booking_status)
                     this.toastr.success(this.message, res.message, {
                       positionClass: 'toast-top-center'
                     });
@@ -1017,7 +1021,7 @@ export class CheckoutComponent implements OnInit {
           }
         );
       }
-      else if (sessionStorage.getItem('time') == 'daily') {
+      else if (localStorage.getItem('time') == 'daily') {
         const formData = {
           amount: this.d_paid_amount*100,
           currency: 'INR',
@@ -1032,7 +1036,7 @@ export class CheckoutComponent implements OnInit {
             const options: any = {
               key: 'rzp_test_89ZbQ2LKtoRyRs',
               amount: this.d_paid_amount*100, // amount should be in paise format to display Rs 1255 without decimal point
-              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              // amount: Math.floor(+localStorage.getItem('amount')*100),
               currency: 'INR',
               name: '', // company name or product name
               description: '', // product description
@@ -1070,7 +1074,7 @@ export class CheckoutComponent implements OnInit {
                     end_date: this.d_enddate,
                     end_time: this.d_endtime,
                     type: 'daily',
-                    booking_id: sessionStorage.getItem('booking_id'),
+                    booking_id: localStorage.getItem('booking_id'),
                     paid_amount: this.d_paid_amount,
                     coordinator: this.Site_Details.get('coordinator_name').value,
                     phone: this.Site_Details.get('contact_number').value,
@@ -1095,10 +1099,10 @@ export class CheckoutComponent implements OnInit {
                   .set('Authorization', `Bearer ${this.auth_token}`);
                   this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
                     console.log(res);
-                    sessionStorage.setItem('b_id', res.response.id);
-                    sessionStorage.setItem('booked_id', res.response.booked_id)
-                    sessionStorage.setItem('booking_id', res.response.booking_id)
-                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    localStorage.setItem('b_id', res.response.id);
+                    localStorage.setItem('booked_id', res.response.booked_id)
+                    localStorage.setItem('booking_id', res.response.booking_id)
+                    localStorage.setItem('booking_status', res.response.booking_status)
                     this.toastr.success(this.message, res.message, {
                       positionClass: 'toast-top-center'
                     });
@@ -1131,7 +1135,7 @@ export class CheckoutComponent implements OnInit {
           }
         );
       }
-      else if (sessionStorage.getItem('time') == 'weekly') {
+      else if (localStorage.getItem('time') == 'weekly') {
         const formData = {
           amount: this.w_paid_amount*100,
           currency: 'INR',
@@ -1146,7 +1150,7 @@ export class CheckoutComponent implements OnInit {
             const options: any = {
               key: 'rzp_test_89ZbQ2LKtoRyRs',
               amount: this.w_paid_amount*100, // amount should be in paise format to display Rs 1255 without decimal point
-              // amount: Math.floor(+sessionStorage.getItem('amount')*100),
+              // amount: Math.floor(+localStorage.getItem('amount')*100),
               currency: 'INR',
               name: '', // company name or product name
               description: '', // product description
@@ -1184,7 +1188,7 @@ export class CheckoutComponent implements OnInit {
                     end_date: this.w_enddate,
                     end_time: this.w_endtime,
                     type: 'weekly',
-                    booking_id: sessionStorage.getItem('booking_id'),
+                    booking_id: localStorage.getItem('booking_id'),
                     paid_amount: this.w_paid_amount,
                     due_date: this.due_date,
                     coordinator: this.Site_Details.get('coordinator_name').value,
@@ -1210,10 +1214,10 @@ export class CheckoutComponent implements OnInit {
                   .set('Authorization', `Bearer ${this.auth_token}`);
                   this.http.post<any>('https://superuser.crexin.com/api/user/bookings',data,{'headers':headers}).subscribe(res => {
                     console.log(res);
-                    sessionStorage.setItem('b_id', res.response.id);
-                    sessionStorage.setItem('booked_id', res.response.booked_id)
-                    sessionStorage.setItem('booking_id', res.response.booking_id)
-                    sessionStorage.setItem('booking_status', res.response.booking_status)
+                    localStorage.setItem('b_id', res.response.id);
+                    localStorage.setItem('booked_id', res.response.booked_id)
+                    localStorage.setItem('booking_id', res.response.booking_id)
+                    localStorage.setItem('booking_status', res.response.booking_status)
                     this.toastr.success(this.message, res.message, {
                       positionClass: 'toast-top-center'
                     });
@@ -1266,7 +1270,7 @@ export class CheckoutComponent implements OnInit {
   }
   favourites() {
     const data = {
-      subcategory_id: sessionStorage.getItem('sub_id')
+      subcategory_id: localStorage.getItem('sub_id')
     }
     this.checkoutservice.addfavs(data).subscribe((res) => {
       console.log(res);
@@ -1299,7 +1303,7 @@ export class CheckoutComponent implements OnInit {
 
   canExit(): boolean {
 
-    if (sessionStorage.getItem('clicked') == 'true') {
+    if (localStorage.getItem('clicked') == 'true') {
       return true;
     }
     else {
@@ -1307,6 +1311,32 @@ export class CheckoutComponent implements OnInit {
         return true
       } else {
         return false
+      }
+    }
+  }
+  siteinfo(){
+    // this.site_errors = true;
+    this.submitted_site = true;
+    if(this.Site_Details.invalid){
+      this.site_errors = true;
+      return false;
+    }
+    else{
+      localStorage.setItem('site_info','valid')
+    }
+  }
+
+  billinginfo(){
+    // this.site_errors = true;
+    this.submitted_billing = true;
+    if(this.Billing_Information.invalid){
+      this.billing_errors = true;
+      return false;
+    }
+    else{
+      localStorage.setItem('billing_info','valid');
+      if(localStorage.getItem('site_info')=='valid'&&localStorage.getItem('billing_info')=='valid'){
+        this.disabled = false;
       }
     }
   }

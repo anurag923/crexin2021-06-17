@@ -19,7 +19,7 @@ export class SingleproductComponent implements OnInit {
   weekly = false;
   allcategories: any;
   cat_id: any;
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   singleproduct:any;
   message: string;
   products: any;
@@ -50,7 +50,7 @@ export class SingleproductComponent implements OnInit {
   w_s_date: any;
   loading = true;
   no_of_weeks:any;
-  cat_name = sessionStorage.getItem('cat_name');
+  cat_name = localStorage.getItem('cat_name');
   bookings_notavailable = false;
   show = false;
   error:any;
@@ -69,13 +69,13 @@ export class SingleproductComponent implements OnInit {
   w_start_time:any;
 
   constructor(private datePipe: DatePipe,private fb:FormBuilder, private toastr:ToastrService,private router:Router,private http:HttpClient,private activeroute:ActivatedRoute, private route:Router, private crexinservice:CrexinService) {
-    // sessionStorage.setItem('time','hourly');
+    // localStorage.setItem('time','hourly');
    }
 
   ngOnInit(): void {
-    this.index = +sessionStorage.getItem('index'); 
-    // sessionStorage.setItem('time','hourly');
-    if(sessionStorage.getItem('time')=='hourly'){
+    this.index = +localStorage.getItem('index'); 
+    // localStorage.setItem('time','hourly');
+    if(localStorage.getItem('time')=='hourly'){
       this.hourly_checked = true;
       this.daily_checked = false;
       this.weekly_checked = false;
@@ -86,7 +86,7 @@ export class SingleproductComponent implements OnInit {
       this.Daily_button = false;
       this.Weekly_button = false;
     }
-    else if(sessionStorage.getItem('time')=='daily'){
+    else if(localStorage.getItem('time')=='daily'){
       this.daily_checked = true;
       this.hourly_checked = false;
       this.weekly_checked = false;
@@ -97,7 +97,7 @@ export class SingleproductComponent implements OnInit {
       this.Daily_button = true;
       this.Weekly_button = false;
     }
-    else if(sessionStorage.getItem('time')=='weekly'){
+    else if(localStorage.getItem('time')=='weekly'){
       this.weekly_checked = true;
       this.daily_checked = false;
       this.hourly_checked = false;
@@ -108,7 +108,7 @@ export class SingleproductComponent implements OnInit {
       this.Daily_button = false;
       this.Weekly_button = true;
     }
-    else if(sessionStorage.getItem('time')==null){
+    else if(localStorage.getItem('time')==null){
       this.hourly_checked = true;
       this.daily_checked = false;
       this.weekly_checked = false;
@@ -119,67 +119,67 @@ export class SingleproductComponent implements OnInit {
       this.Daily_button = false;
       this.Weekly_button = false;
     }
-    if(sessionStorage.getItem('time')=='hourly'){
-      if(sessionStorage.getItem('no_hours')!=null){
-        this.no_of_hours = sessionStorage.getItem('no_hours');
+    if(localStorage.getItem('time')=='hourly'){
+      if(localStorage.getItem('no_hours')!=null){
+        this.no_of_hours = localStorage.getItem('no_hours');
       }
-      if(sessionStorage.getItem('h_startdate')!=null){
-        this.start_date = sessionStorage.getItem('h_startdate');
+      if(localStorage.getItem('h_startdate')!=null){
+        this.start_date = localStorage.getItem('h_startdate');
       }
-      if(sessionStorage.getItem('h_starttime')){
-        this.start_time = sessionStorage.getItem('h_starttime');
+      if(localStorage.getItem('h_starttime')){
+        this.start_time = localStorage.getItem('h_starttime');
       }
     }
     
-    if(sessionStorage.getItem('time')=='daily'){
-      if(sessionStorage.getItem('no_days')!=null){
-        this.no_of_days = sessionStorage.getItem('no_days');
+    if(localStorage.getItem('time')=='daily'){
+      if(localStorage.getItem('no_days')!=null){
+        this.no_of_days = localStorage.getItem('no_days');
       }
-      if(sessionStorage.getItem('d_starttime')!=null){
-        this.d_start_time = sessionStorage.getItem('d_starttime');
+      if(localStorage.getItem('d_starttime')!=null){
+        this.d_start_time = localStorage.getItem('d_starttime');
       }
-      if(sessionStorage.getItem('d_startdate')!=null){
-        this.d_start_date = sessionStorage.getItem('d_startdate');
+      if(localStorage.getItem('d_startdate')!=null){
+        this.d_start_date = localStorage.getItem('d_startdate');
       }
-      if(sessionStorage.getItem('d_endtime')!=null){
-        this.end_time = sessionStorage.getItem('d_endtime');
+      if(localStorage.getItem('d_endtime')!=null){
+        this.end_time = localStorage.getItem('d_endtime');
       }
-      if(sessionStorage.getItem('d_enddate')!=null){
-        this.end_date = sessionStorage.getItem('d_enddate');
-      }
-    }
-
-    if(sessionStorage.getItem('time')=='weekly'){
-      if(sessionStorage.getItem('no_weeks')!=null){
-        this.no_of_weeks = sessionStorage.getItem('no_weeks');
-      }
-      if(sessionStorage.getItem('w_startdate')!=null){
-        this.w_start_date = sessionStorage.getItem('w_startdate');
-      }
-      if(sessionStorage.getItem('w_starttime')!=null){
-        this.w_start_time = sessionStorage.getItem('w_starttime');
-      }
-      if(sessionStorage.getItem('w_endtime')!=null){
-        this.wend_time = sessionStorage.getItem('w_endtime');
-      }
-      if(sessionStorage.getItem('w_enddate')!=null){
-        this.wend_date = sessionStorage.getItem('w_enddate');
+      if(localStorage.getItem('d_enddate')!=null){
+        this.end_date = localStorage.getItem('d_enddate');
       }
     }
 
-    if(sessionStorage.getItem('time')==null){
-      if(sessionStorage.getItem('no_hours')!=null){
-        this.no_of_hours = sessionStorage.getItem('no_hours');
+    if(localStorage.getItem('time')=='weekly'){
+      if(localStorage.getItem('no_weeks')!=null){
+        this.no_of_weeks = localStorage.getItem('no_weeks');
       }
-      if(sessionStorage.getItem('h_startdate')!=null){
-        this.start_date = sessionStorage.getItem('h_startdate');
+      if(localStorage.getItem('w_startdate')!=null){
+        this.w_start_date = localStorage.getItem('w_startdate');
       }
-      if(sessionStorage.getItem('h_starttime')){
-        this.start_time = sessionStorage.getItem('h_starttime');
+      if(localStorage.getItem('w_starttime')!=null){
+        this.w_start_time = localStorage.getItem('w_starttime');
+      }
+      if(localStorage.getItem('w_endtime')!=null){
+        this.wend_time = localStorage.getItem('w_endtime');
+      }
+      if(localStorage.getItem('w_enddate')!=null){
+        this.wend_date = localStorage.getItem('w_enddate');
       }
     }
-    //this.categoriedetails(this.index,sessionStorage.getItem('cat_id'),sessionStorage.getItem('cat_name'));
-    // sessionStorage.setItem('time','hourly');
+
+    if(localStorage.getItem('time')==null){
+      if(localStorage.getItem('no_hours')!=null){
+        this.no_of_hours = localStorage.getItem('no_hours');
+      }
+      if(localStorage.getItem('h_startdate')!=null){
+        this.start_date = localStorage.getItem('h_startdate');
+      }
+      if(localStorage.getItem('h_starttime')){
+        this.start_time = localStorage.getItem('h_starttime');
+      }
+    }
+    //this.categoriedetails(this.index,localStorage.getItem('cat_id'),localStorage.getItem('cat_name'));
+    // localStorage.setItem('time','hourly');
     this.Hourly = this.fb.group({
       no_hours : ['', Validators.required],
       h_startdate : ['', Validators.required],
@@ -207,7 +207,7 @@ export class SingleproductComponent implements OnInit {
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization',`Bearer ${this.auth_token}`);
-    this.http.get<any>('https://superuser.crexin.com/api/subcategory/'+sessionStorage.getItem('sub_id'),{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
+    this.http.get<any>('https://superuser.crexin.com/api/subcategory/'+localStorage.getItem('sub_id'),{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
      console.log(res);
     this.singleproduct = res.response;
     
@@ -289,7 +289,7 @@ export class SingleproductComponent implements OnInit {
     console.log(this.wend_date);
   }
   hourly_function(){
-    sessionStorage.setItem('time','hourly');
+    localStorage.setItem('time','hourly');
     this.hourly_checked = true;
     this.daily_checked = false;
     this.weekly_checked = false;
@@ -301,7 +301,7 @@ export class SingleproductComponent implements OnInit {
     this.Weekly_button = false;
   }
   daily_function(){
-    sessionStorage.setItem('time','daily');
+    localStorage.setItem('time','daily');
     this.hourly_checked = false;
     this.daily_checked = true;
     this.weekly_checked = false;
@@ -313,7 +313,7 @@ export class SingleproductComponent implements OnInit {
     this.Weekly_button = false;
   }
   weekly_function(){
-    sessionStorage.setItem('time','weekly');
+    localStorage.setItem('time','weekly');
     this.hourly_checked = false;
     this.daily_checked = false;
     this.weekly_checked = true;
@@ -325,32 +325,32 @@ export class SingleproductComponent implements OnInit {
     this.Weekly_button = true;
   }
   categoriedetails(index:number,cat_id:any,categorie){
-    sessionStorage.setItem('categoryclick','true')
-    if(sessionStorage.getItem('categoryclick')=='true'){
-      if(sessionStorage.getItem('time')==null){
-        sessionStorage.removeItem('no_hours');
-        sessionStorage.removeItem('h_startdate');
-        sessionStorage.removeItem('h_starttime');
+    localStorage.setItem('categoryclick','true')
+    if(localStorage.getItem('categoryclick')=='true'){
+      if(localStorage.getItem('time')==null){
+        localStorage.removeItem('no_hours');
+        localStorage.removeItem('h_startdate');
+        localStorage.removeItem('h_starttime');
         this.no_of_hours = "";
         this.start_date = "";
         this.start_time = "";
         }
-      else if(sessionStorage.getItem('time')=='hourly'){
-        sessionStorage.removeItem('no_hours');
-        sessionStorage.removeItem('h_startdate');
-        sessionStorage.removeItem('h_starttime');
-        sessionStorage.removeItem('time');
+      else if(localStorage.getItem('time')=='hourly'){
+        localStorage.removeItem('no_hours');
+        localStorage.removeItem('h_startdate');
+        localStorage.removeItem('h_starttime');
+        localStorage.removeItem('time');
         this.no_of_hours = "";
         this.start_date = "";
         this.start_time = "";
       }
-      else if(sessionStorage.getItem('time')=='daily'){
-        sessionStorage.removeItem('no_days');
-        sessionStorage.removeItem('d_starttime');
-        sessionStorage.removeItem('d_startdate');
-        sessionStorage.removeItem('d_endtime');
-        sessionStorage.removeItem('d_enddate');
-        sessionStorage.removeItem('time');
+      else if(localStorage.getItem('time')=='daily'){
+        localStorage.removeItem('no_days');
+        localStorage.removeItem('d_starttime');
+        localStorage.removeItem('d_startdate');
+        localStorage.removeItem('d_endtime');
+        localStorage.removeItem('d_enddate');
+        localStorage.removeItem('time');
         this.no_of_days = "";
         this.d_start_date = "";
         this.d_start_time = "";
@@ -358,13 +358,13 @@ export class SingleproductComponent implements OnInit {
         this.end_time = "";
       }
 
-      else if(sessionStorage.getItem('time')=='weekly'){
-        sessionStorage.removeItem('no_weeks');
-        sessionStorage.removeItem('w_starttime');
-        sessionStorage.removeItem('w_startdate');
-        sessionStorage.removeItem('w_endtime');
-        sessionStorage.removeItem('w_enddate');
-        sessionStorage.removeItem('time');
+      else if(localStorage.getItem('time')=='weekly'){
+        localStorage.removeItem('no_weeks');
+        localStorage.removeItem('w_starttime');
+        localStorage.removeItem('w_startdate');
+        localStorage.removeItem('w_endtime');
+        localStorage.removeItem('w_enddate');
+        localStorage.removeItem('time');
         this.no_of_weeks = "";
         this.w_start_time = "";
         this.w_start_date = "";
@@ -374,9 +374,9 @@ export class SingleproductComponent implements OnInit {
     }
     this.selectedIndex = index;
     this.selectedItem = categorie.c_name;
-    sessionStorage.setItem('cat_id',cat_id);
-    sessionStorage.setItem('index',index.toString());
-    sessionStorage.setItem('cat_name',categorie.c_name);
+    localStorage.setItem('cat_id',cat_id);
+    localStorage.setItem('index',index.toString());
+    localStorage.setItem('cat_name',categorie.c_name);
     this.cat_id = cat_id;
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')
@@ -406,16 +406,16 @@ export class SingleproductComponent implements OnInit {
    this.categorie_products = true;
   }
   singlesucategorie(id:any){
-    sessionStorage.setItem('sub_id', id);
-    console.log(sessionStorage.getItem('sub_id'));
+    localStorage.setItem('sub_id', id);
+    console.log(localStorage.getItem('sub_id'));
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization',`Bearer ${this.auth_token}`);
-    this.http.get<any>('https://superuser.crexin.com/api/subcategory/'+sessionStorage.getItem('sub_id'),{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
+    this.http.get<any>('https://superuser.crexin.com/api/subcategory/'+localStorage.getItem('sub_id'),{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       console.log(res);
-      // sessionStorage.setItem('eqid',res.equipments[0].id);
-      // console.log(sessionStorage.getItem('eqid'));
+      // localStorage.setItem('eqid',res.equipments[0].id);
+      // console.log(localStorage.getItem('eqid'));
       if(res.response.length === 0 || res.response.length === null){
         this.toastr.error(this.message,"No equipments available at this moment",{
           positionClass: 'toast-top-center'
@@ -435,36 +435,36 @@ export class SingleproductComponent implements OnInit {
   //   })
   // }
   Hourlyoption(id:any){
-    sessionStorage.setItem('rentclicked','true');
+    localStorage.setItem('rentclicked','true');
     console.log(id);
-    sessionStorage.setItem('sub_id',id);
+    localStorage.setItem('sub_id',id);
     this.submitted_hourly = true;
     if(this.Hourly.invalid){
       return false;
     }
-    else if(sessionStorage.getItem('auth_token') === null){
-      sessionStorage.setItem('route',this.route.url);
-      sessionStorage.setItem('no_hours',this.Hourly.get('no_hours').value);
-      sessionStorage.setItem('h_startdate',this.Hourly.get('h_startdate').value);
-      sessionStorage.setItem('h_starttime',this.Hourly.get('h_starttime').value);
+    else if(localStorage.getItem('auth_token') === null){
+      localStorage.setItem('route',this.route.url);
+      localStorage.setItem('no_hours',this.Hourly.get('no_hours').value);
+      localStorage.setItem('h_startdate',this.Hourly.get('h_startdate').value);
+      localStorage.setItem('h_starttime',this.Hourly.get('h_starttime').value);
       this.toastr.error(this.message,'Please login to proceed',{
         
       });
       this.router.navigate(['/login']);
     }
     else{
-      console.log(sessionStorage.getItem('sub_id'));
+      console.log(localStorage.getItem('sub_id'));
       const data = {
-        subcategory_id:sessionStorage.getItem('sub_id'),
-        // userid:sessionStorage.getItem('user_id'),
+        subcategory_id:localStorage.getItem('sub_id'),
+        // userid:localStorage.getItem('user_id'),
         type:'hourly',
         duration:this.Hourly.get('no_hours').value,
         start_time:this.Hourly.get('h_starttime').value,
         start_date:this.Hourly.get('h_startdate').value,
       }
-      sessionStorage.setItem('no_hours',this.Hourly.get('no_hours').value);
-      sessionStorage.setItem('h_startdate',this.Hourly.get('h_startdate').value);
-      sessionStorage.setItem('h_starttime',this.Hourly.get('h_starttime').value);
+      localStorage.setItem('no_hours',this.Hourly.get('no_hours').value);
+      localStorage.setItem('h_startdate',this.Hourly.get('h_startdate').value);
+      localStorage.setItem('h_starttime',this.Hourly.get('h_starttime').value);
       console.log(data);
       console.log(this.auth_token);
       const headers= new HttpHeaders()
@@ -475,12 +475,12 @@ export class SingleproductComponent implements OnInit {
       //  console.log(res);
       // this.crexinservice.rent(data).subscribe((res)=>{
         console.log(res.response);
-        sessionStorage.setItem('booking_id',res.response.id);
+        localStorage.setItem('booking_id',res.response.id);
         console.log(res.response.subcategory.hourly_rate);
-        sessionStorage.setItem('hourly_rate',res.response.subcategory.hourly_rate);
-      //  sessionStorage.setItem('grandtotal', this.order.grandtotal);
-      //  sessionStorage.setItem('gst', this.order.gst);
-      //  sessionStorage.setItem('subtotal', this.order.subtotal);
+        localStorage.setItem('hourly_rate',res.response.subcategory.hourly_rate);
+      //  localStorage.setItem('grandtotal', this.order.grandtotal);
+      //  localStorage.setItem('gst', this.order.gst);
+      //  localStorage.setItem('subtotal', this.order.subtotal);
       //  this.toastr.success(this.message,res.message,{
       //   
       // });
@@ -502,8 +502,8 @@ export class SingleproductComponent implements OnInit {
     }
   }
   Dailyoption(id:any){
-    sessionStorage.setItem('sub_id',id);
-    sessionStorage.setItem('rentclicked','true');
+    localStorage.setItem('sub_id',id);
+    localStorage.setItem('rentclicked','true');
     
     this.submitted_daily = true;
     if(this.Daily.invalid){
@@ -511,13 +511,13 @@ export class SingleproductComponent implements OnInit {
       console.log(this.Daily.get('d_enddate').value);
       return false;
     }
-    else if(sessionStorage.getItem('auth_token') === null){
-      sessionStorage.setItem('route',this.route.url);
-      sessionStorage.setItem('no_days',this.Daily.get('no_days').value);
-      sessionStorage.setItem('d_starttime',this.Daily.get('d_starttime').value);
-      sessionStorage.setItem('d_startdate',this.Daily.get('d_startdate').value);
-      sessionStorage.setItem('d_endtime',this.end_time);
-      sessionStorage.setItem('d_enddate',this.end_date);
+    else if(localStorage.getItem('auth_token') === null){
+      localStorage.setItem('route',this.route.url);
+      localStorage.setItem('no_days',this.Daily.get('no_days').value);
+      localStorage.setItem('d_starttime',this.Daily.get('d_starttime').value);
+      localStorage.setItem('d_startdate',this.Daily.get('d_startdate').value);
+      localStorage.setItem('d_endtime',this.end_time);
+      localStorage.setItem('d_enddate',this.end_date);
 
       this.toastr.error(this.message,'Please login to proceed',{
         
@@ -526,8 +526,8 @@ export class SingleproductComponent implements OnInit {
     }
     else{
       const data = {
-        subcategory_id:sessionStorage.getItem('sub_id'),
-        // userid:sessionStorage.getItem('user_id'),
+        subcategory_id:localStorage.getItem('sub_id'),
+        // userid:localStorage.getItem('user_id'),
         type:'daily',
         duration :this.Daily.get('no_days').value,
         start_time:this.Daily.get('d_starttime').value,
@@ -535,11 +535,11 @@ export class SingleproductComponent implements OnInit {
         start_date:this.Daily.get('d_startdate').value,
         end_date:this.end_date,
       }
-      sessionStorage.setItem('no_days',this.Daily.get('no_days').value);
-      sessionStorage.setItem('d_starttime',this.Daily.get('d_starttime').value);
-      sessionStorage.setItem('d_startdate',this.Daily.get('d_startdate').value);
-      sessionStorage.setItem('d_endtime',this.end_time);
-      sessionStorage.setItem('d_enddate',this.end_date);
+      localStorage.setItem('no_days',this.Daily.get('no_days').value);
+      localStorage.setItem('d_starttime',this.Daily.get('d_starttime').value);
+      localStorage.setItem('d_startdate',this.Daily.get('d_startdate').value);
+      localStorage.setItem('d_endtime',this.end_time);
+      localStorage.setItem('d_enddate',this.end_date);
       console.log(data);
       // this.crexinservice.rent(data).subscribe((res)=>{
         const headers= new HttpHeaders()
@@ -548,8 +548,8 @@ export class SingleproductComponent implements OnInit {
         .set('Authorization',`Bearer ${this.auth_token}`);
         this.http.post<any>('https://www.superuser.crexin.com/api/user/rent',data,{'headers':headers}).subscribe((res)=>{
         console.log(res);
-        sessionStorage.setItem('booking_id',res.response.id);
-        sessionStorage.setItem('daily_rate',res.response.subcategory.daily_rate);
+        localStorage.setItem('booking_id',res.response.id);
+        localStorage.setItem('daily_rate',res.response.subcategory.daily_rate);
         // this.toastr.success(this.message,res.message,{
         //   
         // });
@@ -576,9 +576,9 @@ export class SingleproductComponent implements OnInit {
     //   this.http.post<any>('https://www.superuser.crexin.com/api/rent',data,{'headers':headers}).subscribe((res)=>{
     //    console.log(res);
     //    this.order = res.data;
-    //    sessionStorage.setItem('grandtotal', this.order.grandtotal);
-    //    sessionStorage.setItem('gst', this.order.gst);
-    //    sessionStorage.setItem('subtotal', this.order.subtotal);
+    //    localStorage.setItem('grandtotal', this.order.grandtotal);
+    //    localStorage.setItem('gst', this.order.gst);
+    //    localStorage.setItem('subtotal', this.order.subtotal);
     //    this.toastr.success(this.message,res.success,{
     //     
     //   });
@@ -593,20 +593,20 @@ export class SingleproductComponent implements OnInit {
     }
   }
   Weeklyoption(id:any){
-    sessionStorage.setItem('sub_id',id);
-    sessionStorage.setItem('rentclicked','true');
+    localStorage.setItem('sub_id',id);
+    localStorage.setItem('rentclicked','true');
 
     this.submitted_weekly = true;
     if(this.Weekly.invalid){
       return false;
     }
-    else if(sessionStorage.getItem('auth_token') === null){
-      sessionStorage.setItem('route',this.route.url);
-      sessionStorage.setItem('no_weeks',this.Weekly.get('no_weeks').value);
-      sessionStorage.setItem('w_starttime',this.Weekly.get('w_starttime').value);
-      sessionStorage.setItem('w_startdate',this.Weekly.get('w_startdate').value);
-      sessionStorage.setItem('w_endtime',this.wend_time);
-      sessionStorage.setItem('w_enddate',this.wend_date);
+    else if(localStorage.getItem('auth_token') === null){
+      localStorage.setItem('route',this.route.url);
+      localStorage.setItem('no_weeks',this.Weekly.get('no_weeks').value);
+      localStorage.setItem('w_starttime',this.Weekly.get('w_starttime').value);
+      localStorage.setItem('w_startdate',this.Weekly.get('w_startdate').value);
+      localStorage.setItem('w_endtime',this.wend_time);
+      localStorage.setItem('w_enddate',this.wend_date);
 
       this.toastr.error(this.message,'Please login to proceed',{
         
@@ -616,8 +616,8 @@ export class SingleproductComponent implements OnInit {
     else{
       console.log(this.Weekly.get('no_weeks').value);
       const data = {
-        subcategory_id:sessionStorage.getItem('sub_id'),
-        // userid:sessionStorage.getItem('user_id'),
+        subcategory_id:localStorage.getItem('sub_id'),
+        // userid:localStorage.getItem('user_id'),
         type:'weekly',
         duration:this.no_of_weeks,
         start_time:this.Weekly.get('w_starttime').value,
@@ -625,11 +625,11 @@ export class SingleproductComponent implements OnInit {
         start_date:this.Weekly.get('w_startdate').value,
         end_date:this.wend_date,
       }
-      sessionStorage.setItem('no_weeks',this.Weekly.get('no_weeks').value);
-      sessionStorage.setItem('w_starttime',this.Weekly.get('w_starttime').value);
-      sessionStorage.setItem('w_startdate',this.Weekly.get('w_startdate').value);
-      sessionStorage.setItem('w_endtime',this.wend_time);
-      sessionStorage.setItem('w_enddate',this.wend_date);
+      localStorage.setItem('no_weeks',this.Weekly.get('no_weeks').value);
+      localStorage.setItem('w_starttime',this.Weekly.get('w_starttime').value);
+      localStorage.setItem('w_startdate',this.Weekly.get('w_startdate').value);
+      localStorage.setItem('w_endtime',this.wend_time);
+      localStorage.setItem('w_enddate',this.wend_date);
       console.log(data);
       //this.crexinservice.rent(data).subscribe((res)=>{
         const headers= new HttpHeaders()
@@ -638,8 +638,8 @@ export class SingleproductComponent implements OnInit {
         .set('Authorization',`Bearer ${this.auth_token}`);
         this.http.post<any>('https://www.superuser.crexin.com/api/user/rent',data,{'headers':headers}).subscribe((res)=>{
         console.log(res);
-        sessionStorage.setItem('booking_id',res.response.id);
-        sessionStorage.setItem('weekly_rate',res.response.subcategory.weekly_rate);
+        localStorage.setItem('booking_id',res.response.id);
+        localStorage.setItem('weekly_rate',res.response.subcategory.weekly_rate);
         // this.toastr.success(this.message,res.message,{
         //   
         // });
@@ -666,9 +666,9 @@ export class SingleproductComponent implements OnInit {
     //   this.http.post<any>('https://www.superuser.crexin.com/api/rent',data,{'headers':headers}).subscribe((res)=>{
     //    console.log(res);
     //    this.order = res.data;
-    //    sessionStorage.setItem('grandtotal', this.order.grandtotal);
-    //    sessionStorage.setItem('gst', this.order.gst);
-    //    sessionStorage.setItem('subtotal', this.order.subtotal);
+    //    localStorage.setItem('grandtotal', this.order.grandtotal);
+    //    localStorage.setItem('gst', this.order.gst);
+    //    localStorage.setItem('subtotal', this.order.subtotal);
     //    this.toastr.success(this.message,res.success,{
     //     
     //   });
@@ -701,7 +701,7 @@ export class SingleproductComponent implements OnInit {
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization',`Bearer ${this.auth_token}`);
-    this.http.get<any>(`https://www.superuser.crexin.com/api/searchequipments?subcategoryid=${sessionStorage.getItem('p_id')}&equipment=${search_categorie}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
+    this.http.get<any>(`https://www.superuser.crexin.com/api/searchequipments?subcategoryid=${localStorage.getItem('p_id')}&equipment=${search_categorie}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       console.log(res.equipments);
       // console.log(res.category);
       // console.log(res.products);

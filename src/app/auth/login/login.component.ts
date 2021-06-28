@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   mobile = "";
   message:any;
-
+  disable=false;
   data: any;
   success: string;
   error: any;
@@ -51,19 +51,23 @@ export class LoginComponent implements OnInit {
       return false
      }
      else{
-       sessionStorage.setItem('mobile', this.Singin.get('mobile').value) 
-       console.log(sessionStorage.getItem('mobile'));
+       this.disable = true;
+       localStorage.setItem('mobile', this.Singin.get('mobile').value) 
+       console.log(localStorage.getItem('mobile'));
        const data = {
-        mobile :sessionStorage.getItem('mobile'),
+        mobile :localStorage.getItem('mobile'),
        }
        console.log(data);
        this.auth.login(data).subscribe((res)=>{
          console.log(res);
          this.success = res.message;
+         if(res.message=='OTP has been successfully sent to your mobile number'){
+           this.disable = true;
+         }
           this.toastr.success(this.message,this.success,{
             // positionClass: 'toast-top-center'
            });
-         this.router.navigate(['/otp']);
+          this.router.navigate(['/otp']);
        },(error)=>{
          console.log(error.error.message);
          this.error = error.error.message;

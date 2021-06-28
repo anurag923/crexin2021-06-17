@@ -1,116 +1,139 @@
-<section class="vendor-frm my-5">
+<div class="vendor-frm my-5">
     <div class="container p-4">
-        <div class="row mgl-0 mgr-0 pb-4 one-23 justify-content-around p-2">
-            <h3 class="w-100 ml-3 fs-25 my-4">Register Your Equipment</h3>
-            <div class="col-md-5 my-3">
-                <div class="card seven-23 pd-25">
-                    <form [formGroup]="Vendor">
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Full Name</label>
-                            <input type="text" class="form-control frm-brd" [(ngModel)]="fullname"
-                                formControlName="fullname" placeholder="Full Name"
-                                [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }">
-                            <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
-                                <div *ngIf="f.fullname.errors.required" class="fs-15 ">Fullname Name is required</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Business Name</label>
-                            <input type="text" class="form-control frm-brd" [(ngModel)]="bussiness_name"
-                                placeholder="Business Name" formControlName="bussiness_name"
-                                [ngClass]="{ 'is-invalid': submitted && f.bussiness_name.errors }">
-                            <div *ngIf="submitted && f.bussiness_name.errors" class="invalid-feedback">
-                                <div *ngIf="f.bussiness_name.errors.required" class="fs-15 ">Bussiness Name is required
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Mobile Number</label>
-                            <input type="tel" class="form-control frm-brd" [(ngModel)]="phone"
-                                placeholder="Mobile Number" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }"
-                                formControlName="mobile">
-                            <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
-                                <div *ngIf="f.mobile.errors.required" class="fs-15 ">Mobile Number is required</div>
-                                <div *ngIf="f.mobile.errors.pattern" class="fs-15 ">Mobile Number must be at 10 digits
-                                    required</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Address 1</label>
-                            <input type="text" class="form-control frm-brd" [(ngModel)]="address_one"
-                                placeholder="Address 1" [ngClass]="{ 'is-invalid': submitted && f.address_one.errors }"
-                                formControlName="address_one">
-                            <div *ngIf="submitted && f.address_one.errors" class="invalid-feedback">
-                                <div *ngIf="f.address_one.errors.required" class="fs-15 ">First Address is required
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Address 2</label>
-                            <input type="text" class="form-control frm-brd" [(ngModel)]="address_two"
-                                placeholder="Address 2" [ngClass]="{ 'is-invalid': submitted && f.address_one.errors }"
-                                formControlName="address_two">
-                            <div *ngIf="submitted && f.address_two.errors" class="invalid-feedback">
-                                <div *ngIf="f.address_two.errors.required" class="fs-15 ">Second Address is required
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Location</label>
-                            <select class="form-control frm-brd" [(ngModel)]="location"
-                                [ngClass]="{ 'is-invalid': submitted && f.location.errors }" formControlName="location">
-                                <option disabled selected value>
-                                    -- select an location--
-                                </option>
-                                <option value="Hyderabad">Hyderabad</option>
-                                <option value="Medchal">Medchal</option>
-                                <option value="Rangareddy">Rangareddy</option>
-                                <option value="Nizamabad">Nizamabad</option>
-                            </select>
-                            <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
-                                <div *ngIf="f.location.errors.required" class="fs-15 ">Location is required</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Pincode</label>
-                            <input type="number" class="form-control frm-brd" [(ngModel)]="pincode"
-                                placeholder="Pincode" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }"
-                                formControlName="pincode">
-                            <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
-                                <div *ngIf="f.pincode.errors.required" class="fs-15 ">Pincode is required</div>
-                                <div *ngIf="f.pincode.errors.pattern" class="fs-15 ">Pincode must be at least 6 digits
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="fs-15 mgb-10">Notes</label>
-                            <textarea class="form-control" rows="3" [(ngModel)]="notes" placeholder="Enter Notes"
-                                [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"
-                                formControlName="notes"></textarea>
-                            <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
-                                <div *ngIf="f.notes.errors.required" class="fs-15 ">Notes is required</div>
-                            </div>
-                        </div>
+        <div class="bg-truck">
+            <div class="row">
+                <div class="col-md-12 my-3">
 
-                        <div class="text-center">
-                            <button type="button" class="btn btn-frm-submit-23" (click)="vendor()">SUBMIT</button>
-                        </div>
-                    </form>
-                </div>
 
-            </div>
-            <div class="col-md-5 my-3">
-                <div class="card eight-23">
-                    <h2 class="fs-28 mx-auto mt-3 text-white">PARTNER WITH US</h2>
                     <div class="mt-auto p-4 mb-4 ">
-                        <p class="text-white fnt-sz">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+                        <h2 class="fs-28 mx-auto mt-3 text-white">PARTNER WITH US</h2>
+                        <p class="text-white fnt-sz">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Quaerat
                             aspernatur iusto consequatur laboriosam repudiandae repellendus sed voluptate recusandae
                             minus necessitatibus voluptatem porro ut voluptatibus maiores, provident, neque dolores,
                             totam veritatis!</p>
                     </div>
 
+
                 </div>
+            </div>
+            <div class="mgl-0 mgr-0 pb-4 one-23 justify-content-around p-2">
+                <h3 class="w-100 ml-3 fs-25 my-4">Register Your Equipment</h3>
+                <div class=" my-3">
+                    <div class="card seven-23 pd-25">
+                        <form [formGroup]="Vendor">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+
+                                    <label for="" class="fs-15 mgb-10">Full Name<span class="red-clr">*</span></label>
+                                    <input type="text" class="form-control frm-brd" [(ngModel)]="fullname"
+                                        formControlName="fullname" placeholder="Full Name"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }">
+                                    <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
+                                        <div *ngIf="f.fullname.errors.required" class="fs-15 ">Fullname Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="fs-15 mgb-10">Business Name</label>
+                                    <input type="text" class="form-control frm-brd" [(ngModel)]="bussiness_name"
+                                        placeholder="Business Name" formControlName="bussiness_name"
+                                        [ngClass]="{ 'is-invalid': submitted && f.bussiness_name.errors }">
+                                    <div *ngIf="submitted && f.bussiness_name.errors" class="invalid-feedback">
+                                        <div *ngIf="f.bussiness_name.errors.required" class="fs-15 ">Bussiness Name is
+                                            required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="fs-15 mgb-10">Mobile Number<span
+                                            class="red-clr">*</span></label>
+                                    <input type="tel" class="form-control frm-brd" [(ngModel)]="phone"
+                                        placeholder="Mobile Number"
+                                        [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }"
+                                        formControlName="mobile">
+                                    <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                                        <div *ngIf="f.mobile.errors.required" class="fs-15 ">Mobile Number is required
+                                        </div>
+                                        <div *ngIf="f.mobile.errors.pattern" class="fs-15 ">Mobile Number must be at 10
+                                            digits
+                                            required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="fs-15 mgb-10">Address 1</label>
+                                    <input type="text" class="form-control frm-brd" [(ngModel)]="address_one"
+                                        placeholder="Address 1"
+                                        [ngClass]="{ 'is-invalid': submitted && f.address_one.errors }"
+                                        formControlName="address_one">
+                                    <div *ngIf="submitted && f.address_one.errors" class="invalid-feedback">
+                                        <div *ngIf="f.address_one.errors.required" class="fs-15 ">First Address is
+                                            required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="fs-15 mgb-10">Address 2</label>
+                                    <input type="text" class="form-control frm-brd" [(ngModel)]="address_two"
+                                        placeholder="Address 2"
+                                        [ngClass]="{ 'is-invalid': submitted && f.address_one.errors }"
+                                        formControlName="address_two">
+                                    <div *ngIf="submitted && f.address_two.errors" class="invalid-feedback">
+                                        <div *ngIf="f.address_two.errors.required" class="fs-15 ">Second Address is
+                                            required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="fs-15 mgb-10">Location<span class="red-clr">*</span></label>
+                                    <select class="form-control frm-brd" [(ngModel)]="location"
+                                        [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                                        formControlName="location">
+                                        <option disabled selected value>
+                                            -- select an location--
+                                        </option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Medchal">Medchal</option>
+                                        <option value="Rangareddy">Rangareddy</option>
+                                        <option value="Nizamabad">Nizamabad</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                        <div *ngIf="f.location.errors.required" class="fs-15 ">Location is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="fs-15 mgb-10">Pincode</label>
+                                    <input type="number" class="form-control frm-brd" [(ngModel)]="pincode"
+                                        placeholder="Pincode"
+                                        [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }"
+                                        formControlName="pincode">
+                                    <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+                                        <div *ngIf="f.pincode.errors.required" class="fs-15 ">Pincode is required</div>
+                                        <div *ngIf="f.pincode.errors.pattern" class="fs-15 ">Pincode must be at least 6
+                                            digits
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="fs-15 mgb-10">Notes</label>
+                                    <textarea class="form-control" rows="3" [(ngModel)]="notes"
+                                        placeholder="Enter Notes"
+                                        [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"
+                                        formControlName="notes"></textarea>
+                                    <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
+                                        <div *ngIf="f.notes.errors.required" class="fs-15 ">Notes is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-frm-submit-23" (click)="vendor()">SUBMIT</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</section>

@@ -16,16 +16,21 @@
    border-radius: 5px;
    font-weight: bold;
 }
-.eight-23{
-    background: url(/assets/images/JCB-2.jpeg);
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 620px;
-    border-radius: 20px;
-}
+
 .fnt-sz{
     font-size: 18px;
     text-align: left;
     line-height: 30px !important;
     font-weight:300 !important;
+}
+.red-clr
+{
+    color:red;
+}
+.bg-truck
+{
+    background: url(/assets/images/upperbanner1.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+    
 }

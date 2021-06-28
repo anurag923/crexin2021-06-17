@@ -10,6 +10,7 @@
     border: 2px solid #ccc !important;
     border-radius: 5px !important;
     padding:0 15px !important;
+    height: calc(1.9em + 0.75rem + 2px) !important;
 }
 .dropdown-toggle::after {
     -ms-transform: rotate(-90deg); /* IE 9 */
@@ -24,8 +25,8 @@
 }
 .form-control
 {
-    padding: 0 4px !important;
-    font-size:13px !important;
+    padding: 0 2px !important;
+    font-size:11px !important;
 }
 .ht34
 {

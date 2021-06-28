@@ -20,13 +20,13 @@
 
     margin-bottom: 10px !important;
 }
-.form-control{
+.form-control1{
     background-color: transparent !important;
     /* border: none !important; */
     border: 2px solid #ccc !important;
     border-radius: 5px !important;
-    padding:0 0 0 5px !important;
-    font-size:13px !important;
+    padding:0 5px !important;
+    font-size:11px !important;
 }
 .checkout-img{
     width: 200px !important;
@@ -125,3 +125,19 @@ select:hover {
  {
      width:7%;
  }
+ .height-cal
+ {
+     height: calc(1.9em + 0.75rem + 2px) !important;
+    
+ }
+ ::-webkit-calendar-picker-indicator{
+    margin-left: 0px !important;
+}
+.p-01
+{
+    padding:0 !important;
+}
+.fs-141
+{
+    font-size:14px !important;
+}

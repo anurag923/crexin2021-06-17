@@ -21,6 +21,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AESEncryptDecryptServiceService } from './services/aesencrypt-decrypt-service.service';
+import { ConfirmLeaveComponent } from './confirm-leave/confirm-leave.component';
 
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
@@ -29,7 +30,8 @@ import { AESEncryptDecryptServiceService } from './services/aesencrypt-decrypt-s
     HeaderComponent,
     LandingpageComponent,
     FooterComponent,
-    TermsandconditionsComponent
+    TermsandconditionsComponent,
+    ConfirmLeaveComponent
   ],
   imports: [
     BrowserModule,

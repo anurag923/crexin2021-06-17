@@ -8,6 +8,7 @@ import { CsidenavComponent } from './csidenav/csidenav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared/shared.module';
 
+
 @NgModule({
   declarations: [CategoriesComponent, CategorieslistComponent, CsidenavComponent],
   imports: [

@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   name:any;
   userprofile = false;
   submitted = false;
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   constructor(private aes:AESEncryptDecryptServiceService,private fb:FormBuilder, private toastr: ToastrService, private http:HttpClient,
     private router: Router,private crexinservice:CrexinService) {
       const headers= new HttpHeaders()
@@ -36,9 +36,9 @@ export class HeaderComponent implements OnInit {
         var name = this.aes.encrypt(res.user.fullname)
         var email = this.aes.encrypt(res.user.email)
         var phone = this.aes.encrypt(res.user.phone)
-        sessionStorage.setItem('name',name)
-        sessionStorage.setItem('email',email)
-        sessionStorage.setItem('phone',phone)
+        localStorage.setItem('name',name)
+        localStorage.setItem('email',email)
+        localStorage.setItem('phone',phone)
         this.userprofile = true;
       }) 
       // this.crexinservice.userdata().subscribe(res=>{
@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
       //   this.phone = res.user.phone
       //   this.userprofile = true;
       // });
-      // if(sessionStorage.getItem('isloggedin') === 'true'){
+      // if(localStorage.getItem('isloggedin') === 'true'){
       
       // }
       // else{
@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
       // }
     }
   ngOnInit(): void {
-    // if(sessionStorage.getItem('isloggedin') === 'true'){
+    // if(localStorage.getItem('isloggedin') === 'true'){
       // this.crexinservice.userdata().subscribe(res=>{
       //   console.log(res.user);
       //   this.name = res.user.fullname
@@ -80,15 +80,19 @@ export class HeaderComponent implements OnInit {
       var name = this.aes.encrypt(res.user.fullname)
       var email = this.aes.encrypt(res.user.email)
       var phone = this.aes.encrypt(res.user.phone)
-      sessionStorage.setItem('name',name)
-      sessionStorage.setItem('email',email)
-      sessionStorage.setItem('phone',phone)      
+      localStorage.setItem('name',name)
+      localStorage.setItem('email',email)
+      localStorage.setItem('phone',phone)      
       this.userprofile = true;
     })
     this.profile_update = this.fb.group({
       mobile:['',[Validators.required,Validators.pattern(("^((\\+91-?)|0)?[0-9]{10}$"))]],
-      email:['',Validators.required],
-      address:['',Validators.required]
+      email:['',[Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      address1:['',Validators.required],
+      address2:['',Validators.required],
+      city:['',Validators.required],
+      state:['',Validators.required],
+      pincode:['',[Validators.required,Validators.pattern("[0-9]{6}$"), Validators.maxLength(6)]]
     })
     
   }
@@ -99,19 +103,19 @@ export class HeaderComponent implements OnInit {
        this.collapsed = !this.collapsed;
      }
 get userstatus(){
-   return sessionStorage.getItem('auth_token');
+   return localStorage.getItem('auth_token');
  } 
 get username(){
-  var username = this.aes.decrypt(sessionStorage.getItem('name'));
+  var username = this.aes.decrypt(localStorage.getItem('name'));
   return username;
 }
 get userphone(){
-  var userphone = this.aes.decrypt(sessionStorage.getItem('phone'));
+  var userphone = this.aes.decrypt(localStorage.getItem('phone'));
   return userphone;
 }
  logout(){
-  sessionStorage.clear();
-  sessionStorage.clear();
+  localStorage.clear();
+  localStorage.clear();
   this.toastr.success(this.message,'Logout Successfully',{
     
   });
@@ -132,7 +136,11 @@ updateprofile(){
      const data = {
       phone:this.phone,
       email:this.email,
-      address:this.profile_update.get('address').value
+      address1:this.profile_update.get('address1').value,
+      address2:this.profile_update.get('address2').value,
+      city:this.profile_update.get('city').value,
+      state:this.profile_update.get('state').value,
+      pincode:this.profile_update.get('pincode').value
      }
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')

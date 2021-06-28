@@ -18,8 +18,12 @@
 }
 .hover-click:hover
 {
-    font-weight:bold;
-    color:#dca101;
+    font-weight:bold !important;
+    color:#dca101 !important;
+}
+.hover-click:hover .fa
+{
+    color:#dca101 !important;
 }
 .card-shad
 {

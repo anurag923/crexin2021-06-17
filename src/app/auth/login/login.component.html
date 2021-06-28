@@ -42,9 +42,7 @@
                             <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
                                 <div *ngIf="f.mobile.errors.required" class="fs-13 error_pos">Mobile Number is required
                                 </div>
-                                <div *ngIf="f.mobile.errors.pattern" class="fs-13 error_pos">Mobil Number must be at 10
-                                    digits
-                                    required</div>
+                                <div *ngIf="f.mobile.errors.pattern" class="fs-13 error_pos">Mobile Number must be of 10 digits</div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center" style="line-height: 1px;">
@@ -58,7 +56,7 @@
                             </p>
                         </div>
                         <div class="mt-2">
-                            <button class="btn btn fs-15 fw-700 text-color pd-10 w-100" type="button" (click)="login()">
+                            <button class="btn btn fs-15 fw-700 text-color pd-10 w-100" type="button" [disabled]="disable" (click)="login()">
                                 GET OTP
                             </button>
                         </div>

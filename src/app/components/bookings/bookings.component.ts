@@ -15,7 +15,7 @@ import { GlobalData } from '../../globaldata/global.data';
 })
 export class BookingsComponent implements OnInit {
   loading = true;
-  auth_token = sessionStorage.getItem('auth_token');
+  auth_token = localStorage.getItem('auth_token');
   ongoing: any;
   scheduled: any;
   completed: any;
@@ -95,9 +95,9 @@ export class BookingsComponent implements OnInit {
     })
   }
   ongoing_singlebooking(type:any,booking_id:any,id:any){
-    sessionStorage.setItem('booking_id', booking_id)
-    sessionStorage.setItem('b_id', id)
-    sessionStorage.setItem('type', type)
+    localStorage.setItem('booking_id', booking_id)
+    localStorage.setItem('b_id', id)
+    localStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){
@@ -111,9 +111,9 @@ export class BookingsComponent implements OnInit {
     }
   }
   sheduled_singlebooking(type:any,booking_id:any,id:any){
-    sessionStorage.setItem('booking_id', booking_id)
-    sessionStorage.setItem('b_id', id)
-    sessionStorage.setItem('type', type)
+    localStorage.setItem('booking_id', booking_id)
+    localStorage.setItem('b_id', id)
+    localStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){
@@ -127,9 +127,9 @@ export class BookingsComponent implements OnInit {
     }
   }
   completed_singlebooking(type:any,booking_id:any,id:any){
-    sessionStorage.setItem('booking_id', booking_id)
-    sessionStorage.setItem('b_id', id)
-    sessionStorage.setItem('type', type)
+    localStorage.setItem('booking_id', booking_id)
+    localStorage.setItem('b_id', id)
+    localStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){
@@ -144,9 +144,9 @@ export class BookingsComponent implements OnInit {
   }
 
   pending_singlebooking(type:any,booking_id:any,id:any){
-    sessionStorage.setItem('booking_id', booking_id)
-    sessionStorage.setItem('b_id', id)
-    sessionStorage.setItem('type', type)
+    localStorage.setItem('booking_id', booking_id)
+    localStorage.setItem('b_id', id)
+    localStorage.setItem('type', type)
     this.type = type;
     console.log(this.type);
     if(this.type === 'hourly'){
