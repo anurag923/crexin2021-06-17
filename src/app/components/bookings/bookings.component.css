@@ -50,3 +50,13 @@
 .accordion-header h2{
     color: #414a4c;
 }
+.card1
+{
+    box-shadow:none !important;
+}
+.acc-cls
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

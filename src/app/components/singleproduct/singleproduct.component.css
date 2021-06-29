@@ -25,9 +25,10 @@
 }
 .form-control
 {
-    padding: 0 2px !important;
-    font-size:11px !important;
+    padding: 0 0 0 5px!important;
+    font-size:13px !important;
 }
+
 .ht34
 {
     height:34px !important;
@@ -57,5 +58,39 @@ select:hover {
 }
 .mt-3l
 {
-    margin-top:1.5rem;
+    margin-top:1.8rem;
+}
+@media (max-width:500px){
+    .three{
+     width: 100%;
+     margin: auto;
+    }
+    .booking_cls
+    {
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-start;
+}
+.form-100
+{
+    width:100%;
+}
+   
+}
+@media (max-width:772px){
+    .three{
+      width: 100%;
+    }
+    .booking_cls
+{
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-start;
+}
+.form-100
+{
+    width:100%;
+}
 }

@@ -29,7 +29,7 @@
                                 <div class="form-group has-search w-100">
                                     <span class="fa search-cls fa-search form-control-feedback search-cls"></span>
                                     <input type="search" id="gsearch" name="gsearch" class="searchTerm input"
-                                        placeholder="Search for a Category" (keyup)="search(search_categorie.value)"
+                                        placeholder="Search for a Category" [(ngModel)]="searchval" (keyup)="search(search_categorie.value)"
                                         #search_categorie>
                                     <div class="close-btn" (click)="removeval()">&times;</div>
                                 </div>

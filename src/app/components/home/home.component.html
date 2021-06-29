@@ -178,15 +178,15 @@
   <section class="nine" id="Enquiry">
     <div class="container">
       <div class="row mgl-0 mgr-0" data-aos="fade-up">
-        <div class="col-md-6 my-5">
+        <div class="col-md-6 col-sm-12 col-xs-12 my-5">
           <div class="form-one-1 ">
 
             <h4 class="nine-hd-1">Let us Know your Rental<br> Requirement</h4>
             <form [formGroup]="UserEnquiry">
 
               <div class="form-group">
-                <label for="" class="fs-15 text-light my-2 w-75">Name</label>
-                <input type="text" class="form-control form-jcb" placeholder="Name*" id="name" [(ngModel)]="name"
+                <label for="" class="fs-15 text-light my-2 w-75">Name <span class="red-cls">*</span></label>
+                <input type="text" class="form-control form-jcb" placeholder="Name" id="name" [(ngModel)]="name"
                   formControlName="fullname" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }">
                 <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback enquiry-error-message">
                   <div *ngIf="f.fullname.errors.required" class="fs-15 ">Fullname is required</div>
@@ -202,8 +202,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="" class="fs-15 text-light my-2  w-75">Mobile</label>
-                <input type="tel" class="form-control form-jcb" placeholder="Mobile*" id="number" [(ngModel)]="mobile"
+                <label for="" class="fs-15 text-light my-2  w-75">Mobile <span class="red-cls">*</span></label>
+                <input type="tel" class="form-control form-jcb" placeholder="Mobile" id="number" [(ngModel)]="mobile"
                   formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
                 <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback enquiry-error-message">
                   <div *ngIf="f.mobile.errors.required" class="fs-15 ">Mobile Number is required</div>
@@ -211,7 +211,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="" class="fs-15 text-light my-2  w-75">Location</label>
+                <label for="" class="fs-15 text-light my-2  w-75">Location <span class="red-cls">*</span></label>
                 <input type="text" class="form-control form-jcb" placeholder="Hyderabad" [(ngModel)]="location"
                   id="location" formControlName="location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
                 <div *ngIf="submitted && f.location.errors" class="invalid-feedback enquiry-error-message">
@@ -236,7 +236,7 @@
           </div>
         </div>
 
-        <div class="col-md-6 my-5 text-white" data-aos="flip-up">
+        <div class="col-md-6 col-sm-12 col-xs-12 my-5 text-white" data-aos="flip-up">
           <h2 class="nine-hd-2 fn-25 my-3">HEADER</h2>
           <P class="my-3 nine-para-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed vel vitae aut hic
             adipisci. Eius illo ex quo, doloribus nam sint voluptate, optio rerum temporibus minus officiis saepe iusto

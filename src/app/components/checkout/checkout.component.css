@@ -20,13 +20,13 @@
 
     margin-bottom: 10px !important;
 }
-.form-control1{
+.form-control{
     background-color: transparent !important;
     /* border: none !important; */
     border: 2px solid #ccc !important;
     border-radius: 5px !important;
     padding:0 5px !important;
-    font-size:11px !important;
+    font-size:13px !important;
 }
 .checkout-img{
     width: 200px !important;
@@ -136,8 +136,4 @@ select:hover {
 .p-01
 {
     padding:0 !important;
-}
-.fs-141
-{
-    font-size:14px !important;
 }

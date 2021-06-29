@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit {
       console.log(search_categorie);
       localStorage.setItem('search_categorie', search_categorie);
       localStorage.setItem('global_search', 'true');
+      localStorage.setItem('searchval',search_categorie);
       this.router.navigate(['/rent'])
     }
     else {
@@ -97,6 +98,7 @@ export class HomeComponent implements OnInit {
         console.log(search_categorie);
         localStorage.setItem('search_categorie', search_categorie);
         localStorage.setItem('global_search', 'true');
+        localStorage.setItem('searchval',search_categorie);
         this.router.navigate(['/rent'])
       }
       else {

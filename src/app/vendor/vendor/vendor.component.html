@@ -2,12 +2,12 @@
     <div class="container p-4">
         <div class="bg-truck">
             <div class="row">
-                <div class="col-md-12 my-3">
+                <div class="col-md-12">
 
 
                     <div class="mt-auto p-4 mb-4 ">
                         <h2 class="fs-28 mx-auto mt-3 text-white">PARTNER WITH US</h2>
-                        <p class="text-white fnt-sz">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <p class="text-white fw-600 fnt-sz">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Quaerat
                             aspernatur iusto consequatur laboriosam repudiandae repellendus sed voluptate recusandae
                             minus necessitatibus voluptatem porro ut voluptatibus maiores, provident, neque dolores,
@@ -60,7 +60,7 @@
                                             required</div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <!-- <div class="form-group col-md-4">
                                     <label for="" class="fs-15 mgb-10">Address 1</label>
                                     <input type="text" class="form-control frm-brd" [(ngModel)]="address_one"
                                         placeholder="Address 1"
@@ -71,8 +71,8 @@
                                             required
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-4">
+                                </div> -->
+                                <!-- <div class="form-group col-md-4">
                                     <label for="" class="fs-15 mgb-10">Address 2</label>
                                     <input type="text" class="form-control frm-brd" [(ngModel)]="address_two"
                                         placeholder="Address 2"
@@ -83,12 +83,14 @@
                                             required
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group col-md-4">
                                     <label for="" class="fs-15 mgb-10">Location<span class="red-clr">*</span></label>
-                                    <select class="form-control frm-brd" [(ngModel)]="location"
+                                    <input type="text" class="form-control frm-brd" placeholder="Location"
+                                        [(ngModel)]="location"
                                         [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
                                         formControlName="location">
+                                    <!-- <select class="form-control " >
                                         <option disabled selected value>
                                             -- select an location--
                                         </option>
@@ -96,7 +98,7 @@
                                         <option value="Medchal">Medchal</option>
                                         <option value="Rangareddy">Rangareddy</option>
                                         <option value="Nizamabad">Nizamabad</option>
-                                    </select>
+                                    </select> -->
                                     <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
                                         <div *ngIf="f.location.errors.required" class="fs-15 ">Location is required
                                         </div>

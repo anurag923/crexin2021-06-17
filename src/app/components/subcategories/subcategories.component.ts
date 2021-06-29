@@ -84,11 +84,7 @@ export class SubcategoriesComponent implements OnInit {
         this.loading = false;
       });
     }
-    // this.crexinservice.getallcategories().subscribe((res)=>{
-    //   console.log(res.categories);
-    //   this.allcategories = res.categories
-    //   this.loading = false;
-    // })
+    
     const headers= new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
@@ -154,31 +150,13 @@ export class SubcategoriesComponent implements OnInit {
   singleproduct(id:any){
     localStorage.setItem('sub_id', id);
     this.router.navigate(['/rent/bookingtypeselection']);
-    // const headers= new HttpHeaders()
-    // .set('content-type', 'application/json')
-    // .set('Access-Control-Allow-Origin', '*')
-    // .set('Authorization',`Bearer ${this.auth_token}`);
-    // this.http.get<any>('https://www.superuser.crexin.com/api/single_equipment?equipment_id='+localStorage.getItem('p_id'),{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
-    //   console.log(res);
-    //   this.singleproducts = res;
-    // });
-    // this.single_product = true;
-    // this.categorie_products = false;
   }
   search(search_categorie){
     console.log(search_categorie.length);
     if(search_categorie.length == 0){
       this.all_categories();
     }
-    // this.searching = true;
-    // if(search_categorie.length!=0){
-    //   localStorage.setItem('searchval',search_categorie);
-    //   this.searching = true;
-    // }
-
-    // else{
-    //   this.searching = false;
-    // }
+    
     if(localStorage.getItem('searchval')==null){
       const headers= new HttpHeaders()
       .set('content-type', 'application/json')
@@ -186,8 +164,7 @@ export class SubcategoriesComponent implements OnInit {
       .set('Authorization',`Bearer ${this.auth_token}`);
       this.http.get<any>(`https://superuser.crexin.com/api/searchsubcategories?categoryid=${localStorage.getItem('cat_id')}&subcategory=${search_categorie}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
         console.log(res);
-        // console.log(res.category);
-        // console.log(res.products);
+        
         if(res.subcategories.length === 0 || res.subcategories.length === null){
           this.toastr.error(this.message,'Data not found',{
             positionClass: 'toast-top-center'
@@ -197,7 +174,7 @@ export class SubcategoriesComponent implements OnInit {
           this.products = res.subcategories;
           this.defaultproducts = res.subcategories;
         }
-        // this.products = res.products;
+        
       })      
     }
     if(localStorage.getItem('searchval').length!=0){
@@ -207,8 +184,7 @@ export class SubcategoriesComponent implements OnInit {
     .set('Authorization',`Bearer ${this.auth_token}`);
     this.http.get<any>(`https://superuser.crexin.com/api/searchsubcategories?categoryid=${localStorage.getItem('cat_id')}&subcategory=${search_categorie}`,{'headers':headers}).pipe(shareReplay(1)).subscribe((res)=>{
       console.log(res);
-      // console.log(res.category);
-      // console.log(res.products);
+      
       if(res.subcategories.length === 0 || res.subcategories.length === null){
         this.toastr.error(this.message,'Data not found',{
           positionClass: 'toast-top-center'
@@ -218,7 +194,7 @@ export class SubcategoriesComponent implements OnInit {
         this.products = res.subcategories;
         this.defaultproducts = res.subcategories;
       }
-      // this.products = res.products;
+      
     })
     }
     else{

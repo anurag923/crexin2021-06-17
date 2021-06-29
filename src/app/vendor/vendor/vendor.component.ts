@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { CrexinService } from 'src/app/services/crexin.service';
-declare var $:any;
+
+declare var $: any;
 import AOS from 'aos';
 
 @Component({

@@ -537,7 +537,7 @@
     <div class="row">
       <div class="container-fluid">
         <mat-vertical-stepper [linear]="isLinear" #stepper>
-          <mat-step [stepControl]="firstFormGroup">
+          <mat-step [stepControl]="General_Details">
             <form [formGroup]="General_Details">
               <ng-template matStepLabel>General Details</ng-template>
               <div class="row mb-2">
@@ -570,7 +570,7 @@
               </div>
             </form>
           </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
+          <mat-step [stepControl]="Site_Details">
             <form [formGroup]="Site_Details">
               <ng-template matStepLabel>Site Information <i *ngIf="site_errors" class="fa fa-exclamation-circle"
                   style="color:#dc3545;font-size:18px;"></i></ng-template>
@@ -578,7 +578,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Site Co-Ordinator Name</label>
-                    <input type="text" placeholder="Site Co-Ordinator Name" class="form-control fs-141"
+                    <input type="text" id="coordinator" placeholder="Site Co-Ordinator Name" class="form-control fs-141"
                       formControlName="coordinator_name"
                       [ngClass]="{ 'is-invalid': submitted_site && s.coordinator_name.errors }">
                     <div *ngIf="submitted_site && s.coordinator_name.errors" class="invalid-feedback">
@@ -590,7 +590,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Contact Number</label>
-                    <input type="tel" placeholder="Contact Number" class="form-control fs-141"
+                    <input type="tel" id="number" placeholder="Contact Number" class="form-control fs-141"
                       formControlName="contact_number"
                       [ngClass]="{ 'is-invalid': submitted_site && s.contact_number.errors }">
                     <div *ngIf="submitted_site && s.contact_number.errors" class="invalid-feedback">
@@ -605,7 +605,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Plot/Flat No. & Building Name</label>
-                    <input type="text" placeholder="Plot/Flat No. & Building Name" class="form-control fs-141"
+                    <input type="text" id="plot" placeholder="Plot/Flat No. & Building Name" class="form-control fs-141"
                       formControlName="address_one" [ngClass]="{ 'is-invalid': submitted_site && s.address_one.errors }">
                     <div *ngIf="submitted_site && s.address_one.errors" class="invalid-feedback">
                       <div *ngIf="s.address_one.errors.required" class="fs-13 fw-600">Plot/Flat No. & Building Name is required
@@ -616,7 +616,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Street Name/Area</label>
-                    <input type="text" placeholder="Street Name/Area" class="form-control fs-141"
+                    <input type="text" id="street" placeholder="Street Name/Area" class="form-control fs-141"
                       formControlName="address_two" [ngClass]="{ 'is-invalid': submitted_site && s.address_two.errors }">
                     <div *ngIf="submitted_site && s.address_two.errors" class="invalid-feedback">
                       <div *ngIf="s.address_two.errors.required" class="fs-13 fw-600">Street Name/Area is required
@@ -627,7 +627,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Landmark</label>
-                    <input type="text" placeholder="Landmark" class="form-control fs-141" formControlName="landmark"
+                    <input type="text" id="landmark" placeholder="Landmark" class="form-control fs-141" formControlName="landmark"
                       [ngClass]="{ 'is-invalid': submitted_site && s.landmark.errors }">
                     <div *ngIf="submitted_site && s.landmark.errors" class="invalid-feedback">
                       <div *ngIf="s.landmark.errors.required" class="fs-13 fw-600">Landmark is required</div>
@@ -638,7 +638,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">City</label>
-                    <input type="text" placeholder="City" class="form-control fs-141" formControlName="city"
+                    <input type="text" id="city" placeholder="City" class="form-control fs-141" formControlName="city"
                       [ngClass]="{ 'is-invalid': submitted_site && s.city.errors }">
                     <div *ngIf="submitted_site && b.city.errors" class="invalid-feedback">
                       <div *ngIf="b.city.errors.required" class="fs-13 fw-600">City is required</div>
@@ -648,7 +648,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">State</label>
-                    <input type="text" placeholder="State" class="form-control fs-141" formControlName="state"
+                    <input type="text" id="state" placeholder="State" class="form-control fs-141" formControlName="state"
                       [ngClass]="{ 'is-invalid': submitted_site && s.state.errors }">
                     <div *ngIf="submitted_site && s.state.errors" class="invalid-feedback">
                       <div *ngIf="s.state.errors.required" class="fs-13 fw-600">State is required</div>
@@ -658,7 +658,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Pincode</label>
-                    <input type="number" placeholder="Pincode" class="form-control fs-141" formControlName="pincode"
+                    <input type="number" id="pincode" placeholder="Pincode" class="form-control fs-141" formControlName="pincode"
                       [ngClass]="{ 'is-invalid': submitted_site && s.pincode.errors }" maxlength="6">
                     <div *ngIf="submitted_site && s.pincode.errors" class="invalid-feedback">
                       <div *ngIf="s.pincode.errors.required" class="fs-13 fw-600">Pincode is required</div>
@@ -675,7 +675,7 @@
               </div>
             </form>
           </mat-step>
-          <mat-step>
+          <mat-step [stepControl]="Billing_Information">
             <form [formGroup]="Billing_Information">
               <ng-template matStepLabel>Billing Information<i *ngIf="billing_errors" class="fa fa-exclamation-circle"
                   style="color:#dc3545;font-size:18px;"></i></ng-template>
@@ -1023,9 +1023,28 @@
         </div>
       </div>
       <div class="col-md-6 d-flex justify-content-end">
-        <button class="btn btn fs-15 fw-600 paynow-btn" [disabled]="disabled" (click)="paynow()" id="paynow">PAY NOW</button>
+        <button class="btn btn fs-15 fw-600 paynow-btn" [ngClass]="disabled ? 'btn-secondary' : 'btn'"  [disabled]="disabled" (click)="paynow()" id="paynow">PAY NOW</button>
       </div>
     </div>
   </div>
 
+</div>
+
+<div class="modal" tabindex="-1" id="proceedtopay">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn fs-15 fw-600 paynow-btn" data-dismiss="modal" (click)="closemodal()">ok</button>
+      </div>
+    </div>
+  </div>
 </div>

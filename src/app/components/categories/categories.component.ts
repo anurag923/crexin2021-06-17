@@ -35,11 +35,12 @@ export class CategoriesComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService,private toastr:ToastrService,private router:Router,private http:HttpClient,private activeroute:ActivatedRoute, private route:Router, private crexinservice:CrexinService) { }
 
   ngOnInit(): void {
-    // this.crexinservice.firstcategorie().subscribe((res)=>{
-    //   console.log(res.categories);
-    //   this.firstcategoriedatas = res;
-    //   this.loading = false;
-    // });
+    if(localStorage.getItem('global_search')=='true'){
+      this.searchcat = true;
+      this.allcat = false;
+      this.searchval = localStorage.getItem('search_categorie');
+    }
+    
     document.getElementById("gsearch").addEventListener("search", function(event) {
       window.location.reload();
     });

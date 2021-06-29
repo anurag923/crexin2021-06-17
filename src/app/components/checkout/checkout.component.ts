@@ -1315,13 +1315,30 @@ export class CheckoutComponent implements OnInit {
     }
   }
   siteinfo(){
-    // this.site_errors = true;
     this.submitted_site = true;
     if(this.Site_Details.invalid){
       this.site_errors = true;
+      console.log((this.Site_Details.get('coordinator_name').value).length);
+      if((this.Site_Details.get('coordinator_name').value.length!=0)&&(this.Site_Details.get('contact_number').value.length!=0)&&
+      (this.Site_Details.get('address_one').value.length!=0)&&(this.Site_Details.get('address_two').value.length!=0)&&
+      (this.Site_Details.get('landmark').value.length!=0)&&(this.Site_Details.get('pincode').value.length!=0)&&
+      (this.Site_Details.get('pincode').value.length!=0)&&(this.Site_Details.get('city').value.length!=0)&&
+      (this.Site_Details.get('state').value.length!=0)
+      ){
+        this.site_errors = false;
+      }
       return false;
     }
     else{
+      this.site_errors = false;
+      console.log((this.Site_Details.get('coordinator_name').value).length);
+      if((this.Site_Details.get('coordinator_name').value.length!=0)&&(this.Site_Details.get('contact_number').value.length!=0)&&
+      (this.Site_Details.get('address_one').value.length!=0)&&(this.Site_Details.get('address_two').value.length!=0)&&
+      (this.Site_Details.get('landmark').value.length!=0)&&(this.Site_Details.get('pincode').value.length!=0)&&
+      (this.Site_Details.get('city').value.length!=0)&&(this.Site_Details.get('state').value.length!=0)
+      ){
+        this.site_errors = false;
+      }
       localStorage.setItem('site_info','valid')
     }
   }
@@ -1331,13 +1348,33 @@ export class CheckoutComponent implements OnInit {
     this.submitted_billing = true;
     if(this.Billing_Information.invalid){
       this.billing_errors = true;
+      if((this.Billing_Information.get('c_name').value.length!=0)&&(this.Billing_Information.get('gst_number').value.length!=0)&&
+      (this.Billing_Information.get('email').value.length!=0)&&(this.Billing_Information.get('c_address').value.length!=0)&&
+      (this.Billing_Information.get('city').value.length!=0)&&(this.Billing_Information.get('state').value.length!=0)&&
+      (this.Billing_Information.get('p_code').value.length!=0)&&(this.Billing_Information.get('city').value.length!=0)&&
+      (this.Billing_Information.get('state').value.length!=0)
+      ){
+        this.billing_errors = false;
+      }
       return false;
     }
     else{
       localStorage.setItem('billing_info','valid');
       if(localStorage.getItem('site_info')=='valid'&&localStorage.getItem('billing_info')=='valid'){
+        $('#proceedtopay').modal('show');
+        if((this.Billing_Information.get('c_name').value.length!=0)&&(this.Billing_Information.get('gst_number').value.length!=0)&&
+      (this.Billing_Information.get('email').value.length!=0)&&(this.Billing_Information.get('c_address').value.length!=0)&&
+      (this.Billing_Information.get('city').value.length!=0)&&(this.Billing_Information.get('state').value.length!=0)&&
+      (this.Billing_Information.get('p_code').value.length!=0)&&(this.Billing_Information.get('city').value.length!=0)&&
+      (this.Billing_Information.get('state').value.length!=0)
+      ){
+        this.billing_errors = false;
+      }
         this.disabled = false;
       }
     }
+  }
+  closemodal(){
+    $('#proceedtopay').modal('hide');
   }
 }
