@@ -137,3 +137,7 @@ select:hover {
 {
     padding:0 !important;
 }
+.work-options1 {
+    padding: 20px 0 45px 20px;
+    min-height: 258px
+}

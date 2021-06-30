@@ -189,7 +189,7 @@
                 <input type="text" class="form-control form-jcb" placeholder="Name" id="name" [(ngModel)]="name"
                   formControlName="fullname" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }">
                 <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback enquiry-error-message">
-                  <div *ngIf="f.fullname.errors.required" class="fs-15 ">Fullname is required</div>
+                  <div *ngIf="f.fullname.errors.required" class="fs-13">Fullname is required</div>
                 </div>
               </div>
               <div class="form-group">
@@ -197,8 +197,8 @@
                 <input type="email" class="form-control form-jcb" placeholder="Email" id="email" [(ngModel)]="email"
                   formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback enquiry-error-message">
-                  <div *ngIf="f.email.errors.required" class="fs-15 ">Email is required</div>
-                  <div *ngIf="f.email.errors.email" class="fs-15 ">Email must be at email pattern</div>
+                  <!-- <div *ngIf="f.email.errors.required" class="fs-13">Email is required</div> -->
+                  <div *ngIf="f.email.errors.email" class="fs-13">Please enter a valid email</div>
                 </div>
               </div>
               <div class="form-group">
@@ -206,26 +206,25 @@
                 <input type="tel" class="form-control form-jcb" placeholder="Mobile" id="number" [(ngModel)]="mobile"
                   formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
                 <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback enquiry-error-message">
-                  <div *ngIf="f.mobile.errors.required" class="fs-15 ">Mobile Number is required</div>
-                  <div *ngIf="f.mobile.errors.pattern" class="fs-15 ">Mobile Number must be at 10 digits required</div>
+                  <div *ngIf="f.mobile.errors.required" class="fs-13">Mobile Number is required</div>
+                  <div *ngIf="f.mobile.errors.pattern" class="fs-13">Mobile Number must be at 10 digits required</div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="" class="fs-15 text-light my-2  w-75">Location <span class="red-cls">*</span></label>
-                <input type="text" class="form-control form-jcb" placeholder="Hyderabad" [(ngModel)]="location"
+                <input type="text" class="form-control form-jcb" placeholder="Location" [(ngModel)]="location"
                   id="location" formControlName="location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
                 <div *ngIf="submitted && f.location.errors" class="invalid-feedback enquiry-error-message">
-                  <div *ngIf="f.location.errors.required" class="fs-15 ">Location is required</div>
+                  <div *ngIf="f.location.errors.required" class="fs-13">Location is required</div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="" class="text-light fs-15 my-2  w-75">Description</label>
+                <label for="" class="text-light fs-15 my-2  w-75">Message</label>
                 <textarea class="form-control form-jcb-txtarea" rows="3" [(ngModel)]="description"
-                  placeholder="Type here....." id="comment" formControlName="description"
-                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
-                <div *ngIf="submitted && f.description.errors" class="invalid-feedback enquiry-error-message">
-                  <div *ngIf="f.description.errors.required" class="fs-15 ">Description is required</div>
-                </div>
+                  placeholder="Type here....." id="comment" formControlName="description"></textarea>
+                <!-- <div *ngIf="submitted && f.description.errors" class="invalid-feedback enquiry-error-message">
+                  <div *ngIf="f.description.errors.required" class="fs-13">Description is required</div>
+                </div> -->
               </div>
               <div class="text-center my-4">
                 <button type="button" class="btn btn-frm-submit" (click)="user_enquiry()">SUBMIT</button>

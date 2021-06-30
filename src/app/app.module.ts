@@ -22,6 +22,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AESEncryptDecryptServiceService } from './services/aesencrypt-decrypt-service.service';
 import { ConfirmLeaveComponent } from './confirm-leave/confirm-leave.component';
+import { CustomsuccesstoastComponent } from './components/customsuccesstoast/customsuccesstoast.component';
 
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
@@ -31,7 +32,8 @@ import { ConfirmLeaveComponent } from './confirm-leave/confirm-leave.component';
     LandingpageComponent,
     FooterComponent,
     TermsandconditionsComponent,
-    ConfirmLeaveComponent
+    ConfirmLeaveComponent,
+    CustomsuccesstoastComponent
   ],
   imports: [
     BrowserModule,

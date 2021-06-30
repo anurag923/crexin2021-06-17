@@ -35,7 +35,7 @@
                   <div class="form-check">
                     <input class="form-check-input" [checked]='checked_hourly?true:false' (click)="hourly_function()"
                       value="hourly" type="radio" name="flexRadioDefault" id="hourly">
-                    <label class="form-check-label fs-15 fw-700 text-color" for="flexRadioDefault1"
+                    <label class="form-check-label fs-17 fw-700 text-color" for="flexRadioDefault1"
                       style="cursor:pointer;" (click)="hourly_function()">
                       Hourly
                     </label>
@@ -43,7 +43,7 @@
                   <div class="form-check mgl-5 mgr-5">
                     <input class="form-check-input" [checked]='checked_daily?true:false' (click)="daily_function()"
                       value="daily" type="radio" name="flexRadioDefault" id="daily">
-                    <label class="form-check-label fs-15 fw-700 text-color" for="flexRadioDefault1"
+                    <label class="form-check-label fs-17 fw-700 text-color" for="flexRadioDefault1"
                       style="cursor:pointer;" (click)="daily_function()">
                       Daily
                     </label>
@@ -51,23 +51,23 @@
                   <div class="form-check">
                     <input class="form-check-input" [checked]='checked_weekly?true:false' (click)="weekly_function()"
                       value="weekly" type="radio" name="flexRadioDefault" id="weekly">
-                    <label class="form-check-label fs-15 fw-700 text-color" for="flexRadioDefault1"
+                    <label class="form-check-label fs-17 fw-700 text-color" for="flexRadioDefault1"
                       style="cursor:pointer;" (click)="weekly_function()">
                       Weekly
                     </label>
                   </div>
                 </div>
               </form>
-              <div class="work-options" *ngIf="hourly">
+              <div class="work-options1 pl-5" *ngIf="hourly">
                 <div class="d-flex align-items-center pdl-10">
                   <h1 class="fs-19 fw-600 mgb-6 mgr-5">Hourly</h1><span class="fs-12 text-danger fw-600">(Min. 3hrs &
                     Max. 6hrs)</span>
                 </div>
                 <form [formGroup]="Hourly">
                   <div class="row mgl-0 mgr-0 mt-1">
-                    <div class="form-group col-md-2">
-                      <label for="" class="fs-13 text-color">No of Hours</label>
-                      <select name="" id="" (click)="nohours()" class="form-control form-control1 w-100 bdr"
+                    <div class="form-group col-md-3">
+                      <label for="" class="fs-15 text-color">No of Hours</label>
+                      <select name="" id="" (click)="nohours()" class="fs-15 form-control w-100 bdr"
                         formControlName="no_hours" [(ngModel)]="no_hours"
                         [ngClass]="{ 'is-invalid': submitted_hourly  && h.no_hours.errors }">
                         <option value="3">3hrs</option>
@@ -76,22 +76,22 @@
                         <option value="6">6hrs</option>
                       </select>
                       <div *ngIf="submitted_hourly && h.no_hours.errors" class="invalid-feedback">
-                        <div *ngIf="h.no_hours.errors.required" class="fs-15">No of Hours is required</div>
+                        <div *ngIf="h.no_hours.errors.required" class="fs-13">No of Hours is required</div>
                       </div>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-13 text-color">Start Date</label>
+                      <label for="" class="fs-15 text-color">Start Date</label>
                       <input type="date" min="{{book_date1}}" (click)="getcurrentdate()" placeholder="23-04-21"
-                        class="form-control form-control1 p-0 w-100 date1 fs-13 height-cal" formControlName="h_startdate"
+                        class="form-control p-0 w-100 date1 fs-15 height-cal" formControlName="h_startdate"
                         [(ngModel)]="h_startdate"
                         [ngClass]="{ 'is-invalid': submitted_hourly && h.h_startdate.errors }">
                       <div *ngIf="submitted_hourly  && h.h_startdate.errors" class="invalid-feedback">
-                        <div *ngIf="h.h_startdate.errors.required" class="fs-15">Start Date is required</div>
+                        <div *ngIf="h.h_startdate.errors.required" class="fs-13">Start Date is required</div>
                       </div>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-13 text-color">Start Time</label>
-                      <select class="form-control form-control1 p-0 w-75 time1 fs-13 height-cal" aria-label="Default select example"
+                      <label for="" class="fs-15 text-color">Start Time</label>
+                      <select class="form-control p-0 time1 fs-15 height-cal" aria-label="Default select example"
                         [(ngModel)]="h_starttime" formControlName="h_starttime"
                         [ngClass]="{ 'is-invalid': submitted_hourly  && h.h_starttime.errors }">
                         <option selected>Select time</option>
@@ -130,7 +130,7 @@
                       </select>
                       <!-- <input type="time" class="form-control" placeholder="7AM to 6PM" [(ngModel)]="h_starttime" formControlName="h_starttime" [ngClass]="{ 'is-invalid': submitted_hourly  && h.h_starttime.errors }"> -->
                       <div *ngIf="submitted_hourly  && h.h_starttime.errors" class="invalid-feedback">
-                        <div *ngIf="h.h_starttime.errors.required" class="fs-15">Start Time is required</div>
+                        <div *ngIf="h.h_starttime.errors.required" class="fs-13">Start Time is required</div>
                       </div>
                     </div>
                   </div>
@@ -141,17 +141,18 @@
                   </div>
                 </form>
               </div>
-              <div class="work-options" *ngIf="daily">
+              <div class="work-options1 pl-5" *ngIf="daily">
                 <div class="d-flex align-items-center pdl-10">
                   <h1 class="fs-19 fw-600 mgb-6 mgr-5">Daily</h1><span class="fs-12 text-danger fw-600">(Maximum No of
                     hrs: 12Hours)</span>
                 </div>
                 <form [formGroup]="Daily">
                   <div class="row mgl-0 mgr-0">
-                    <div class="form-group col-md-2">
-                      <label for="" class="fs-13 text-color">No of Days</label>
-                      <select name="" id="" class="form-control form-control1 w-100" (click)="d_days()" formControlName="no_days"
-                        [(ngModel)]="no_days" [ngClass]="{ 'is-invalid': submitted_daily && d.no_days.errors }">
+                    <div class="form-group col-md-3">
+                      <label for="" class="fs-15 text-color">No of Days</label>
+                      <select name="" id="" class="form-control w-100 fs-15" (click)="d_days()"
+                        formControlName="no_days" [(ngModel)]="no_days"
+                        [ngClass]="{ 'is-invalid': submitted_daily && d.no_days.errors }">
                         <option value="1">1Day</option>
                         <option value="2">2Days</option>
                         <option value="3">3Days</option>
@@ -159,24 +160,24 @@
                         <option value="5">5Days</option>
                       </select>
                       <div *ngIf="submitted_daily && d.no_days.errors" class="invalid-feedback">
-                        <div *ngIf="d.no_days.errors.required" class="fs-15">No of Days is required</div>
+                        <div *ngIf="d.no_days.errors.required" class="fs-13">No of Days is required</div>
                       </div>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-13 text-color">Start Date</label>
+                      <label for="" class="fs-15 text-color">Start Date</label>
                       <input type="date" min="{{book_date1}}" (click)="getcurrentdate()" placeholder="23-04-21"
-                        class="form-control form-control1 date1 pd-0 height-cal" [(ngModel)]="d_startdate"
+                        class="form-control fs-15 date1 pd-0 height-cal" [(ngModel)]="d_startdate"
                         formControlName="d_startdate" (change)="enddata(startdate.value)"
                         [ngClass]="{ 'is-invalid': submitted_daily && d.d_startdate.errors }" #startdate>
                       <div *ngIf="submitted_daily && d.d_startdate.errors" class="invalid-feedback">
-                        <div *ngIf="d.d_startdate.errors.required" class="fs-15">Start Date is required</div>
+                        <div *ngIf="d.d_startdate.errors.required" class="fs-13">Start Date is required</div>
                       </div>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-13 text-color">Start Time</label>
+                      <label for="" class="fs-15 text-color">Start Time</label>
                       <!-- <input [ngxTimepicker]="picker" (change)="endtime(starttime.value)" #starttime>
                                     <ngx-material-timepicker #picker></ngx-material-timepicker> -->
-                      <select class="form-control form-control1 p-0 w-75 time1 height-cal" aria-label="Default select example"
+                      <select class="form-control p-0 w-100 time1 height-cal fs-15" aria-label="Default select example"
                         [(ngModel)]="d_starttime" formControlName="d_starttime" (change)="endtime(starttime.value)"
                         [ngClass]="{ 'is-invalid': submitted_daily && d.d_starttime.errors }" #starttime>
                         <option selected>Select time</option>
@@ -215,23 +216,24 @@
                       </select>
                       <!-- <input type="time" class="form-control" placeholder="7AM to 6PM" [(ngModel)]="d_starttime" formControlName="d_starttime" (change)="endtime(starttime.value)" [ngClass]="{ 'is-invalid': submitted_daily && d.d_starttime.errors }" #starttime> -->
                       <div *ngIf="submitted_daily && d.d_starttime.errors" class="invalid-feedback">
-                        <div *ngIf="d.d_starttime.errors.required" class="fs-15">Start Time is required</div>
+                        <div *ngIf="d.d_starttime.errors.required" class="fs-13">Start Time is required</div>
                       </div>
                     </div>
                   </div>
                   <div class="row mgl-0 mgr-0">
-                    <div class="col-md-2"></div>
+                    <div class="col-md-3"></div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-13">End Date</label>
-                      <input type="date" placeholder="23-04-21" class="form-control form-control1 p-0 date1 height-cal"
+                      <label for="" class="fs-15">End Date</label>
+                      <input type="date" placeholder="23-04-21" class="form-control p-0 date1 height-cal"
                         value="{{d_enddate}}" readonly>
                       <!-- <div *ngIf="submitted_daily && d.d_enddate.errors" class="invalid-feedback" >
                                      <div *ngIf="d.d_enddate.errors.required" class="fs-15 fw-700">End Date is required</div>
                                    </div> -->
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-13">End Time</label>
-                      <input type="text" class="form-control form-control1 time1 w-75" value="{{d_endtime}}" readonly>
+                      <label for="" class="fs-15">End Time</label>
+                      <input type="text" class="form-control time1 w-100 fs-15 height-cal" value="{{d_endtime}}"
+                        readonly>
                       <!-- <div *ngIf="submitted_daily && d.d_endtime.errors" class="invalid-feedback">
                                      <div *ngIf="d.d_endtime.errors.required" class="fs-15 fw-700">End Time is required</div>
                                    </div> -->
@@ -239,16 +241,16 @@
                   </div>
                 </form>
               </div>
-              <div class="work-options" *ngIf="weekly">
+              <div class="work-options1 pl-5" *ngIf="weekly">
                 <div class="d-flex align-items-center pdl-10">
                   <h1 class="fs-19 fw-600 mgb-6 mgr-5">Weekly</h1><span class="fs-12 text-danger fw-600">(Total No of
                     hrs:60hrs)</span>
                 </div>
                 <form [formGroup]="Weekly">
                   <div class="row mgl-0 mgr-0">
-                    <div class="form-group col-md-2">
-                      <label for="" class="fs-12 text-color">No of Weeks</label>
-                      <select name="" (click)="w_days()" id="" class="form-control form-control1 p-01 w-100"
+                    <div class="form-group col-md-3">
+                      <label for="" class="fs-15 text-color">No of Weeks</label>
+                      <select name="" (click)="w_days()" id="" class="form-control p-01 w-100 fs-15"
                         formControlName="no_weeks" [(ngModel)]="no_weeks"
                         [ngClass]="{ 'is-invalid': submitted_weekly && w.no_weeks.errors }">
                         <option value="1">1Weeks</option>
@@ -265,23 +267,23 @@
                         <option value="12">12Weeks</option>
                       </select>
                       <div *ngIf="submitted_weekly  && w.no_weeks.errors" class="invalid-feedback">
-                        <div *ngIf="w.no_weeks.errors.required" class="fs-15">No of Weeks is required</div>
+                        <div *ngIf="w.no_weeks.errors.required" class="fs-13">No of Weeks is required</div>
                       </div>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-12 text-color">Start Date</label>
+                      <label for="" class="fs-15 text-color">Start Date</label>
                       <input type="date" min="{{book_date1}}" (click)="getcurrentdate()" placeholder="23-04-21"
-                        class="form-control form-control1 date1 pd-0 height-cal" [(ngModel)]="w_startdate"
+                        class="form-control date1 pd-0 height-cal fs-15" [(ngModel)]="w_startdate"
                         formControlName="w_startdate"
                         [ngClass]="{ 'is-invalid': submitted_weekly  && w.w_startdate.errors }"
                         (change)="w_end_date(startdate.value)" #startdate>
                       <div *ngIf="submitted_weekly  && w.w_startdate.errors" class="invalid-feedback">
-                        <div *ngIf="w.w_startdate.errors.required" class="fs-15">Start Date is required</div>
+                        <div *ngIf="w.w_startdate.errors.required" class="fs-13">Start Date is required</div>
                       </div>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="" class="fs-12 text-color">Start Time</label>
-                      <select class="form-control form-control1 w-75 time1 p-0 height-cal" aria-label="Default select example"
+                      <label for="" class="fs-15 text-color">Start Time</label>
+                      <select class="form-control w-100 time1 p-0 height-cal fs-15" aria-label="Default select example"
                         [(ngModel)]="w_starttime" formControlName="w_starttime"
                         [ngClass]="{ 'is-invalid': submitted_weekly  && w.w_starttime.errors }"
                         (change)="w_end_time(starttime.value)" #starttime>
@@ -321,15 +323,15 @@
                       </select>
                       <!-- <input type="time" class="form-control" placeholder="7AM to 6PM" [(ngModel)]="w_starttime" formControlName="w_starttime" [ngClass]="{ 'is-invalid': submitted_weekly  && w.w_starttime.errors }" (change)="w_end_time(starttime.value)" #starttime> -->
                       <div *ngIf="submitted_weekly  && w.w_starttime.errors" class="invalid-feedback">
-                        <div *ngIf="w.w_starttime.errors.required" class="fs-15">Start Time is required</div>
+                        <div *ngIf="w.w_starttime.errors.required" class="fs-13">Start Time is required</div>
                       </div>
                     </div>
                   </div>
                   <div class="row mgl-0 mgr-0">
-                    <div class="col-md-2"></div>
+                    <div class="col-md-3"></div>
                     <div class="form-group col-md-3">
                       <label for="" class="fs-12 text-color">End Date</label>
-                      <input type="date" placeholder="23-04-21" class="form-control form-control1 w-100 height-cal pd-0"
+                      <input type="date" placeholder="23-04-21" class="form-control w-100 height-cal pd-0"
                         value="{{w_enddate}}" readonly>
                       <!-- <input type="date" placeholder="23-04-21" class="form-control pd-0" value="{{weekenddate}}"> -->
                       <!-- <div *ngIf="submitted_weekly  && w.w_starttime.errors" class="invalid-feedback">
@@ -338,7 +340,7 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="" class="fs-12 text-color">End Time</label>
-                      <input type="text" class="form-control form-control1 w-75 height-cal" placeholder="" value="{{w_endtime}}"
+                      <input type="text" class="form-control w-100 height-cal" placeholder="" value="{{w_endtime}}"
                         readonly>
                       <!-- <input type="time" class="form-control" placeholder="7AM to 6PM" value="{{weekendtime}}"> -->
                       <!-- <div *ngIf="submitted_weekly  && w.w_endtime.errors" class="invalid-feedback">
@@ -544,7 +546,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Name</label>
-                    <input type="text" placeholder="Name" [(ngModel)]="name" class="form-control fs-141" formControlName="name"
+                    <input type="text" placeholder="Name" [(ngModel)]="name" class="form-control" formControlName="name"
                       [ngClass]="{ 'is-invalid': submitted && f.name.errors }" readonly>
                     <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                       <div *ngIf="f.name.errors.required" class="fs-13 fw-600">Name is required</div>
@@ -554,7 +556,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Contact Number</label>
-                    <input type="tel" placeholder="Contact Number" [(ngModel)]="mobile" class="form-control fs-141"
+                    <input type="tel" placeholder="Contact Number" [(ngModel)]="mobile" class="form-control"
                       formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" readonly>
                     <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
                       <div *ngIf="f.mobile.errors.required" class="fs-13 fw-600">Mobile Number is required</div>
@@ -578,7 +580,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Site Co-Ordinator Name</label>
-                    <input type="text" id="coordinator" placeholder="Site Co-Ordinator Name" class="form-control fs-141"
+                    <input type="text" placeholder="Site Co-Ordinator Name" class="form-control"
                       formControlName="coordinator_name"
                       [ngClass]="{ 'is-invalid': submitted_site && s.coordinator_name.errors }">
                     <div *ngIf="submitted_site && s.coordinator_name.errors" class="invalid-feedback">
@@ -590,7 +592,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Contact Number</label>
-                    <input type="tel" id="number" placeholder="Contact Number" class="form-control fs-141"
+                    <input type="tel" id="number" placeholder="Contact Number" class="form-control"
                       formControlName="contact_number"
                       [ngClass]="{ 'is-invalid': submitted_site && s.contact_number.errors }">
                     <div *ngIf="submitted_site && s.contact_number.errors" class="invalid-feedback">
@@ -605,7 +607,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Plot/Flat No. & Building Name</label>
-                    <input type="text" id="plot" placeholder="Plot/Flat No. & Building Name" class="form-control fs-141"
+                    <input type="text" id="plot" placeholder="Plot/Flat No. & Building Name" class="form-control"
                       formControlName="address_one" [ngClass]="{ 'is-invalid': submitted_site && s.address_one.errors }">
                     <div *ngIf="submitted_site && s.address_one.errors" class="invalid-feedback">
                       <div *ngIf="s.address_one.errors.required" class="fs-13 fw-600">Plot/Flat No. & Building Name is required
@@ -616,7 +618,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Street Name/Area</label>
-                    <input type="text" id="street" placeholder="Street Name/Area" class="form-control fs-141"
+                    <input type="text" id="street" placeholder="Street Name/Area" class="form-control"
                       formControlName="address_two" [ngClass]="{ 'is-invalid': submitted_site && s.address_two.errors }">
                     <div *ngIf="submitted_site && s.address_two.errors" class="invalid-feedback">
                       <div *ngIf="s.address_two.errors.required" class="fs-13 fw-600">Street Name/Area is required
@@ -627,7 +629,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Landmark</label>
-                    <input type="text" id="landmark" placeholder="Landmark" class="form-control fs-141" formControlName="landmark"
+                    <input type="text" id="landmark" placeholder="Landmark" class="form-control" formControlName="landmark"
                       [ngClass]="{ 'is-invalid': submitted_site && s.landmark.errors }">
                     <div *ngIf="submitted_site && s.landmark.errors" class="invalid-feedback">
                       <div *ngIf="s.landmark.errors.required" class="fs-13 fw-600">Landmark is required</div>
@@ -638,7 +640,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">City</label>
-                    <input type="text" id="city" placeholder="City" class="form-control fs-141" formControlName="city"
+                    <input type="text" id="city" placeholder="City" class="form-control" formControlName="city"
                       [ngClass]="{ 'is-invalid': submitted_site && s.city.errors }">
                     <div *ngIf="submitted_site && b.city.errors" class="invalid-feedback">
                       <div *ngIf="b.city.errors.required" class="fs-13 fw-600">City is required</div>
@@ -648,7 +650,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">State</label>
-                    <input type="text" id="state" placeholder="State" class="form-control fs-141" formControlName="state"
+                    <input type="text" id="state" placeholder="State" class="form-control" formControlName="state"
                       [ngClass]="{ 'is-invalid': submitted_site && s.state.errors }">
                     <div *ngIf="submitted_site && s.state.errors" class="invalid-feedback">
                       <div *ngIf="s.state.errors.required" class="fs-13 fw-600">State is required</div>
@@ -658,7 +660,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Pincode</label>
-                    <input type="number" id="pincode" placeholder="Pincode" class="form-control fs-141" formControlName="pincode"
+                    <input type="number" id="pincode" placeholder="Pincode" class="form-control" formControlName="pincode"
                       [ngClass]="{ 'is-invalid': submitted_site && s.pincode.errors }" maxlength="6">
                     <div *ngIf="submitted_site && s.pincode.errors" class="invalid-feedback">
                       <div *ngIf="s.pincode.errors.required" class="fs-13 fw-600">Pincode is required</div>
@@ -683,7 +685,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Company Name</label>
-                    <input type="text" placeholder="Company Name" class="form-control fs-141" formControlName="c_name"
+                    <input type="text" placeholder="Company Name" class="form-control" formControlName="c_name"
                       [ngClass]="{ 'is-invalid': submitted_billing && b.c_name.errors }">
                     <div *ngIf="submitted_billing && b.c_name.errors" class="invalid-feedback">
                       <div *ngIf="b.c_name.errors.required" class="fs-13 fw-600">Company Name is required</div>
@@ -693,7 +695,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">GSTN Number</label>
-                    <input type="text" placeholder="GSTN Number" class="form-control fs-141" formControlName="gst_number"
+                    <input type="text" placeholder="GSTN Number" class="form-control" formControlName="gst_number"
                       [ngClass]="{ 'is-invalid': submitted_billing && b.gst_number.errors }">
                     <div *ngIf="submitted_billing && b.gst_number.errors" class="invalid-feedback">
                       <div *ngIf="b.gst_number.errors.required" class="fs-13 fw-600">GST Number is required</div>
@@ -705,7 +707,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Email</label>
-                    <input type="email" placeholder="Email id" class="form-control fs-141" formControlName="email"
+                    <input type="email" placeholder="Email id" class="form-control" formControlName="email"
                       [ngClass]="{ 'is-invalid': submitted_billing && b.email.errors }">
                     <div *ngIf="submitted_billing && b.email.errors" class="invalid-feedback">
                       <div *ngIf="b.email.errors.required" class="fs-13 fw-600">Email id is required</div>
@@ -717,7 +719,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Company Address</label>
-                    <input type="text" placeholder="Company Address" class="form-control fs-141"
+                    <input type="text" placeholder="Company Address" class="form-control"
                       formControlName="c_address" [ngClass]="{ 'is-invalid': submitted_billing && b.c_address.errors }">
                     <div *ngIf="submitted_billing && b.c_address.errors" class="invalid-feedback">
                       <div *ngIf="b.c_address.errors.required" class="fs-13 fw-600">Company Address is required
@@ -729,7 +731,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">City</label>
-                    <input type="text" placeholder="City" class="form-control fs-141" formControlName="city"
+                    <input type="text" placeholder="City" class="form-control" formControlName="city"
                       [ngClass]="{ 'is-invalid': submitted_billing && b.city.errors }">
                     <div *ngIf="submitted_billing && b.city.errors" class="invalid-feedback">
                       <div *ngIf="b.city.errors.required" class="fs-13 fw-600">City is required</div>
@@ -739,7 +741,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">State</label>
-                    <input type="text" placeholder="State" class="form-control fs-141" formControlName="state"
+                    <input type="text" placeholder="State" class="form-control" formControlName="state"
                       [ngClass]="{ 'is-invalid': submitted_billing && b.state.errors }">
                     <div *ngIf="submitted_billing && b.state.errors" class="invalid-feedback">
                       <div *ngIf="b.state.errors.required" class="fs-13 fw-600">State is required</div>
@@ -749,7 +751,7 @@
                 <div class="col-md-4">
                   <div class="form-group w1001">
                     <label for="" class="fs-15">Pincode</label>
-                    <input type="number" placeholder="Pincode" class="form-control fs-141" formControlName="p_code"
+                    <input type="number" placeholder="Pincode" class="form-control" formControlName="p_code"
                       [ngClass]="{ 'is-invalid': submitted_billing && b.p_code.errors }">
                     <div *ngIf="submitted_billing && b.p_code.errors" class="invalid-feedback">
                       <div *ngIf="b.p_code.errors.required" class="fs-13 fw-600">Pincode is required</div>

@@ -4,12 +4,21 @@
     border-radius: 5%;
     width: 250px !important;
 } */
+.pad-lf-3
+{
+    padding-left:3rem !important;
+}
+.space_bt
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .form-control{
     background-color: transparent !important;
     /* border: none !important; */
     border: 2px solid #ccc !important;
     border-radius: 5px !important;
-    padding:0 15px !important;
     height: calc(1.9em + 0.75rem + 2px) !important;
 }
 .dropdown-toggle::after {
@@ -26,7 +35,7 @@
 .form-control
 {
     padding: 0 0 0 5px!important;
-    font-size:13px !important;
+    font-size:15px !important;
 }
 
 .ht34
@@ -56,6 +65,10 @@ select:hover {
 {
     border:1px solid #dca101 !important;
 }
+.ht-40
+{
+    height:40px;
+}
 .mt-3l
 {
     margin-top:1.8rem;
@@ -65,32 +78,65 @@ select:hover {
      width: 100%;
      margin: auto;
     }
-    .booking_cls
-    {
-    display:flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: flex-start;
+}
+.col-12w
+{
+    max-width:100% !important;
 }
 .form-100
 {
     width:100%;
 }
    
-}
+
 @media (max-width:772px){
     .three{
       width: 100%;
     }
-    .booking_cls
+ 
+.col-12w
 {
-    display:flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: flex-start;
+    max-width:100% !important;
 }
 .form-100
 {
     width:100%;
 }
+}
+
+
+
+.booking_cls
+{
+    display:table;
+    
+}
+.tbl-row
+{
+    display:table-row;
+}
+.col-12w
+{
+    display:table-cell;
+    padding:15px;
+}
+.w1
+{
+    width:120px;
+}
+.w2
+{
+    width:150px;
+}
+.w3
+{
+    width:150px;
+}
+.w4
+{
+    width:120px;
+}
+.m15
+{
+    margin-left:15px;
 }

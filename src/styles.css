@@ -72,8 +72,8 @@ a:hover{
 .three{
     background-color: #000;
     text-align: center;
-    width: 80%;
-    margin: auto;
+    width:80%;
+    margin:0 auto;
     border-radius: 5px;
     padding: 0rem 2rem 1rem 2em;
 }
@@ -84,11 +84,8 @@ a:hover{
     }
     .booking_cls
     {
-    display:flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: flex-start;
-}
+    display:table;
+    }
    
 }
 @media (max-width:772px){
@@ -96,12 +93,9 @@ a:hover{
       width: 100%;
     }
     .booking_cls
-{
-    display:flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: flex-start;
-}
+    {
+    display:table;
+    }
 }
 .brd-clr{
     background-color: #000;
@@ -1403,7 +1397,7 @@ button{
     } 
 }
 .work-options{
-    padding: 20px 0px;
+    padding: 20px 0 0 20px;
 }
 
 /* checkout page */
@@ -1552,7 +1546,7 @@ margin-bottom: 3rem;
 .form__div{
 position: relative;
 height: 50px;
-margin-bottom: 30px;
+margin-bottom: 25px;
 }
 .form__input{
 position: absolute;
@@ -1664,6 +1658,7 @@ border: 1.5px solid #7b7b7b;
     object-fit: cover;
     max-width:100%;
     height:auto;
+    width:100%;
 }
 .fnt-fff
 {
@@ -1720,10 +1715,7 @@ border: 1.5px solid #7b7b7b;
     
 }
 
-.yellow-cls
-{
-    color:#dca101;
-}
+
 
   .search-cls
   {
@@ -1897,13 +1889,6 @@ input[type='radio']:checked:before {
 }
 
 
-.booking_cls
-{
-    display:flex;
-    flex-direction: row;
-    justify-items: center;
-    align-items: flex-start;
-}
 
 .ml-6
 {
@@ -1911,15 +1896,19 @@ input[type='radio']:checked:before {
 }
 .visible-cls
 {
-    width:16%;
     visibility: hidden;
 }
 .visible-cls1
 {
-    width:18%;
+    width:26%;
     visibility: hidden;
 }
-.w17
+.w22
 {
-    width:17% !important;
+    width:18% !important;
+}
+.teal-cls
+{
+    color:#339999 !important; 
+    font-weight:600 !important;
 }

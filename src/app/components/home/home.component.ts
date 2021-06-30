@@ -28,10 +28,10 @@ export class HomeComponent implements OnInit {
     AOS.init();
     this.UserEnquiry = this.fb.group({
      fullname:['',Validators.required],
-     email:['', [Validators.required,Validators.email]],
+     email:['', Validators.email],
      mobile:['', [Validators.required, Validators.pattern(("^((\\+91-?)|0)?[0-9]{10}$"))]],
      location:['', Validators.required],
-     description:['',Validators.required]
+    //  description:['',Validators.required]
     })
   }
   get f(){
